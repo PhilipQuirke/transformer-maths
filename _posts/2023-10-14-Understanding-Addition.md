@@ -9,12 +9,12 @@ You can also type in “12345+86764=” and it will give the right answer. How d
 
 This blog explains how a toy (1-layer, 3-head) transformer model answers integer addition questions like:
 
-![AdditionQuestionAndAnswer](/static/AdditionQuestionAnswer.svg?raw=true "AdditionQuestionAndAnswer")
+<img src="{{site.url}}/assets/AdditionQuestionAnswer.svg" style="display: block; margin: auto;" />
 
 This blog is written as an introduction to Mechanistic Interpretability and Transformer models for novices. 
 It covers our investigation, testing and results of integer addition in transformers, building up section by section, and finally explaining this diagram:
 
-![AdditionStaircaseA3Summary](/static/StaircaseA3_Summary.svg?raw=true "AdditionStaircaseA3Summary")
+<img src="{{site.url}}/assets/StaircaseA3_Summary.svg" style="display: block; margin: auto;" />
 
 A CoLab notepad is provided here. 
 It contains all the code needed to train the model and use the trained model, create graphs, etc. You can alter the code to test out other approaches.
@@ -28,7 +28,7 @@ We might expect the model to use the human approach to addition: adding first th
 
 As our model trains, it tries many possibly-useful approaches to many addition sub-tasks (e.g. D3 + D3’) in parallel. There is no overall coordination or time-ordering. The learning is more like evolution - using the answer scoring to prefer one approach over another. The below graph (from the CoLab Part 5) shows our model training over time - getting better at adding each of D0 to D4 digits - learning at a different speed for each digit. After training, the model has learnt a different way to do addition than humans.
 
-![Addition5DigitTrainingLoss](/static/Addition5DigitTrainingLoss.png?raw=true "Addition5DigitTrainingLoss")
+<img src="{{site.url}}/assets/Addition5DigitTrainingLoss.png" style="display: block; margin: auto;" />
 
 For 5 digit addition there are 10 billion possible questions, and the model gets accurate after being trained on 2 million questions, so the model isn’t using memorisation. What is it doing?
 
@@ -63,29 +63,10 @@ For each training question, we can say whether to get the right answer the model
 
 Graphing the training loss for the BA and UC1 tasks side by side for say Digit 3 shows an interesting pattern. In Phase 1, both tasks have the same (high) loss. In Phase 2, both curves drop quickly but the BA curve drops faster than the UC1 curve. This “time lag" is because the BA task must be accurate before the UC1 task can be accurate. In Phase 3, both tasks’ loss curve decrease slowly over time. 
 
-<img src="{{site.url}}/images/AdditionDigit3BaUc1TrainingLoss.png" style="display: block; margin: auto;" />
 <img src="{{site.url}}/assets/AdditionDigit3BaUc1TrainingLoss.png" style="display: block; margin: auto;" />
+
 This graph supports the idea that the model is learning these tasks independently. The CoLab notebook contains many graphs supporting this idea (Parts 5, 6 & 7).
 
 # Time Ordering
 
 Transformers process the question and predict the answer one token at a time, strictly from left to right. For 5 digit integer addition this gives a total of 18 tokens:
-
-pq
-<img src="images/AdditionDigit3BaUc1TrainingLoss.png"/>
-pq0
-<img src="{{site.url}}/images/AdditionDigit3BaUc1TrainingLoss.png" style="display: block; margin: auto;" />
-pq1
-![AdditionDigit3BaUc1TrainingLoss](/images/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
-pq2
-![AdditionDigit3BaUc1TrainingLoss](./images/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
-pq3
-![AdditionDigit3BaUc1TrainingLoss](../images/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
-pq4
-![AdditionDigit3BaUc1TrainingLoss](./static/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
-pq5
-![AdditionDigit3BaUc1TrainingLoss](./assets/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
-pq6
-![AdditionDigit3BaUc1TrainingLoss](/assets/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
-
-
