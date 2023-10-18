@@ -73,3 +73,51 @@ Transformers process the question and predict the answer one token at a time, st
 
 <img src="{{site.url}}/assets/AdditionQuestionAnswerSteps.svg" style="display: block; margin: auto;" />
 
+Before answering the question, the trained model focuses on (aka attends to) the first token, then the first two tokens, then the first three tokens, etc. At each of the 18 steps the model does some calculations. After the question is fully revealed (at step 11), the model starts predicting the answer tokens, revealing the highest-value (100,000s) A5 digit first, then the other answer digits, finishing with the lowest-value (units) A0 digit. So it must reveal answer digits in the reverse order from what a human doing addition would!  
+
+To get the A5 digit we need to know whether the question generated a Carry 1 in digit A4, which may depend on A3’s Carry 1, which may depend on A2’s Carry 1, etc. Which leads to the question, has the model calculated all the digits before it reveals A5? How do we find out?
+
+# Attention Heads and Attention Patterns
+A key internal part of the model is its “attention heads”. For technical reasons (not explained here) they are the only part of the transformer model that can move information between multiple tokens. BaseAdd combines values from two tokens (digits) so we expect the attention heads to be involved.
+
+Our model has 3 attention heads. This sample “attention pattern” graph (from CoLab Part 13) shows which tokens each of the 3 attention heads are focused on in each of the 18 steps:
+
+<img src="{{site.url}}/assets/AttentionPattern5Digit3Head.png" style="display: block; margin: auto;" />
+
+The pattern is 18 by 18 squares. Time proceeds vertically downwards, with one additional token being revealed horizontally at each step, giving the overall triangle shape. After the question is fully revealed (at step 11), each head starts attending to pairs of question digits from left to right (i.e. high-value digits before lower-value digits) giving the “double staircase" shape. The three heads attend to a given digit pair in three different steps, giving a time ordering of heads. The fact that the three staircases do not overlap is part of the model’s algorithm.
+
+# Ablating Early Steps
+Another key investigative tool is called “ablating”. For example, we can choose any of the 18 steps and scramble the model’s data at that step, to see if the model can still correctly answer the question. If the model can still answer the question correctly, then that step was irrelevant.
+
+For our model, we can scramble the steps 0 to 10, without impacting accuracy (CoLab Part 10). This means that the model is not doing useful calculations in these steps. In the above attention pattern, the top half vertically is all “noise” - it is not useful. The useful calculations start with the “double staircase”.
+
+So the model starts calculating in step 11 and reveals the answer digit A5 in step 12! Seems unlikely the model has calculated all the digits in step 11 and 12. So how does it calculate A5 accurately when it may need a UC1 from A4 which may need a UC1 from A3 etc?
+
+# Simple vs Cascading UseSum9
+This lead us to create test data to investigate the model accuracy on UseSum9 cases like:
+00450+00550. This is a “simple” (one step) US9 case. The model copes with this.
+04450+05550. This is a “cascading” (two, three or four step) US9 case. The model does not cope with this.
+
+Note that simple US9 cases are rare and cascading US9 cases are very rare. They turn up infrequently in (random) training data, and so don’t impact the summary loss figures much. Our 1-layer 3-attention-head transformer model has a rare case it can’t cope with.
+
+# Ablating the Last Step
+One more fact: For our model, we can also scramble step 17, without impacting accuracy. This means A0 must have been calculated in step 16 or before. 
+
+It turns out that ablating step 16 scrambles (only) digit A0, ablating step 15 scrambles (only) digit A1, etc. Each answer digit has been calculated one step before it is revealed.
+
+# Pulling it all together
+Summarizing the above findings: In each of the steps 11 to 16, the model calculates one digit, revealing it the following step. In each step, the 3 attention heads attend to different pairs of digits. The model is accurate, with the exception of cascading US9 cases. So it must be doing BA, MC1, UC1, MS9 and simple US9 calculations. 
+
+The algorithm summarized in this diagram is consistent with these facts:
+
+
+
+
+
+
+
+
+
+
+
+
