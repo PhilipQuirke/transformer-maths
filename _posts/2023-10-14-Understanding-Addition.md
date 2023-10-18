@@ -82,7 +82,9 @@ pq3
 ![AdditionDigit3BaUc1TrainingLoss](../images/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
 pq4
 ![AdditionDigit3BaUc1TrainingLoss](./static/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
-
-
+pq5
+![AdditionDigit3BaUc1TrainingLoss](./assets/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
+pq6
+![AdditionDigit3BaUc1TrainingLoss](/assets/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
 
 
