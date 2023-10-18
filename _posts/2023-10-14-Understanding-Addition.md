@@ -8,10 +8,12 @@ Chat GPT is a “Transformer” model that considers each word in the question a
 You can also type in “12345+86764=” and it will give the right answer. How does it do this?
 
 This blog explains how a toy (1-layer, 3-head) transformer model answers integer addition questions like:
+
 ![AdditionQuestionAndAnswer](/static/AdditionQuestionAnswer.svg?raw=true "AdditionQuestionAndAnswer")
 
 This blog is written as an introduction to Mechanistic Interpretability and Transformer models for novices. 
 It covers our investigation, testing and results of integer addition in transformers, building up section by section, and finally explaining this diagram:
+
 ![AdditionStaircaseA3Summary](/static/StaircaseA3_Summary.svg?raw=true "AdditionStaircaseA3Summary")
 
 A CoLab notepad is provided here. 
@@ -24,4 +26,8 @@ Transformer models are trained by us providing them with many example questions 
 
 We might expect the model to use the human approach to addition: adding first the lowest-value digit-pair (D0 + D0’), noting whether this sum generated a “Carry 1”, then adding D1 + D1’ + D0’s Carry 1 (if any), etc. This approach is the easiest for us, but it is very sequential (D0 then D1 etc) with a strong time-ordering.
 
-As our model train, it tries many possibly-useful approaches to many addition sub-tasks (e.g. D3 + D3’) in parallel. There is no overall coordination or time-ordering. The learning is more like evolution - using the answer scoring to prefer one approach over another. The below graph (from the CoLab Part 5) shows our model training over time - getting better at adding each of D0 to D4 digits - learning at a different speed for each digit. After training, the model has learnt a different (accurate) way to do addition than humans
+As our model trains, it tries many possibly-useful approaches to many addition sub-tasks (e.g. D3 + D3’) in parallel. There is no overall coordination or time-ordering. The learning is more like evolution - using the answer scoring to prefer one approach over another. The below graph (from the CoLab Part 5) shows our model training over time - getting better at adding each of D0 to D4 digits - learning at a different speed for each digit. After training, the model has learnt a different way to do addition than humans.
+
+![Addition5DigitTrainingLoss](/static/Addition5DigitTrainingLoss.png?raw=true "Addition5DigitTrainingLoss")
+
+For 5 digit addition there are 10 billion possible questions, and the model gets accurate after being trained on 2 million questions, so the model isn’t using memorisation. What is it doing?
