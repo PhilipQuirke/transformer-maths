@@ -17,7 +17,7 @@ It covers our investigation, testing and results of integer addition in transfor
 
 <img src="{{site.url}}/assets/StaircaseA3_Summary.svg" style="display: block; margin: auto;" />
 
-A CoLab notepad is provided <link href="{{site.url}}/assets/Accurate_Addition_in_Transformers.ipynb" text="here" />. 
+A CoLab notepad is provided <a href="{{site.url}}/assets/Accurate_Addition_in_Transformers.ipynb" text="here" />. 
 It contains all the code needed to train the model and use the trained model, create graphs, etc. You can alter the code to try out other approaches.
 
 # Humans vs Model Learning
