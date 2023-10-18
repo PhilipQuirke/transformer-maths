@@ -9,3 +9,7 @@ You can also type in “12345+86764=” and it will give the right answer. How d
 
 This blog explains how a toy (1-layer, 3-head) transformer model answers integer addition questions like:
 ![Question and Answer](/static/AdditionQuestionAnswer.svg?raw=true "AdditionQuestionAnswer")
+
+This blog is written as an introduction to Mechanistic Interpretability and Transformer models for novices. 
+It covers our investigation, testing and results of integer addition in transformers, building up section by section, and finally explaining this diagram:
+
