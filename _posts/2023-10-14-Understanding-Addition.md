@@ -71,7 +71,7 @@ This graph supports the idea that the model is learning these tasks independentl
 
 Transformers process the question and predict the answer one token at a time, strictly from left to right. For 5 digit integer addition this gives a total of 18 tokens:
 
-<img src="{{site.url}}/assets/AdditionQuestionAnswerSteps.svg" style="display: block; margin: auto;" />
+<img src="{{site.url}}/assets/QuestionAnswerSteps.svg" style="display: block; margin: auto;" />
 
 Before answering the question, the trained model focuses on (aka attends to) the first token, then the first two tokens, then the first three tokens, etc. At each of the 18 steps the model does some calculations. After the question is fully revealed (at step 11), the model starts predicting the answer tokens, revealing the highest-value (100,000s) A5 digit first, then the other answer digits, finishing with the lowest-value (units) A0 digit. So it must reveal answer digits in the reverse order from what a human doing addition would!  
 
