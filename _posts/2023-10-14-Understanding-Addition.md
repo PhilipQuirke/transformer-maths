@@ -110,6 +110,35 @@ Summarizing the above findings: In each of the steps 11 to 16, the model calcula
 
 The algorithm summarized in this diagram is consistent with these facts:
 
+<img src="{{site.url}}/assets/StaircaseA3_Summary.svg" style="display: block; margin: auto;" />
+
+In the diagram: **A:** The 5 digit question is revealed token by token. The highest-value digit is revealed first. **B:** From the "=" token, the model attention heads focus on successive pairs of digits, giving a 'staircase' attention pattern. **C:** The 3 heads are time-offset from each other by 1 token so in each step data from 3 tokens is available. **D:** To calculate A3, the 3 heads do independent simple mathematical calculations on D3, D2 & D1. The results are combined by the MLP.
+
+In more detail, the “programming” of the algorithm for A3 is:
+
+<img src="{{site.url}}/assets/StaircaseA3_Detailed.svg" style="display: block; margin: auto;" />
+
+With n_layers = 1, the above findings stay the same for n_digits = 10 or 15.(CoLab Part 2).
+
+# The MLP
+The above diagram references the MLP and uses the term “trigrams”. For clarity of presentation, we didn’t discuss these beforehand. We discuss them here.
+
+The MLP is another key part of a Transformer model. For technical reasons (not explained here), the MLP can be thought of as a “key-value pair" memory that can hold many bigrams and trigrams. We believe that the model’s MLP pulls together the two-state 1st head result, the tri-state 2nd head result and the ten-state 3rd head result value, treating them as a trigram with 60 (2 x 3 x 10) possible keys. For each digit, the MLP has memorized the mapping of these 60 keys to the 60 correct digit answers (0 to 9). 
+
+We haven’t proven this experimentally. We know that our MLP is sufficiently large to store this many mappings with zero interference between mappings.
+
+# Answer Digits A0 and A1
+The A0 and A1 digit calculations are simpler than the other digits:
+A1 never uses the US9 task. 
+A0 never uses the US9 or UC1 tasks.
+
+These digits have their own digit-specific algorithms that are simplifications of the above algorithm. This simpler algorithm explains the fast training speed of these digits.
+
+# Conclusions
+The algorithm is very different from the human approach to addition. The algorithm is elegant & compact. It has high parallelism. 
+
+Given the question’s high density, and the need to answer promptly, the algorithm’s accuracy ( > 99.5% ) is impressive.
+
 
 
 
