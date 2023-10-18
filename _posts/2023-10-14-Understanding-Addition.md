@@ -63,7 +63,7 @@ For each training question, we can say whether to get the right answer the model
 
 Graphing the training loss for the BA and UC1 tasks side by side for say Digit 3 shows an interesting pattern. In Phase 1, both tasks have the same (high) loss. In Phase 2, both curves drop quickly but the BA curve drops faster than the UC1 curve. This “time lag" is because the BA task must be accurate before the UC1 task can be accurate. In Phase 3, both tasks’ loss curve decrease slowly over time. 
 
-![AdditionDigit3BaUc1TrainingLoss](./static/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
+![AdditionDigit3BaUc1TrainingLoss](static/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
 This graph supports the idea that the model is learning these tasks independently. The CoLab notebook contains many graphs supporting this idea (Parts 5, 6 & 7).
 
 # Time Ordering
