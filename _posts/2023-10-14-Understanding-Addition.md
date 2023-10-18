@@ -70,12 +70,18 @@ This graph supports the idea that the model is learning these tasks independentl
 
 Transformers process the question and predict the answer one token at a time, strictly from left to right. For 5 digit integer addition this gives a total of 18 tokens:
 
-<img src="images/AdditionDigit3BaUc1TrainingLoss.png"/>
-
 pq
-
+<img src="images/AdditionDigit3BaUc1TrainingLoss.png"/>
+pq0
 <img src="{{site.url}}/images/AdditionDigit3BaUc1TrainingLoss.png" style="display: block; margin: auto;" />
-
+pq1
+![AdditionDigit3BaUc1TrainingLoss](/images/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
+pq2
+![AdditionDigit3BaUc1TrainingLoss](./images/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
+pq3
+![AdditionDigit3BaUc1TrainingLoss](../images/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
+pq4
+![AdditionDigit3BaUc1TrainingLoss](./static/AdditionDigit3BaUc1TrainingLoss.png?raw=true "AdditionDigit3BaUc1TrainingLoss")
 
 
 
