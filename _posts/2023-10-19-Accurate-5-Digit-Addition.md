@@ -47,6 +47,8 @@ Ablating the useful steps (in CoLab Part 11) negatively impacts accuracy in a cl
 - Layer 15 impacts A1 only. All tasks
 - Layer 16 impacts A0 only. All tasks
 
+- 
+
 So the 2-layer model uses the steps 11 to 16 in the same way as the 1-layer model did. But it now uses steps 8 to 10 to do US9-related calculations for A2 to A4. (Recall that A0 and A1 are simpler calculations and don’t use the US9 task).
 Attention Patterns (5 digits, 2 layers)
 Here is the attention pattern for the sample question “16044+14973=031017=”:
