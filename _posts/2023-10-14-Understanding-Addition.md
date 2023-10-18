@@ -3,21 +3,22 @@ title: "Understanding Addition in Transformers"
 date: 2023-10-14
 ---
 # Introduction
-If you type the question “When Mary and John went to the store, John gave a drink to” into Chat GPT, it will answer “Mary”.  
-Chat GPT is a “Transformer” model that considers each word in the question and generates a predicted answer. 
+If you type the question “When Mary and John went to the store, John gave a drink to” into Chat GPT, it will answer “Mary”.
+Chat GPT is a “Transformer” model that considers each word in the question and generates a predicted answer.
 You can also type in “12345+86764=” and it will give the right answer. How does it do this?
 
-This blog explains how a toy (1-layer, 3-head) transformer model answers integer addition questions like:
+This blog explains how a toy (1-layer, 3-head) transformer model answers integer addition questions like "33357+82243=". 
+When written down as a sequence of tokens the question and answer look like this:
 
 <img src="{{site.url}}/assets/AdditionQuestionAnswer.svg" style="display: block; margin: auto;" />
 
 This blog is written as an introduction to Mechanistic Interpretability and Transformer models for novices. 
-It covers our investigation, testing and results of integer addition in transformers, building up section by section, and finally explaining this diagram:
+It covers our investigation, testing and results of integer addition in transformers, build understanding section by section, and finally explaining this diagram:
 
 <img src="{{site.url}}/assets/StaircaseA3_Summary.svg" style="display: block; margin: auto;" />
 
-A CoLab notepad is provided here. 
-It contains all the code needed to train the model and use the trained model, create graphs, etc. You can alter the code to test out other approaches.
+A CoLab notepad is provided <html url="{{site.url}}/assets/Accurate_Addition_in_Transformers.ipynb"> here </>. 
+It contains all the code needed to train the model and use the trained model, create graphs, etc. You can alter the code to try out other approaches.
 
 # Humans vs Model Learning
 When we were learning to do addition, we likely memorized some facts (e.g. 1+1=2) but quickly learnt this was not scalable and then learnt the standard way to do addition. 
