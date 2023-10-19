@@ -141,7 +141,7 @@ The algorithm is very different from the human approach to addition. The algorit
 Given the question’s high density, the need to answer promptly, and the small size of the model, the algorithm’s accuracy ( > 99.5% ) is impressive. (The next post shows how to increase the algorithm’s accuracy further.)
 
 # Acknowledgements
-I gratefully acknowledge the support of the Apart Lab specifically Kiko Barez and Esben Kran in mentoring me through the process of developing this blog and the associated paper. I am also thankful for Neel Nanda etc compiling a list of simple open Mechanistic Interpretability questions (such as this blog’s question) that a talented novice can make progress on, and so contribute to the field.
+I gratefully acknowledge the support of the Apart Lab specifically Fazl (Kiko) Barez and Esben Kran in mentoring me through the process of developing this blog and the associated paper. I am also thankful for Neel Nanda etc compiling a list of simple open Mechanistic Interpretability questions (such as this blog’s question) that a talented novice can make progress on, and so contribute to the field.
 
 
 
