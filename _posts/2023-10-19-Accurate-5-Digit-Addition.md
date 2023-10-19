@@ -1,8 +1,10 @@
 ---
-title: "Accurate 5-Digit Addition in Transformers"
+title: "Accurate 5-Digit Addition in Transformers (incomplete)"
 date: 2023-10-19
 ---
 # Introduction
+This post is an incomplete work-in-progress. 
+
 The <a href="{{site.url}}/2023/10/14/Understanding-Addition.html">previous post</a> discussed how a toy (1-layer, 3-head) transformer model answers integer addition questions like "33357+82243=". 
 
 <img src="{{site.url}}/assets/AdditionQuestionAnswer.svg" style="display: block; margin: auto;" />
