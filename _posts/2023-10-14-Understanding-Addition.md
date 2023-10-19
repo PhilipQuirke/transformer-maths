@@ -143,14 +143,5 @@ Given the question’s high density, the need to answer promptly, and the small 
 # Acknowledgements
 I gratefully acknowledge the support of the Apart Lab specifically Fazl (Kiko) Barez and Esben Kran in mentoring me through the process of developing this blog and the associated paper. I am also thankful for Neel Nanda etc compiling a list of simple open Mechanistic Interpretability questions (such as this blog’s question) that a talented novice can make progress on, and so contribute to the field.
 
-
-
-
-
-
-
-
-
-
-
-
+This post is based on a paper written by Philip Quirke and Fazl (Kiko) Barez which was submitted in Sept 2023 to the ICLR 2024 conference. The paper is available  
+<a href="[https://openreview.net/forum?id=rIx1YXVWZb](https://openreview.net/forum?id=rIx1YXVWZb)">here</a>.
