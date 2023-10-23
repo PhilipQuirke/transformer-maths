@@ -18,7 +18,7 @@ All these questions are similar to the question 06665+03335=10000 where a "Carry
 
 This post documents how to improve that model to do 5-digit addition 100% accurately.
 
-The same CoLab notepad as before can be downloaded from <a href="{{site.url}}/assets/Accurate_Addition_in_Transformers.ipynb">here</a>, 
+The CoLab notepad for this blog can be downloaded fromm <a href="{{site.url}}/assets/Accurate_Addition_in_Transformers.ipynb">here</a>, 
 and used to train and test the model. You can alter the code to try out other approaches.
 
 # What didn’t work
