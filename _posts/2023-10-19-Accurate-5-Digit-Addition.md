@@ -14,7 +14,7 @@ It summarised the model's addition algorithm like this and stated it could solve
 <img src="{{site.url}}/assets/StaircaseA3_Summary.svg" style="display: block; margin: auto;" />
 
 The model can't reliably answer 0.5% of questions. 
-All these questions are similar to the question 06665+03335=10000 where a "Carry 1" cascades through multiple digit columns (aka Cascading Use Sum 9 or cascading US9). 
+All these questions are similar to the question 06665+03335=10000 where a "Carry 1" in one column "cascades" through the next few higher columns that each "sum to 9" (e.g. 6 = 3). We call this Cascading Use Sum 9 (aka US9). 
 
 This post documents how to improve that model to do 5-digit addition 100% accurately.
 
@@ -34,10 +34,14 @@ What worked was increasing the number of model “layers” (n_layers) from 1 to
 Also, the literature says a multiple-layer model gains the ability to“compose” the attention heads together in new ways to implement more complex calculations.
 
 With 1 layer, the model can handle all Simple US9 cases but only 25% of Cascading US9 cases. With 2 layers, 
-the model can handle all Simple and Cascading US9 cases (CoLab Part 9) for 5 digit addition. Excellent! How does it do this? 
+the model can handle all Simple and Cascading US9 cases (CoLab Part 9) for 5 digit addition. Excellent! 
+
+To be accurate, the 2 layer algorithm must have the functionality of the 1 layer algorithm **and** 
+functionality to handle the 06665+03335=10000 case by cascading the Carry 1 through multiple columns. How does it do this? 
+
 
 # Attention Pattern
-Attention patterns are the easiest way to see the impact of changing n_layers. With 1 layer, the attention pattern showed one row of 3 attention heads. With 2 layers, there are now 6 attention heads over two rows. For example, for the question “16044+14973=” we get this attention pattern:
+Attention patterns are the easiest way to see the change in model structure by changing n_layers. With 1 layer, the attention pattern showed one row of 3 attention heads. With 2 layers, there are now 6 attention heads over two rows. For example, for the question “16044+14973=” we get this attention pattern:
 
 <img src="{{site.url}}/assets/AttentionPattern5Digit3Heads2Layer.png" style="display: block; margin: auto;" />
 
