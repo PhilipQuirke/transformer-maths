@@ -17,7 +17,7 @@ It covers our investigation, testing and results of integer addition in transfor
 
 <img src="{{site.url}}/assets/StaircaseA3_Summary.svg" style="display: block; margin: auto;" />
 
-A CoLab notepad can be downloaded from <a href="{{site.url}}/assets/Accurate_Addition_in_Transformers.ipynb">here</a>. 
+A CoLab notepad can be downloaded from <a href="{{site.url}}/assets/Understanding_Addition_in_Transformers.ipynb">here</a>. 
 It contains all the code needed to train the model and use the trained model, create graphs, etc. You can alter the code to try out other approaches.
 
 # Humans vs Model Learning
@@ -141,7 +141,7 @@ The algorithm is very different from the human approach to addition. The algorit
 Given the question’s high density, the need to answer promptly, and the small size of the model, the algorithm’s accuracy ( > 99.5% ) is impressive. (The next post shows how to increase the algorithm’s accuracy further.)
 
 # Acknowledgements
-I gratefully acknowledge the support of the Apart Lab specifically Fazl (Kiko) Barez and Esben Kran in mentoring me through the process of developing this blog and the associated paper. I am also thankful for Neel Nanda etc compiling a list of simple open Mechanistic Interpretability questions (such as this blog’s question) that a talented novice can make progress on, and so contribute to the field.
+I gratefully acknowledge the support of the Apart Lab specifically Fazl Barez and Esben Kran in mentoring me through the process of developing this blog and the associated paper. I am also thankful for Neel Nanda etc compiling a list of simple open Mechanistic Interpretability questions (such as this blog’s question) that a talented novice can make progress on, and so contribute to the field.
 
-This post is based on a paper written by Philip Quirke and Fazl (Kiko) Barez which was submitted in Sept 2023 to the ICLR 2024 conference. The paper is available  
-<a href="[https://openreview.net/forum?id=rIx1YXVWZb](https://openreview.net/forum?id=rIx1YXVWZb)">here</a>.
+This post is based on a paper written by Philip Quirke and Fazl Barez which was submitted in Sept 2023 to the ICLR 2024 conference. The paper is available  
+<a href="[http://arxiv.org/abs/2310.13121](http://arxiv.org/abs/2310.13121)">here</a>.
