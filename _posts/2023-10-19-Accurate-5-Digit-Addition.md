@@ -85,12 +85,16 @@ Some notes:
 # Which heads + steps impact which digits and tasks?
 By studying attention patterns we can see which token each head attentions to in each step. But we are not sure if the model actually relies on the output of that neuron+step. Sometimes models train neurons to do calculations and then ignore their results.
 
-CoLab Part 11B ablates **each** heads in each step and see if loss increases for specific **digits** and **tasks**. This shows which steps are associated with calculating which digits and tasks.
+CoLab Part 11B ablates **each** heads in each step and see if loss increases for specific **digits** and **tasks**. This shows which steps are associated with calculating which digits and tasks. Any head+step not used in the calculations is marked with an X. 
+
+<img src="{{site.url}}/assets/StaircaseA3L2_Summary.svg" style="display: block; margin: auto;" />
 
 
 
 
-# Pulling it all together
+
+
+# Pulling it all together (TBD)
 As the 2 layer model is 100% accurate, the algorithm for the model must be able to handle a cascading US9 question such as 66665+33335=100000. What algorithm can handle this? 
 
 Draft / incorrect algorithm is:
@@ -100,4 +104,4 @@ Draft / incorrect algorithm is:
 TBC
 
 # Acknowledgements
-I gratefully acknowledge the support of the Apart Lab specifically Fazl (Kiko) Barez and Esben Kran. I am also thankful for Neel Nanda etc compiling a list of simple open Mechanistic Interpretability questions that a talented novice can make progress on, and so contribute to the field.
+I gratefully acknowledge the support of the Apart Lab specifically Fazl Barez and Esben Kran. I am also thankful for Neel Nanda etc compiling a list of simple open Mechanistic Interpretability questions that a talented novice can make progress on, and so contribute to the field.
