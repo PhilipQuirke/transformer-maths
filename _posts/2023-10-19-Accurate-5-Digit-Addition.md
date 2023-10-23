@@ -45,34 +45,50 @@ Attention patterns are the easiest way to see the change in model structure by c
 
 <img src="{{site.url}}/assets/AttentionPattern5Digit3Heads2Layer.png" style="display: block; margin: auto;" />
 
-# Which Steps do useful calculations?
-With 1 layer, (CoLab Part 11 shows) the model does not use steps 0 to 10 and step 17 to do useful calculations. So all calculations are done in the 6 steps 11 to 16.
+# Which steps do any useful calculations?
+If we ablate all heads in each step and see if loss increases we can show which steps (if any) are **not** used by the algorithm. These steps can be excluded from further analysis.
 
-With 2 layers, the model does not use steps 0 to 7 and step 17. So it is doing useful calculations in 10 steps! What calculations do these 10 steps perform?
+CoLab Part 10 does this and shows:
+- n_digits = 5, n_layers = 1 :
+  - The addition algorithm does not use any data generated in steps 0 to 10 inclusive. The model also does not use the last (17th) step. Therefore, the addition is started and completed in 6 steps (11 to 16)
+- n_digits = 5, n_layers = 2 :
+  - The addition algorithm does not use any data generated in steps 0 to 7 inclusive. The model also does not use the last (17th) step. Therefore, the addition is started and completed in 9 steps (8 to 16). What calculations get done in the extra 3 steps?
 
-# Double-staircases similarities
-Both the 1 layer and 2 layer attention patterns contain a double-staircase, late in the steps, with the same length. Maybe they do the same job? 
 
-Ablating the last 6 useful steps (in CoLab Part 11) negatively impacts accuracy, in exactly the same way as in the 1 layer model, supporting this intuition:
-- Step 11 impacts A5 only. Impacts all (i.e. BA, UC1, US9) tasks.
-- Step 12 impacts A4 only. Impacts all tasks.
-- Step 13 impacts A3 only. Impacts all tasks.
-- Step 14 impacts A2 only. Impacts all tasks.
-- Step 15 impacts A1 only. Impacts all tasks.
-- Step 16 impacts A0 only. Impacts all tasks.
+# Which steps impact which digits and tasks?
+Here we ablate all heads in each step and see if loss increases for specific **digits** and **tasks**. This shows which steps are associated with calculating which digits and tasks.
 
-One difference: With 2 layers, the staircase is 2 tokens wide. With 1 layer, the staircase was 3 tokens wide and handled BaseAdd (perfectly), UseCarry1 (perfectly) and UseSum9 (imperfectly). Our intuition is that with 2 layers, the staircase handles BaseAdd and UseCarry1 but some other mechanism handles UseSum9 (perfectly).
+CoLab Part 11A does this and shows:
+- n_digits = 5, n_layers = 1 :
+  - Step 12 impacts A4 only. All tasks
+  - Step 13 impacts A3 only. All tasks
+  - Step 14 impacts A2 only. All tasks
+  - Step 15 impacts A1 only. All tasks
+  - Step 16 impacts A0 only. All tasks
+- n_digits = 5, n_layers = 2 :
+  - Step 8 impacts mostly A4. Mostly SimpleUS9.
+  - Step 9 impacts mostly A3. Mostly SimpleUS9 and CascadeUS9.
+  - Step 10 impacts mostly A2. Mostly SimpleUS9 and CascadeUS9.
+  - Step 11 impacts A5 only. All tasks
+  - Step 12 impacts A4 only. All tasks
+  - Step 13 impacts A3 only. All tasks
+  - Step 14 impacts A2 only. All tasks
+  - Step 15 impacts A1 only. All tasks
+  - Step 16 impacts A0 only. All tasks
 
-#Extra steps do UseSum9-related calculations
-What calculations does the 2 layer model do in steps 8 to 10 (where the 1 layer model does nothing)? 
+Some notes:
+- The extra 3 steps (8 to 11) appear to support the SimpleUS9 and CascadeUS9 calculations. Recall that A0 only needs BaseAdd, and A1 only needs BaseAdd and UseCarry1, so we won’t see any Use Sum 9 calculations for them.
+- The last 5 steps (12 to 16) do approximately the same calculations in the 5 and 10 digit cases. 
+- With 2 layers, the staircase is 2 tokens wide. With 1 layer, the staircase was 3 tokens wide and handled BaseAdd (perfectly), UseCarry1 (perfectly) and UseSum9 (imperfectly). Our intuition is that with 2 layers, the staircase handles BaseAdd and UseCarry1 but some other mechanism handles UseSum9 (perfectly).
 
-Ablating these steps (in CoLab Part 11) negatively impacts accuracy in a clear pattern:
-- Step 8 impacts mostly A4. Mostly impacts Simple US9 task.
-- Step 9 impacts mostly A3. Mostly impacts Simple and Cascading US9 tasks.
-- Step 10 impacts mostly A2. Mostly impacts Simple and Cascading US9 tasks.
-- So with 2 layers, the model uses steps 8 to 10 to do US9-related calculations for A2 to A4. 
 
-Recall that A0 only needs BaseAdd, and A1 only needs BaseAdd and UseCarry1, so we won’t see any Use Sum 9 calculations for them.
+# Which heads + steps impact which digits and tasks?
+By studying attention patterns we can see which token each head attentions to in each step. But we are not sure if the model actually relies on the output of that neuron+step. Sometimes models train neurons to do calculations and then ignore their results.
+
+CoLab Part 11B ablates **each** heads in each step and see if loss increases for specific **digits** and **tasks**. This shows which steps are associated with calculating which digits and tasks.
+
+
+
 
 # Pulling it all together
 As the 2 layer model is 100% accurate, the algorithm for the model must be able to handle a cascading US9 question such as 66665+33335=100000. What algorithm can handle this? 
