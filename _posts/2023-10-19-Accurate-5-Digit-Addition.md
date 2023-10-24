@@ -85,9 +85,18 @@ Some notes:
 # Which heads + steps impact which digits and tasks?
 By studying attention patterns we can see which token each head attentions to in each step. But we are not sure if the model actually relies on the output of that neuron+step. Sometimes models train neurons to do calculations and then ignore their results.
 
-CoLab Part 11B ablates **each** heads in each step and see if loss increases for specific **digits** and **tasks**. This shows which steps are associated with calculating which digits and tasks. Any head+step not used in the calculations is marked with an X. 
+CoLab Part 11B ablates **each** head in each step and see if loss increases for specific **digits** and **tasks**. This shows which steps are associated with calculating which digits and tasks. Any head+step not used in the calculations is marked with an X. 
 
 <img src="{{site.url}}/assets/StaircaseA3L2_Summary.svg" style="display: block; margin: auto;" />
+
+
+# Which heads + steps impact which BaseAdd?
+Now we know all the heads+steps that are needed for the calculations, we can just study the remaining heads+steps.
+
+We can studying simple (aka BaseAdd) questions like 12345+33333= that do not need UseCarry1 or UseSum9. CoLab Part 11B ablates **each** head in each step for a batch of BaseAdd questions, showing which heads+steps are involved in the BaseAdd calculations.
+
+
+
 
 
 
