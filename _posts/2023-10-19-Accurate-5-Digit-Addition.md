@@ -87,28 +87,104 @@ By studying attention patterns we can see which token each head attentions to in
 
 CoLab Part 11B ablates **each** head in each step and see if loss increases for specific **digits** and **tasks**. This shows which steps are associated with calculating which digits and tasks. Any head+step not used in the calculations is marked with an X. 
 
-<img src="{{site.url}}/assets/StaircaseA3L2_Summary.svg" style="display: block; margin: auto;" />
+<img src="{{site.url}}/assets/StaircaseA3L2_Part1.svg" style="display: block; margin: auto;" />
 
 
-# Which heads + steps impact which BaseAdd?
-Now we know all the heads+steps that are needed for the calculations, we can just study the remaining heads+steps.
+# Hypothesis #1
+Given the 2 layer attention pattern’s similarity to 1 layer pattern, and the above evidence, our first hypothesis was that the 2 layer algorithm:
+- Has higher accuracy than the 1 layer algorithm.
+- Is based on the same operations (BA, MC, MS) as the 1 layer.
+- Uses the new early steps to (somehow) do the US9 calculations with higher accuracy than the 1 layer model.
+- The long double staircase still finalises each answer digit’s calculation.
+-The two attention nodes in the long double staircase steps do the BA and MC calculations and pull in US9 information calculated in the early steps.
 
-We can studying simple (aka BaseAdd) questions like 12345+33333= that do not need UseCarry1 or UseSum9. CoLab Part 11B ablates **each** head in each step for a batch of BaseAdd questions, showing which heads+steps are involved in the BaseAdd calculations.
+If this is correct then the 2 layer algorithm successfully completes these calculations:
+- A0 = D0.BA
+- A1 = D1.BA + D0.MC
+- A2 = D2.BA + (D1.MC or D1.MS & D0.MC)
+- A3 = D3.BA + (D2.MC or D2.MS & D1.MC or D2.MS & D1.MS & D0.MC)
+- A4 = D4.BA + (D3.MC or D3.MS & D2.MC or D3.MS & D2.MS & D1.MC or D3.MS & D2.MS & D1.MS & D0.MC)
+- A5 = D4.MC or D4.MS & D3.MC or D4.MS & D3.MS & D2.MC or D4.MS & D3.MS & D2.MS & D1.MC or D4.MS & D3.MS & D2.MS & D1.MS & D0.MC
 
+Answer digit A5 is the earliest-revalued answer. It is always 0 or 1. It must be calculated in steps 8 to 11, and revealed in step 11. Analysing the attention pattern, it turns out there are not enough active heads+layers in steps 8 to 11 to do all the parts of A5 calculation if the BA, MC and MS state data are calculated independently. So hypothesis #1 is incorrect.
 
+# Hypothesis #2
+To calculate A5 by step 11, the model must be packing more calculation into each head+layer in steps 8 to 11. A more compact representation of data would allow this. 
 
+In hypothesis #2, we assume the model stores the sum of each digit pair as a single token in the range “0” to “18” (covering 0+0 to 9+9). We name this operator Dn.T1 - where T stands for “token addition” (and the 1 will be explained later):
+- Dn.T1 = Dn + Dn’
 
+The T1 operation does not understand mathematical addition. The model implements the T1 operator as a bigram mapping from 2 input tokens to 1 result token e.g. “8” + “7” = “15”. There are 100 distinct mappings:
+<img src="{{site.url}}/assets/Addition_T1Pairs.png" style="display: block; margin: auto;" />
 
+We can retrieve the operator BA, MC & MS values from a Dn.T1 value as follows:
+- Dn.BA = (Dn.T1 % 10) where % is the modulus operator 
+- Dn.MC = (Dn.T1 // 10) where // is the integer division operator
+- Dn.MS = (Dn.T1 == 9) where == is the equality operator
 
+So T1 is a compact way to store intermediate results that still allows us to reason using the traditional BA, MC & MS operators. 
 
+The Dn.T1 accuracy is imperfect because it is constrained to information from just one digit - hence the “1” in T1. We define another more accurate operator Dn.T2 that has “two-digit accuracy”. Dn.T2 is the pair sum for the nth digit plus the carry 1 (if any) from the n-1th digit T1:
+- Dn.T2 = Dn.T1 + ( Dn-1.T1 // 10 )
+
+Dn.T2 is more accurate than DnT1. The Dn.T2 value is always in the range “0” to “19” (covering 0+0+0 to 9+9+Carry1). This operation does not understand mathematical addition. The model implements the T2 operator as a bigram mapping from 2 input tokens to 1 result token e.g. “12” + “1” = “13”. There are 38 distinct mappings: 
+<img src="{{site.url}}/assets/Addition_T2mappings.png" style="display: block; margin: auto;" />
+
+Dn.T2 can only be calculated after Dn.T1 and Dn-1.T1 have been calculated. 
+
+We define operators Dn.T3, Dn.T4 & Dn.T5 each with higher accuracy::
+- Dn.T3 = Dn.T1 + ( Dn-1.T2 // 10 )	Three-digit accuracy
+- Dn.T4 = Dn.T1 + ( Dn-1.T3 // 10 )	Four-digit accuracy
+- Dn.T5 = Dn.T1 + ( Dn-1.T4 // 10 )	Five-digit accuracy
+
+The value D4.T5 is perfectly accurate as it integrates MC1 and cascading MS9 data all the way back to and including D0.T1. The values D1.T2, D2.T3, D3.T4 are also perfectly accurate. If we know these values we can calculate answer digits with perfect accuracy:
+- D1.T2 % 10 gives A1
+- D2.T3 % 10 gives A2
+- D3.T4 % 10 gives A3
+- D4.T5 % 10 gives A4
+- D4.T5 // 10 gives A5
+
+If the model is doing integer addition perfectly accurately, then it must be calculating D4.T5 by step 11 so an accurate A5 is revealed. Ablation tests tell us which steps+heads are doing useful calculations (but not what those steps actually do). Hypothesis #2 says the model uses the useful Step+Head to perform these operations so that D4.T5 is calculated in step 11:
+- Step 8:
+  - L0H1: D2: Calculate D2.T1 = D2 + D2’
+  - L0H2: D3: Calculate D3:T1 = D3 + D3’
+  - MLP: N/A: Not used. Could calculate inaccurate D3.T2 = D3.T1 + D2.T1 // 10
+- Step 9
+  - L0H1: D1: Calculate D1:T1 = D1 + D1’
+  - MLP: N/A: Not used. Could calculate inaccurate D2.T2 = D2.T1 + D1.T1 // 10
+- Step 10
+  - L0H0: D0: Calculate D1.T2 = D1.T1 + (D0 + D0’) // 10. Perfectly accurate.
+  - L0H1: D1: Not used. Duplicate of S9.L0H1?
+  - L0H2: D1: Not used. Duplicate of S9.L0H1?
+  - MLP: N/A: Calculate D2.T3 = D2.T1 + D1.T2 // 10. Perfectly accurate  
+- Step 11:
+  - L0H1: D3 : Calculate D3.T4 = D3.T1 + D2.T3. Perfectly accurate. 
+  - L0H2: D4 : Calculate D4.T1
+  - MLP: N/A: Calculate D4.T5 // 10 = (D4.T1 + D3.T4 // 10) // 10. Perfectly accurate A5.
+- Step 12:
+  - L0H0: D4 : Calculate D4.T5 = D4.T1 + D3.T4 // 10. Perfectly accurate.
+  - L0H1: D3 : Not used. Could calculate accurate D3.BA = D3.T4 % 10
+  - L0H2: D4 : Not used. Could calculate accurate D4.BA = D4.T5 % 10
+  - MLP: N/A: Calculate D4.T5 % 10. Perfectly accurate A4
+  - L1H0: =: Not used. Could calculate accurate D2.BA = D2.T3 % 10
+  - L1H1: =:  Not used. Could calculate accurate D1.BA = D1.T2 % 10
+  - MLP: N/A: Not used. 
+
+Some notes :
+- Possible issue: Ablation says two step 10 heads are useful, but they have are not used. 
+  - Possible solution: These heads may be “duplicates” of S9.L0H1, splitting the workload
+- Possible issue: To get a perfect A5, all the digits have been completed by step 11. Why does the model retain the redundant long staircase BA calculations?
+  - Possible solution: The model is not optimising for compactness. Once it gives the right numeric answer consistently it stops optimising.
+- Possible issue: Ablation says the layer 2 heads S12.L1H0 and S12.L1H1 are useful, but they have are not used. That is, no Layer 1 heads are used. This seems wrong.
+  - Possible solution: The model is not optimising for algorithm compactness. The calculation of A4 may be spread over several heads  
+- Possible issue: The calculation by S11.MLP of D4.T5 // 10 = (D4.T1 + D3.T4 // 10) // 10 seems complex. Can this calc be done by the MLP?
+  - Possible solution: The D4.T1 and D3.T4 values are in the residual stream. Is this a trigram? TBA
 
 
 # Pulling it all together (TBD)
 As the 2 layer model is 100% accurate, the algorithm for the model must be able to handle a cascading US9 question such as 66665+33335=100000. What algorithm can handle this? 
 
 Draft / incorrect algorithm is:
-
-<img src="{{site.url}}/assets/StaircaseA3L2_Detailed.svg" style="display: block; margin: auto;" />
 
 TBC
 
