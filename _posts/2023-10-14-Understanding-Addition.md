@@ -57,12 +57,12 @@ We defined 2 “compound” tasks that chain operations across digits:
 - UseCarry1 (aka UC1), which takes the previous column's carry output and adds it to the sum of the current digit pair. That is it combines BA and MC1.
 - UseSum9 (aka US9), which propagates (aka cascades) a carry over of 1 to the next column if the current column sums to 9 and the previous column generated a carry over. US9 is a complex task as it spans three digits. For some rare questions (e.g. 05555+04445=10000) US9 applies to up to four sequential digits, causing a chain effect, with the MC1 cascading through multiple digits. This cascade requires a time ordering of the US9 calculations from lower to higher digits.
 
-For each training question, we can say whether to get the right answer the model needs to use:
-- Just the BA task (e.g. 11111+22222= ), or 
-- BA, MC1 and UC1 tasks (e.g. 00045+00055= ), or
-- All the tasks including US9 (e.g. 05555+04445= )
+While the model was training, we categorised each question based on which tasks the model must perform to get the correct answer. We categorised each training question as one of:
+- Only the BA task is needed (e.g. 11111+22222= ), or 
+- The BA, MC1 and UC1 tasks are needed (e.g. 00045+00055= ), or
+- All the tasks including US9 are needed (e.g. 05555+04445= )
 
-Graphing the training loss for the BA and UC1 tasks side by side for say Digit 3 shows an interesting pattern. In Phase 1, both tasks have the same (high) loss. In Phase 2, both curves drop quickly but the BA curve drops faster than the UC1 curve. This “time lag" is because the BA task must be accurate before the UC1 task can be accurate. In Phase 3, both tasks’ loss curve decrease slowly over time. 
+Graphing the training loss for different question categories side by side helps us see when the model learns tasks. For example, the training loss graph for say Digit 3 shows an interesting pattern. In Phase 1, both tasks have the same (high) loss. In Phase 2, both curves drop quickly but the BA curve drops faster than the UC1 curve. This “time lag" is because the BA task must be accurate before the UC1 task can be accurate. In Phase 3, both tasks’ loss curve decrease slowly over time. The 3 phases seem to correspond to “memorisation”, “algorithm discovery” and “clean-up”.
 
 <img src="{{site.url}}/assets/AdditionDigit3BaUc1TrainingLoss.png" style="display: block; margin: auto;" />
 
@@ -70,7 +70,7 @@ This graph supports the idea that the model is learning these tasks independentl
 
 # Time Ordering
 
-Transformers process the question and predict the answer one token at a time, strictly from left to right. For 5 digit integer addition this gives a total of 18 tokens:
+This transformer model processes the question and predicts the answer one token at a time, strictly from left to right. For 5 digit integer addition this gives a total of 18 tokens:
 
 <img src="{{site.url}}/assets/QuestionAnswerSteps.svg" style="display: block; margin: auto;" />
 
