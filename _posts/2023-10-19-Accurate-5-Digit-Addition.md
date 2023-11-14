@@ -35,7 +35,7 @@ For this model these approaches all failed to improve the model accuracy:
 What worked was increasing the number of model “layers” (n_layers) from 1 to 2. This doubles the number of attention heads in the model. 
 Also, the literature says a multiple-layer model gains the ability to “compose” the attention heads together in new ways to implement more complex calculations.
 
-With 2 layers the model definitely does better: 
+With 2 layers the model definitely does better (based on CoLab with 20K training epochs, batch_size= 64, n_heads = 3, lr = 0.00008, weight_decay = 0.1):
 
 <img src="{{site.url}}/assets/Addition_AccuracyByLayersDigits.png" style="display: block; margin: auto;" />
 
