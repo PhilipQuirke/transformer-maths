@@ -145,7 +145,7 @@ Excluding D0.T1, the value Dn.T1 is not perfectly accurate because it is constra
 - Dn.T2 = Dn.T1 + ( Dn-1.T1 // 10 )
 
 Dn.T2 is more accurate than DnT1. The Dn.T2 value is always in the range “0” to “19” (covering 0+0+0 to 9+9+Carry1). The model can implement the T2 operator as a bigram mapping from 2 input tokens to 1 result token e.g. “12” + “1” = “13”. There are 38 distinct mappings: 
-<img src="{{site.url}}/assets/Addition_T2Mappings,png" style="display: block; margin: auto;" />
+<img src="{{site.url}}/assets/Addition_T2Mappings.png" style="display: block; margin: auto;" />
 
 Dn.T2 can only be calculated after Dn.T1 and Dn-1.T1 have been calculated. 
 
