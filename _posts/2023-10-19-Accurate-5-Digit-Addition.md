@@ -106,7 +106,7 @@ Do we have info on heads+nodes for BA task?
 This is our base evidence from which to hypothesise about how the 2-layer algorithm works.
 
 
-## Hypothesis #1
+# Hypothesis #1
 Given the 2 layer attention pattern’s similarity to 1 layer pattern, and the above evidence, our first hypothesis was that the 2 layer algorithm:
 - Is based on the same operations (BA, MC, MS) as the 1 layer.
 - Uses the new early steps to (somehow) do the US9 calculations with higher accuracy than the 1 layer model.
@@ -128,7 +128,7 @@ Looking at the above diagram and thinking about the A5 and A4 calculations, some
 Our intuition is that there are not enough useful heads+steps in steps 8 to 11 to do the A5 and A4 calculations. So hypothesis #1 is incorrect.
 
 
-## Hypothesis #2
+# Hypothesis #2
 Our second hypothesis was that the 2 layer algorithm:
 - Has a **more compact** data representation (That is, it does not store BA, MC1 and US9 data as separate datums.)
 - Can therefore pack more calculations into each head+layer in steps 8 to 11 (so it can calculate A5 in time).
@@ -151,6 +151,7 @@ Excluding D0.T1, the value Dn.T1 is not perfectly accurate because it is constra
 - Dn.T2 = Dn.T1 + ( Dn-1.T1 // 10 )
 
 Dn.T2 is more accurate than DnT1. The Dn.T2 value is always in the range “0” to “19” (covering 0+0+0 to 9+9+Carry1). The model can implement the T2 operator as a bigram mapping from 2 input tokens to 1 result token e.g. “12” + “1” = “13”. There are 38 distinct mappings: 
+
 <img src="{{site.url}}/assets/Addition_T2Mappings.png" style="display: block; margin: auto;" />
 
 Dn.T2 can only be calculated after Dn.T1 and Dn-1.T1 have been calculated. 
