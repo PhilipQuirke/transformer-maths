@@ -97,10 +97,16 @@ Combining the attentionss are associated with calculating which digits and tasks
 
 <img src="{{site.url}}/assets/StaircaseA3L2_Part1.svg" style="display: block; margin: auto;" />
 
-This is our base evidence from which to hypothesise about the 2-layer algorithm.
+
+# BA
+Do we have info on heads+nodes for BA task?
 
 
-# Hypothesis #1
+# Hypothesis
+This is our base evidence from which to hypothesise about how the 2-layer algorithm works.
+
+
+## Hypothesis #1
 Given the 2 layer attention pattern’s similarity to 1 layer pattern, and the above evidence, our first hypothesis was that the 2 layer algorithm:
 - Is based on the same operations (BA, MC, MS) as the 1 layer.
 - Uses the new early steps to (somehow) do the US9 calculations with higher accuracy than the 1 layer model.
@@ -122,7 +128,7 @@ Looking at the above diagram and thinking about the A5 and A4 calculations, some
 Our intuition is that there are not enough useful heads+steps in steps 8 to 11 to do the A5 and A4 calculations. So hypothesis #1 is incorrect.
 
 
-# Hypothesis #2
+## Hypothesis #2
 Our second hypothesis was that the 2 layer algorithm:
 - Has a **more compact** data representation (That is, it does not store BA, MC1 and US9 data as separate datums.)
 - Can therefore pack more calculations into each head+layer in steps 8 to 11 (so it can calculate A5 in time).
@@ -187,6 +193,9 @@ For the model to do integer addition perfectly accurately, it must be calculatin
   - L1H1: =: Not used. Could calculate accurate D1.BA = D1.T2 % 10 ? TBA
   - MLP: N/A: Not used. 
 
+Representing the above as a diagram:
+<img src="{{site.url}}/assets/StaircaseA3L2_Part2.svg" style="display: block; margin: auto;" />
+
 Some notes :
 - Possible issue: Ablation says two step 10 heads are useful, but they have are not used. 
   - Possible solution: These heads may be “duplicates” of S9.L0H1, splitting the workload
@@ -199,11 +208,8 @@ Some notes :
 
 
 # Pulling it all together (TBD)
-As the 2 layer model is 100% accurate, the algorithm for the model must be able to handle a cascading US9 question such as 66665+33335=100000. What algorithm can handle this? 
+TBA
 
-Draft / incorrect algorithm is:
-
-TBC
 
 # Acknowledgements
 I gratefully acknowledge the support of the Apart Lab specifically Fazl Barez and Esben Kran. I am also thankful for Neel Nanda etc compiling a list of simple open Mechanistic Interpretability questions that a talented novice can make progress on, and so contribute to the field.
