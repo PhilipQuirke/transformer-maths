@@ -61,54 +61,41 @@ CoLab Part 10 does this analysis and shows:
   - The addition algorithm does not use any data generated in steps 0 to 7 inclusive. The model also does not use the last (17th) step. Therefore, the addition is started and completed in 9 steps (8 to 16). What calculations get done in the extra 3 steps?
 
 
-## Which steps impact which digits and tasks?
-If we ablate all heads in each useful step to see if loss increases for specific **digits** and **tasks**, we gain insight into which steps are associated with calculating which digits and tasks.
+## Which steps impact which digits?
+If we ablate all heads in each useful step to see if loss increases for specific **digits**, we gain insights. With 2 layers, CoLab Part 11A shows:
+- Step 8 impacts A4 & A5 
+- Step 9 impacts A3 & A5  
+- Step 10 impacts A2 to A5
+- Step 11 impacts A5 only 
+- Step 12 impacts A4 only 
+- Step 13 impacts A3 only 
+- Step 14 impacts A2 only 
+- Step 15 impacts A1 only 
+- Step 16 impacts A0 only 
 
-CoLab Part 11A does this analysis and shows:
-- n_digits = 5, n_layers = 1, useful_steps = 6 :
-  - Step 12 impacts A4 only. All tasks
-  - Step 13 impacts A3 only. All tasks
-  - Step 14 impacts A2 only. All tasks
-  - Step 15 impacts A1 only. All tasks
-  - Step 16 impacts A0 only. All tasks
-- n_digits = 5, n_layers = 2, useful_steps = 9 :
-  - Step 8 impacts A4 & A5. ???? task
-  - Step 9 impacts A3 & A5. SimpleUS9 task
-  - Step 10 impacts A2 .. A5. ??? tasks.
-  - Step 11 impacts A5 only. All tasks
-  - Step 12 impacts A4 only. All tasks
-  - Step 13 impacts A3 only. All tasks
-  - Step 14 impacts A2 only. All tasks
-  - Step 15 impacts A1 only. All tasks
-  - Step 16 impacts A0 only. All tasks
+## Which steps+heads impact which use cases?
+If we repeat this experiment but only test each classof question one at a time, we gain insights. With 2 layers:
+- For BA questions, CoLab Part 11C shows: S0 to S11 and S17 are not relevant, L1 is not relevant & L0H1 is not relevant.
+- For UC questions, CoLab Part 11D shows: S0 to S11 and S17 are not relevant & L1 is not relevant.
+- For Simple US9 questions, CoLab Part 11E shows: S0 to S7 and S17 are not relevant & L1 is not relevant.
+- For Cascade US9 questions, CoLab Part 11F shows: S0 to S7 and S17 are not relevant.
+
+## Which heads + steps focus on which tokens?
+By inspecting attention patterns we can see which token each head attends to in each step. But we are not sure if the model actually relies on the output of that neuron+step. Sometimes models train neurons to do calculations and then ignore their results.
+
+Combining the attention pattern with the above "steps+heads impact" information gives us the following diagram. Any steps+heads that are not used in the calculations are marked with an X. 
+
+<img src="{{site.url}}/assets/StaircaseA3L2_Part1.svg" style="display: block; margin: auto;" />
+
+## Hypothesis
+The above is our base evidence from which to hypothesise about how the 2-layer algorithm works.
 
 Our intuition:
 - The extra 3 steps (8 to 11) appear to support the SimpleUS9 and CascadeUS9 calculations. Recall that A0 only needs BaseAdd, and A1 only needs BaseAdd and UseCarry1, so Use Sum 9 calculations is not relevant for them.
 - The last 5 steps (12 to 16) do approximately the same calculations in 1 and 2 layer cases. 
 - With 2 layers, the staircase is 2 tokens wide. With 1 layer, the staircase was 3 tokens wide and handled BaseAdd (perfectly), UseCarry1 (perfectly) and UseSum9 (imperfectly). Our intuition is that with 2 layers, the staircase handles BaseAdd and UseCarry1 but a new algorithm in steps 8 to 10 handles UseSum9 (with better accuracy than the 1 layer).
 
-
-## Which heads + steps focus on which tokens?
-By inspecting attention patterns we can see which token each head attends to in each step. But we are not sure if the model actually relies on the output of that neuron+step. Sometimes models train neurons to do calculations and then ignore their results.
-
-CoLab Part 11B ablates **each** head in **each** step and see if loss increases for specific **digits** and **tasks**. This shows which steps+heads are useful and which are not.
-
-Combining the attention pattern with this information gives us the following diagram. All heads+steps that are not used in the calculations are marked with an X. 
-
-<img src="{{site.url}}/assets/StaircaseA3L2_Part1.svg" style="display: block; margin: auto;" />
-
-
-# BA
-By looking at just BA questions (in CoLab Part 11C) we see that BA failures only occur in Setps 12 to 16, and only in heads L0H0 and L0H2.  
-
-# UC1
-By looking at just UC1 questions (in CoLab Part 11D) we see that UC1 failures only occur in Setps 11 to 16, and only in heads L0H0, L0H1 and L0H2.  
-
-
-## Hypothesis
-This is our base evidence from which to hypothesise about how the 2-layer algorithm works.
-
-
+  
 # Hypothesis #1
 Given the 2 layer attention pattern’s similarity to 1 layer pattern, and the above evidence, our first hypothesis was that the 2 layer algorithm:
 - Is based on the same operations (BA, MC, MS) as the 1 layer.
