@@ -65,7 +65,7 @@ CoLab Part 10 does this analysis and shows:
 If we ablate all heads in each useful step to see if loss increases for specific **digits**, we gain insights. With 2 layers, CoLab Part 11A shows:
 - Step 8 impacts A4 & A5 
 - Step 9 impacts A3 & A5  
-- Step 10 impacts A2 to A5
+- Step 10 impacts A2, A3, A4 & A5
 - Step 11 impacts A5 only 
 - Step 12 impacts A4 only 
 - Step 13 impacts A3 only 
@@ -75,10 +75,18 @@ If we ablate all heads in each useful step to see if loss increases for specific
 
 ## Which steps+heads impact which use cases?
 If we repeat this experiment but only test each classof question one at a time, we gain insights. With 2 layers:
-- For BA questions, CoLab Part 11C shows: S0 to S11 and S17 are not relevant, L1 is not relevant & L0H1 is not relevant.
-- For UC questions, CoLab Part 11D shows: S0 to S11 and S17 are not relevant & L1 is not relevant.
-- For Simple US9 questions, CoLab Part 11E shows: S0 to S7 and S17 are not relevant & L1 is not relevant.
-- For Cascade US9 questions, CoLab Part 11F shows: S0 to S7 and S17 are not relevant.
+- For BA questions, CoLab Part 11C shows:
+  - S0 to S11 and S17 are not relevant
+  - L1 is not relevant
+  - L0H1 is not relevant.
+- For UC questions, CoLab Part 11D shows:
+  - S0 to S11 and S17 are not relevant
+  - L1 is not relevant.
+- For Simple US9 questions, CoLab Part 11E shows:
+  - S0 to S7 and S17 are not relevant
+  - L1 is not relevant.
+- For Cascade US9 questions, CoLab Part 11F shows:
+-   S0 to S7 and S17 are not relevant.
 
 ## Which heads + steps focus on which tokens?
 By inspecting attention patterns we can see which token each head attends to in each step. But we are not sure if the model actually relies on the output of that neuron+step. Sometimes models train neurons to do calculations and then ignore their results.
