@@ -2,7 +2,7 @@
 title: "Accurate 5-Digit Addition in Transformers (incomplete)"
 date: 2023-10-19
 ---
-# Introduction
+## Introduction
 This post is an incomplete work-in-progress. 
 
 The <a href="{{site.url}}/2023/10/14/Understanding-Addition.html">previous post</a> discussed how a toy (1-layer, 3-head) transformer model answers integer addition questions like "33357+82243=". 
@@ -22,7 +22,7 @@ The CoLab notepad for this blog can be downloaded from <a href="{{site.url}}/ass
 and used to train and test the model. You can alter the code to try out other approaches.
 
 
-# What didn’t work
+## What didn’t work
 We shouldn’t try to "program" or “teach” a model, but there are some standard "general purpose" changes that sometimes help make models more accurate.
 
 For this model these approaches all failed to improve the model accuracy:
@@ -31,7 +31,7 @@ For this model these approaches all failed to improve the model accuracy:
 - Changing the question format from “12345+22222=” to “12345+22222equals” to give the model more calculation steps after the question is revealed before it needs to state the first answer digit.
 
 
-# Two layers improved accuracy
+## Two layers improved accuracy
 What worked was increasing the number of model “layers” (n_layers) from 1 to 2. This doubles the number of attention heads in the model. 
 Also, the literature says a multiple-layer model gains the ability to “compose” the attention heads together in new ways to implement more complex calculations.
 
@@ -45,13 +45,13 @@ functionality to handle the 06665+03335=10000 case by cascading the Carry 1 thro
 Why isn't the 2 layer algorithm 100% accurate? 
 
 
-# Attention Pattern
+## Attention Pattern
 Attention patterns are the easiest way to see the change in model algorithm by changing n_layers. With 1 layer, the attention pattern showed one row of 3 attention heads. With 2 layers, there are now 6 attention heads over two rows. For example, the question “16044+14973=” gives this attention pattern:
 
 <img src="{{site.url}}/assets/AttentionPattern5Digit3Heads2Layer.png" style="display: block; margin: auto;" />
 
 
-# Which steps do any useful calculations?
+## Which steps do any useful calculations?
 If we ablate alls head in a step, and the loss does not increase, then that step is **not** used by the algorithm, and can be excluded from further analysis.
 
 CoLab Part 10 does this analysis and shows:
@@ -61,7 +61,7 @@ CoLab Part 10 does this analysis and shows:
   - The addition algorithm does not use any data generated in steps 0 to 7 inclusive. The model also does not use the last (17th) step. Therefore, the addition is started and completed in 9 steps (8 to 16). What calculations get done in the extra 3 steps?
 
 
-# Which steps impact which digits and tasks?
+## Which steps impact which digits and tasks?
 If we ablate all heads in each useful step to see if loss increases for specific **digits** and **tasks**, we gain insight into which steps are associated with calculating which digits and tasks.
 
 CoLab Part 11A does this analysis and shows:
@@ -72,9 +72,9 @@ CoLab Part 11A does this analysis and shows:
   - Step 15 impacts A1 only. All tasks
   - Step 16 impacts A0 only. All tasks
 - n_digits = 5, n_layers = 2, useful_steps = 9 :
-  - Step 8 impacts mostly A4. Mostly SimpleUS9.
-  - Step 9 impacts mostly A3. Mostly SimpleUS9 and CascadeUS9.
-  - Step 10 impacts mostly A2. Mostly SimpleUS9 and CascadeUS9.
+  - Step 8 impacts A4 & A5. ???? task
+  - Step 9 impacts A3 & A5. SimpleUS9 task
+  - Step 10 impacts A2 .. A5. ??? tasks.
   - Step 11 impacts A5 only. All tasks
   - Step 12 impacts A4 only. All tasks
   - Step 13 impacts A3 only. All tasks
@@ -88,21 +88,24 @@ Our intuition:
 - With 2 layers, the staircase is 2 tokens wide. With 1 layer, the staircase was 3 tokens wide and handled BaseAdd (perfectly), UseCarry1 (perfectly) and UseSum9 (imperfectly). Our intuition is that with 2 layers, the staircase handles BaseAdd and UseCarry1 but a new algorithm in steps 8 to 10 handles UseSum9 (with better accuracy than the 1 layer).
 
 
-# Which heads + steps focus on which tokens?
+## Which heads + steps focus on which tokens?
 By inspecting attention patterns we can see which token each head attends to in each step. But we are not sure if the model actually relies on the output of that neuron+step. Sometimes models train neurons to do calculations and then ignore their results.
 
 CoLab Part 11B ablates **each** head in **each** step and see if loss increases for specific **digits** and **tasks**. This shows which steps+heads are useful and which are not.
 
-Combining the attentionss are associated with calculating which digits and tasks. All heads+steps that are not used in the calculations are marked with an X. 
+Combining the attention pattern with this information gives us the following diagram. All heads+steps that are not used in the calculations are marked with an X. 
 
 <img src="{{site.url}}/assets/StaircaseA3L2_Part1.svg" style="display: block; margin: auto;" />
 
 
 # BA
-Do we have info on heads+nodes for BA task?
+By looking at just BA questions (in CoLab Part 11C) we see that BA failures only occur in Setps 12 to 16, and only in heads L0H0 and L0H2.  
+
+# UC1
+By looking at just UC1 questions (in CoLab Part 11D) we see that UC1 failures only occur in Setps 11 to 16, and only in heads L0H0, L0H1 and L0H2.  
 
 
-# Hypothesis
+## Hypothesis
 This is our base evidence from which to hypothesise about how the 2-layer algorithm works.
 
 
