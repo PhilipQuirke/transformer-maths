@@ -210,7 +210,22 @@ We prefer compact models. Could the model be more dense?
 - The long staircase seems to have 2 heads doing the same thing
 - Much of L1 is not used
 - There are some unused heads in L0in early steps.
-Try n_layers=2 with n_heads=2 gives:
+
+Try n_digits=5, n_layers=2, **n_heads=2** gives:
+- Training loss of 0.000606
+- BaseAdd: 17 questions. 17 correct. % Correct: 100.0 Mean loss: 2.3795433726271066e-05
+- UseCarry1: 19 questions. 19 correct. % Correct: 100.0 Mean loss: 4.8866916182177686e-05
+- SimpleUS9 18 questions. 18 correct. % Correct: 100.0 Mean loss: 0.00020799814576857097
+- CascadeUS9 **29 questions. 24 correct.** % Correct: 82.75862068965517 Mean loss: 0.05662315274035535
+- Steps 26 questions. 26 correct. % Correct: 100.0 Mean loss: 4.19434362282142e-05
+
+So not as accurate as 3 heads. Try 30K epochs:
+- Training loss of 29900 6.608492797501301e-05
+- BaseAdd: 2 questions. 2 correct. % Correct: 100.0 Mean loss: 1.4172481974972007e-05
+- UseCarry1: 2 questions. 2 correct. % Correct: 100.0 Mean loss: 1.796858599196475e-05
+- SimpleUS9 2 questions. 2 correct. % Correct: 100.0 Mean loss: 0.008300535733287862
+- CascadeUS9 2 questions. 2 correct. % Correct: 100.0 Mean loss: 7.855610402167646e-06
+- Steps 3 questions. 3 correct. % Correct: 100.0 Mean loss: 3.636453621692134e-05
 
 
 # Pulling it all together (TBD)
