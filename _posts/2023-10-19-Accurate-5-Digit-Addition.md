@@ -29,10 +29,11 @@ For this model these approaches all failed to improve the model accuracy:
 - Increasing the frequency of US9 cases in the training data so the model has more examples of this "hard" case to learn from (CoLab Part 3 setting ‘more_ms9_cases’).
 - Increasing the number of attention heads from 3 to 4 or 5 to provide more computing power.
 - Changing the question format from “12345+22222=” to “12345+22222equals” to give the model more calculation steps after the question is revealed before it needs to state the first answer digit.
+- Changing the n_layers to 2 and n_heads to 2, increasing the number of attention heads from 3 to 4. Even with 30K training steps it was still inaccurate on A5 for some questions.
 
 
 ## Two layers improved accuracy
-What worked was increasing the number of model “layers” (n_layers) from 1 to 2. This doubles the number of attention heads in the model. 
+What worked was increasing the number of model “layers” (n_layers) from 1 to 2, while retaining n_heads = 3. This doubles the number of attention heads in the model from 3 to 6. 
 Also, the literature says a multiple-layer model gains the ability to “compose” the attention heads together in new ways to implement more complex calculations.
 
 With 2 layers the model definitely does better (based on CoLab with 20K training epochs, batch_size= 64, n_heads = 3, lr = 0.00008, weight_decay = 0.1):
@@ -204,29 +205,6 @@ Some notes :
   - Possible solution: The model is not optimising for algorithm compactness. The calculation of A4 may be spread over several heads  
 - Possible issue: The calculation by S11.MLP of D4.T5 // 10 = (D4.T1 + D3.T4 // 10) // 10 seems complex. Can this calc be done by the MLP?
   - Possible solution: The D4.T1 and D3.T4 values are in the residual stream. Is this a trigram? TBA
-
-# 2 vs 3 attention heads
-We prefer compact models. Could the model be more dense?
-- The long staircase seems to have 2 heads doing the same thing
-- Much of L1 is not used
-- There are some unused heads in L0in early steps.
-
-Try n_digits=5, n_layers=2, **n_heads=2** gives:
-- Training loss of 0.000606
-- BaseAdd: 17 questions. 17 correct. % Correct: 100.0 Mean loss: 2.3795433726271066e-05
-- UseCarry1: 19 questions. 19 correct. % Correct: 100.0 Mean loss: 4.8866916182177686e-05
-- SimpleUS9 18 questions. 18 correct. % Correct: 100.0 Mean loss: 0.00020799814576857097
-- CascadeUS9 **29 questions. 24 correct.** % Correct: 82.75862068965517 Mean loss: 0.05662315274035535
-- Steps 26 questions. 26 correct. % Correct: 100.0 Mean loss: 4.19434362282142e-05
-
-So not as accurate as 3 heads. Try 30K epochs:
-- Training loss of 29900 6.608492797501301e-05
-- BaseAdd: 2 questions. 2 correct. % Correct: 100.0 Mean loss: 1.4172481974972007e-05
-- UseCarry1: 2 questions. 2 correct. % Correct: 100.0 Mean loss: 1.796858599196475e-05
-- SimpleUS9 2 questions. 2 correct. % Correct: 100.0 Mean loss: 0.008300535733287862
-- CascadeUS9 2 questions. 2 correct. % Correct: 100.0 Mean loss: 7.855610402167646e-06
-- Steps 3 questions. 3 correct. % Correct: 100.0 Mean loss: 3.636453621692134e-05
-- Model fails on A5 on all steps for this question: 33345+66643=099988 ModelAnswer: 199988 Matches: Nyyyyy Loss: 0.25526578177079096 Case: BA
 
 
 # Pulling it all together (TBD)
