@@ -226,6 +226,7 @@ So not as accurate as 3 heads. Try 30K epochs:
 - SimpleUS9 2 questions. 2 correct. % Correct: 100.0 Mean loss: 0.008300535733287862
 - CascadeUS9 2 questions. 2 correct. % Correct: 100.0 Mean loss: 7.855610402167646e-06
 - Steps 3 questions. 3 correct. % Correct: 100.0 Mean loss: 3.636453621692134e-05
+- Model fails on A5 on all steps for this question: 33345+66643=099988 ModelAnswer: 199988 Matches: Nyyyyy Loss: 0.25526578177079096 Case: BA
 
 
 # Pulling it all together (TBD)
