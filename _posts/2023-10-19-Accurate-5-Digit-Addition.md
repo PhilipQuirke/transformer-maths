@@ -75,7 +75,7 @@ If we ablate all heads in each useful step to see if loss increases for specific
 - Step 16 impacts A0 only 
 
 ## Which steps+heads impact which use cases?
-If we repeat this experiment but only test each classof question one at a time, we gain insights. With 2 layers:
+If we repeat this experiment but only test each class of question one at a time, we gain insights. With 2 layers:
 - For BA questions, CoLab Part 11C shows:
   - S0 to S11 and S17 are not relevant
   - L1 is not relevant
@@ -89,12 +89,35 @@ If we repeat this experiment but only test each classof question one at a time, 
 - For Cascade US9 questions, CoLab Part 11F shows:
 -   S0 to S7 and S17 are not relevant.
 
+## Which steps+MLP layers impact which use cases?
+If we ablate an MLP layer in a step, and the loss does not increase, then that MLP layer is **not** used by the algorithm, and can be excluded from further analysis. With 2 layers, CoLab Part 10C shows:
+
++------+-----------+---------+--------------------------------------------------+-------------------------------------------------------------------------------------------------------+
+| Step | MLP Layer | # Fails |                 % Fails by Case                  |                                          # Fails by Patterns                                          |
++------+-----------+---------+--------------------------------------------------+-------------------------------------------------------------------------------------------------------+
+|  8   |     0     |    8    |      %SimpleUS9=11, %CascadeUS9=4, %MC1=1,       |                                          yNyyyy=7, NNyyyy=1,                                          |
+|  9   |     0     |    3    |                 %MC1=2, %BA=2,                   |                                          NyNyyy=2, yyNyyy=1,                                          |
+|  10  |     0     |    44   |  %CascadeUS9=54, %MC1=9, %BA=13, %SimpleUS9=9,   | yyyNyy=19, NyNNyy=5, yyNyyy=4, yyNNyy=4, yNyyyy=3, yNNNyy=2, yNNyyy=2, Nyyyyy=2, NyyNyy=2, yNyNyy=1,  |
+|  11  |     0     |    42   |     %MC1=29, %SimpleUS9=20, %CascadeUS9=13,      |                                              Nyyyyy=42,                                               |
+|  11  |     1     |    18   |                 %CascadeUS9=39,                  |                                              Nyyyyy=18,                                               |
+|  12  |     0     |   158   | %MC1=78, %BA=65, %SimpleUS9=61, %CascadeUS9=48,  |                                              yNyyyy=158,                                              |
+|  12  |     1     |   114   | %MC1=58, %BA=45, %SimpleUS9=46, %CascadeUS9=33,  |                                              yNyyyy=114,                                              |
+|  13  |     0     |   131   | %MC1=72, %BA=55, %SimpleUS9=48, %CascadeUS9=28,  |                                              yyNyyy=131,                                              |
+|  13  |     1     |   143   | %MC1=53, %CascadeUS9=93, %BA=53, %SimpleUS9=48,  |                                              yyNyyy=143,                                              |
+|  14  |     0     |   126   | %MC1=70, %BA=44, %SimpleUS9=50, %CascadeUS9=33,  |                                              yyyNyy=126,                                              |
+|  14  |     1     |   133   | %CascadeUS9=89, %MC1=41, %SimpleUS9=65, %BA=44,  |                                              yyyNyy=133,                                              |
+|  15  |     0     |   141   | %MC1=76, %BA=73, %SimpleUS9=43, %CascadeUS9=24,  |                                              yyyyNy=141,                                              |
+|  15  |     1     |   114   | %MC1=39, %CascadeUS9=72, %BA=44, %SimpleUS9=46,  |                                              yyyyNy=114,                                              |
+|  16  |     0     |   174   | %MC1=80, %BA=87, %SimpleUS9=76, %CascadeUS9=37,  |                                              yyyyyN=174,                                              |
+|  16  |     1     |   104   | %MC1=48, %BA=53, %SimpleUS9=41, %CascadeUS9=26,  |                                              yyyyyN=104,                                              |
++------+-----------+---------+--------------------------------------------------+-------------------------------------------------------------------------------------------------------+
+
 ## Which heads + steps focus on which tokens?
 By inspecting attention patterns we can see which token each head attends to in each step. But we are not sure if the model actually relies on the output of that neuron+step. Sometimes models train neurons to do calculations and then ignore their results.
 
-Combining the attention pattern with the above "steps+heads impact" information gives us the following diagram. Any steps+heads that are not used in the calculations are marked with an X. 
+Combining the attention pattern with information from the above sections, we get the following diagram. Any steps+heads or steps+MLP that are not used in the calculations are marked with an X. 
 
-<img src="{{site.url}}/assets/StaircaseA3L2_Part1.svg" style="display: block; margin: auto;" />
+<img src="{{site.url}}/assets/StaircaseA3L2H3_Part1.svg" style="display: block; margin: auto;" />
 
 ## Hypothesis
 The above is our base evidence from which to hypothesise about how the 2-layer algorithm works.
