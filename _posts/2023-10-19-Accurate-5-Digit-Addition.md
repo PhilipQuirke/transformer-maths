@@ -176,29 +176,30 @@ The value D4.T5 is perfectly accurate as it integrates MC1 and cascading MS9 dat
 
 For the model to do integer addition perfectly accurately, it must be calculating D4.T5 by step 11 so an accurate A5 can be revealed. Ablation tests tell us which steps+heads are doing useful calculations (but not what those steps actually do). Hypothesis #2 says the model uses the useful Step+Head to perform these operations so that D4.T5 is calculated in step 11:
 - Step 8:
-  - L0H1: D2: Calculate D2.T1 = D2 + D2’
-  - L0H2: D3: Calculate D3.T1 = D3 + D3’
-  - MLP: Not used. (Could calculate inaccurate D3.T2 = D3.T1 + D2.T1 // 10)
+  - L0H1: D2 focus: Calculate D2.T1 = D2 + D2’
+  - L0H2: D3 focus: Calculate D3.T1 = D3 + D3’
+  - L0MLP: A4 focus: Use is not understood. Could calculate inaccurate D3.T2 = D3.T1 + D2.T1 // 10
 - Step 9
-  - L0H1: D1: Calculate D1:T1 = D1 + D1’
-  - MLP: Not used. (Could calculate inaccurate D2.T2 = D2.T1 + D1.T1 // 10)
+  - L0H1: D1 focus: Calculate D1:T1 = D1 + D1’
+  - L0MLP: A3 focus: Use is not understood. Could calculate inaccurate D2.T2 = D2.T1 + D1.T1 // 10
 - Step 10
-  - L0H0: D0: Calculate D1.T2 = D1.T1 + (D0 + D0’) // 10. Perfectly accurate.
-  - L0H1: D1: Not used. Duplicate of S9.L0H1? TBA
-  - L0H2: D1: Not used. Duplicate of S9.L0H1? TBA
-  - MLP: N/A: Calculate D2.T3 = D2.T1 + D1.T2 // 10. Perfectly accurate  
+  - L0H0: D0 focus: Calculate D1.T2 = D1.T1 + (D0 + D0’) // 10. Perfectly accurate.
+  - L0H1: D1 focus: Use is not understood. Duplicate of S9.L0H1? 
+  - L0H2: D1 focus: Use is not understood. Duplicate of S9.L0H1? 
+  - L0MLP: ~A2 focus: Calculate D2.T3 = D2.T1 + D1.T2 // 10. Perfectly accurate  
 - Step 11:
-  - L0H1: D3 : Calculate D3.T4 = D3.T1 + D2.T3. Perfectly accurate. 
-  - L0H2: D4 : Calculate D4.T1 = D4 + D4’
-  - MLP: N/A: Calculate D4.T5 // 10 = (D4.T1 + D3.T4 // 10) // 10. Perfectly accurate A5.
+  - L0H1: D3 focus: Calculate D3.T4 = D3.T1 + D2.T3. Perfectly accurate. 
+  - L0H2: D4 focus: Calculate D4.T1 = D4 + D4’
+  - L0MLP: A5 focus: Calculate D3.MC = D3.T4 // 10  
+  - L1MLP: A5 focus: Calculate D4.T5 // 10 = (D4.T1 + D3.MC) // 10. Perfectly accurate A5.
 - Step 12:
-  - L0H0: D4 : Calculate D4.T5 = D4.T1 + D3.T4 // 10. Perfectly accurate.
-  - L0H1: D3 : Not used. Could calculate accurate D3.BA = D3.T4 % 10 ? TBA
-  - L0H2: D4 : Not used. Could calculate accurate D4.BA = D4.T5 % 10 ? TBA
-  - MLP: N/A: Calculate D4.T5 % 10. Perfectly accurate A4
-  - L1H0: =: Not used. Could calculate accurate D2.BA = D2.T3 % 10 ? TBA
-  - L1H1: =: Not used. Could calculate accurate D1.BA = D1.T2 % 10 ? TBA
-  - MLP: N/A: Not used. 
+  - L0H0: D4 focus: Calculate D4.T5 = D4.T1 + D3.T4 // 10. Perfectly accurate.
+  - L0H1: D3 focus: Use is not understood. Could calculate accurate D3.BA = D3.T4 % 10 ? 
+  - L0H2: D4 focus: Use is not understood. Could calculate accurate D4.BA = D4.T5 % 10 ? 
+  - L0MLP: A4 focus: Calculate D4.T5 % 10. Perfectly accurate A4
+  - L1H0: =: Use is not understood. Could calculate accurate D2.BA = D2.T3 % 10 ? TBA
+  - L1H1: =: Use is not understood. Could calculate accurate D1.BA = D1.T2 % 10 ? TBA
+  - L1MLP: A4 focus: Use is not understood.
 
 Representing the above as a diagram:
 <img src="{{site.url}}/assets/StaircaseA3L2_Part2.svg" style="display: block; margin: auto;" />
