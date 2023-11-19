@@ -146,12 +146,13 @@ In hypothesis #2, we assume the model stores the sum of each digit pair as a sin
 The T1 operation does not understand mathematical addition. The model implements the T1 operator as a bigram mapping from 2 input tokens to 1 result token e.g. “8” + “7” = “15”. There are 100 distinct mappings:
 <img src="{{site.url}}/assets/Addition_T1Pairs.png" style="display: block; margin: auto;" />
 
-We can retrieve the operator BA, MC & MS values from a Dn.T1 value as follows:
+T1 is a compact way to store data. If it needs to, the model can implement a bigram mapping to convert a T1 value into a BA, MC or MS value:
+<img src="{{site.url}}/assets/Addition_T1Bigtrm.png" style="display: block; margin: auto;" />
+
+Our notation shorthand for these "conversion" bigram mappings is:
 - Dn.BA = (Dn.T1 % 10) where % is the modulus operator 
 - Dn.MC = (Dn.T1 // 10) where // is the integer division operator
 - Dn.MS = (Dn.T1 == 9) where == is the equality operator
-
-T1 is a compact way to store data that still supports us thinking in terms of our foundational mathematical framework operators (BA, MC, MS, etc). If the model needs Dn.MC in its internal calculations, it can implement Dn.MC as bigram mapping based on the Dn.T1 datum. The same is true for Dn.BA and Dn.MS.
 
 Excluding D0.T1, the value Dn.T1 is not perfectly accurate because it is constrained to information from just one digit - hence the “1” in T1. We define another more accurate operator Dn.T2 that has “two-digit accuracy”. Dn.T2 is the pair sum for the nth digit plus the carry 1 (if any) from the n-1th digit T1:
 - Dn.T2 = Dn.T1 + ( Dn-1.T1 // 10 )
@@ -168,11 +169,11 @@ We define operators Dn.T3, Dn.T4 & Dn.T5 each with higher accuracy:
 - Dn.T5 = Dn.T1 + ( Dn-1.T4 // 10 )	Five-digit accuracy
 
 The value D4.T5 is perfectly accurate as it integrates MC1 and cascading MS9 data all the way back to and including D0.T1. The values D1.T2, D2.T3, D3.T4 are also perfectly accurate. If we know these values we can calculate answer digits with perfect accuracy:
-- D1.T2 % 10 gives A1
-- D2.T3 % 10 gives A2
-- D3.T4 % 10 gives A3
-- D4.T5 % 10 gives A4
-- D4.T5 // 10 gives A5
+- D1.T2 % 10 gives A1 with zero loss
+- D2.T3 % 10 gives A2 with zero loss
+- D3.T4 % 10 gives A3 with zero loss
+- D4.T5 % 10 gives A4 with zero loss
+- D4.T5 // 10 gives A5 with zero loss
 
 For the model to do integer addition perfectly accurately, it must be calculating D4.T5 by step 11 so an accurate A5 can be revealed. Ablation tests tell us which steps+heads are doing useful calculations (but not what those steps actually do). Hypothesis #2 says the model uses the useful Step+Head to perform these operations so that D4.T5 is calculated in step 11:
 - Step 8:
@@ -202,7 +203,7 @@ For the model to do integer addition perfectly accurately, it must be calculatin
   - L1MLP: A4 focus: Use is not understood.
 
 Representing the above as a diagram:
-<img src="{{site.url}}/assets/StaircaseA3L2_Part2.svg" style="display: block; margin: auto;" />
+<img src="{{site.url}}/assets/StaircaseA3L2H3_Part2.svg" style="display: block; margin: auto;" />
 
 Some notes :
 - Possible issue: Ablation says two step 10 heads are useful, but they have are not used. 
