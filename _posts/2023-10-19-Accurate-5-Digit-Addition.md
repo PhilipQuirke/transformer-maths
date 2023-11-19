@@ -147,7 +147,7 @@ The T1 operation does not understand mathematical addition. The model implements
 <img src="{{site.url}}/assets/Addition_T1Pairs.png" style="display: block; margin: auto;" />
 
 T1 is a compact way to store data. If it needs to, the model can implement a bigram mapping to convert a T1 value into a BA, MC or MS value:
-<img src="{{site.url}}/assets/Addition_T1Bigtrm.png" style="display: block; margin: auto;" />
+<img src="{{site.url}}/assets/Addition_T1Bigram.png" style="display: block; margin: auto;" />
 
 Our notation shorthand for these "conversion" bigram mappings is:
 - Dn.BA = (Dn.T1 % 10) where % is the modulus operator 
