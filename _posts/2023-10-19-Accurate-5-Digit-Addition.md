@@ -231,8 +231,10 @@ Some notes :
   - Possible solution: The model is not optimising for compactness. The long staircase is discovered early and it works for simple questions. Once the overall algorithm gives the right numeric answer consistently it stops optimising. 
 - Possible issue: Ablation says the layer 2 heads S12.L1.H0 and S12.L1.H1 are useful, but they have are not used in this hypothesis. That is, no Layer 1 heads are used. This seems wrong.
   - Possible solution: The model is not optimising for algorithm compactness. The calculation of A4 may be spread over several heads  
-- Possible issue: The calculation by S11.MLP of D4.T5 // 10 = (D4.T1 + D3.T4 // 10) // 10 seems complex. Can this calc be done by the MLP?
-  - Possible solution: The D4.T1 and D3.T4 values are in the residual stream. Is this a trigram? TBA
+- Possible issue: The calculation by S11.MLP of D4.T5 // 10 = (D4.T1 + D3.MC) // 10 seems complex. Can this calc be done by the MLP?
+  - Solution: The D4.T1 and D3.MC values are in the residual stream. This is a bigram
+- Possible issue: Are there other ways to forumlate the framework or different ways to use the calculation cells?
+  - Possible solution: Do experiments to test the hypothesis    
 
 
 ## Testing the hypothesis 
