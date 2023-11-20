@@ -216,8 +216,6 @@ Applying this calculation frameworkto the above "What model parts are doing usef
   - L0.H1: D3 focus: Use is not understood. Could calculate accurate D3.BA = D3.T4 % 10 
   - L0.H2: D4 focus: Use is not understood. Could calculate accurate D4.BA = D4.T5 % 10  
   - L0.MLP: A4 focus: Calculate D4.T5 % 10. Perfectly accurate A4
-  - L1.H0: =: Use is not understood. Could calculate accurate D2.BA = D2.T3 % 10 
-  - L1.H1: =: Use is not understood. Could calculate accurate D1.BA = D1.T2 % 10 
   - L1.MLP: A4 focus: Use is not understood.
 
 Even without using the "not understood" cells, A5 and A4 are calculated with perfect accuracy in time. Modifying the first diagram, we can show this hypothesis diagramatically:
@@ -229,8 +227,6 @@ Some notes :
   - Possible solution: These heads may be “duplicates” of S9.L0.H1, splitting the workload
 - Possible issue: To get a perfect A5, all the digits have been completed by step 11. Why does the model retain the redundant long staircase BA calculations?
   - Possible solution: The model is not optimising for compactness. The long staircase is discovered early and it works for simple questions. Once the overall algorithm gives the right numeric answer consistently it stops optimising. 
-- Possible issue: Ablation says the layer 2 heads S12.L1.H0 and S12.L1.H1 are useful, but they have are not used in this hypothesis. That is, no Layer 1 heads are used. This seems wrong.
-  - Possible solution: The model is not optimising for algorithm compactness. The calculation of A4 may be spread over several heads  
 - Possible issue: The calculation by S11.MLP of D4.T5 // 10 = (D4.T1 + D3.MC) // 10 seems complex. Can this calc be done by the MLP?
   - Solution: The D4.T1 and D3.MC values are in the residual stream. This is a bigram
 - Possible issue: Are there other ways to forumlate the framework or different ways to use the calculation cells?
