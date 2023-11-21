@@ -69,12 +69,181 @@ Attention patterns are a good way to view what the model's attention heads are d
 Viewing a number of examples is sometimes useful to get a feel for patterns in the model's attention heads over successive steps.
 
 # Which steps+heads do any useful calculations?
-Sometimes the model does not use entire prediction steps. If we ablate alls head in a step, and the loss does not increase, then that step is **not** used by the algorithm, and can be excluded from further analysis. CoLab Part 10 does this analysis and shows:
+Sometimes the model does not use entire prediction steps. If we ablate alls head in a step, and the loss does not increase, then that step is **not** used by the algorithm, and can be excluded from further analysis. CoLab Part 10B does this analysis and shows:
 
 - n_digits = 5, n_layers = 1 :
   - The addition algorithm does not use any data generated in steps 0 to 10 inclusive. The model also does not use the last (17th) step. Therefore, the addition is started and completed in 6 steps (11 to 16)
 - n_digits = 5, n_layers = 2 :
   - The addition algorithm does not use any data generated in steps 0 to 7 inclusive. The model also does not use the last (17th) step. Therefore, the addition is started and completed in 9 steps (8 to 16). What are the extra 3 steps used for?
+
+
+\begin{tabular}{ccccc}
+Step & Important? & % Fails & % Fails by Case & # Fails by Patterns \\
+0 & No & 0 &  &  \\
+1 & No & 0 &  &  \\
+2 & No & 0 &  &  \\
+3 & No & 0 &  &  \\
+4 & No & 0 &  &  \\
+5 & No & 0 &  &  \\
+6 & No & 0 &  &  \\
+7 & No & 0 &  &  \\
+8 & Yes & 7 & %SimpleUS9=31, %CascadeUS9=10,  & yNyyyy=12, NNyyyy=4,  \\
+9 & Yes & 10 & %CascadeUS9=29, %SimpleUS9=28,  & yyNyyy=11, yNNyyy=9, NNNyyy=3,  \\
+10 & Yes & 15 & %CascadeUS9=61, %SimpleUS9=28,  & yyyNyy=11, NNNNyy=11, yyNNyy=8, yNNNyy=4, yNyNyy=1, NyNNyy=1,  \\
+11 & Yes & 37 & %MC1=52, %CascadeUS9=56, %SimpleUS9=31,  & Nyyyyy=89,  \\
+12 & Yes & 72 & %MC1=87, %BA=68, %SimpleUS9=62, %CascadeUS9=46,  & yNyyyy=171,  \\
+13 & Yes & 68 & %MC1=88, %BA=84, %SimpleUS9=44, %CascadeUS9=20,  & yyNyyy=163,  \\
+14 & Yes & 74 & %MC1=85, %BA=80, %CascadeUS9=56, %SimpleUS9=56,  & yyyNyy=178,  \\
+15 & Yes & 66 & %MC1=86, %BA=84, %SimpleUS9=38, %CascadeUS9=17,  & yyyyNy=158,  \\
+16 & Yes & 74 & %MC1=83, %BA=88, %SimpleUS9=79, %CascadeUS9=27,  & yyyyyN=177,  \\
+17 & No & 0 &  &  \\
+\end{tabular}
+
+<table>
+    <thead>
+        <tr>
+            <th>Step</th>
+            <th>Important?</th>
+            <th>% Fails</th>
+            <th>% Fails by Case</th>
+            <th># Fails by Patterns</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>0</td>
+            <td>No</td>
+            <td>0</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>No</td>
+            <td>0</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>No</td>
+            <td>0</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>No</td>
+            <td>0</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>No</td>
+            <td>0</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>No</td>
+            <td>0</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>No</td>
+            <td>0</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>No</td>
+            <td>0</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Yes</td>
+            <td>7</td>
+            <td>%SimpleUS9=31, %CascadeUS9=10, </td>
+            <td>yNyyyy=12, NNyyyy=4, </td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Yes</td>
+            <td>10</td>
+            <td>%CascadeUS9=29, %SimpleUS9=28, </td>
+            <td>yyNyyy=11, yNNyyy=9, NNNyyy=3, </td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Yes</td>
+            <td>15</td>
+            <td>%CascadeUS9=61, %SimpleUS9=28, </td>
+            <td>yyyNyy=11, NNNNyy=11, yyNNyy=8, yNNNyy=4, yNyNyy=1, NyNNyy=1, </td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Yes</td>
+            <td>37</td>
+            <td>%MC1=52, %CascadeUS9=56, %SimpleUS9=31, </td>
+            <td>Nyyyyy=89, </td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>Yes</td>
+            <td>72</td>
+            <td>%MC1=87, %BA=68, %SimpleUS9=62, %CascadeUS9=46, </td>
+            <td>yNyyyy=171, </td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>Yes</td>
+            <td>68</td>
+            <td>%MC1=88, %BA=84, %SimpleUS9=44, %CascadeUS9=20, </td>
+            <td>yyNyyy=163, </td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>Yes</td>
+            <td>74</td>
+            <td>%MC1=85, %BA=80, %CascadeUS9=56, %SimpleUS9=56, </td>
+            <td>yyyNyy=178, </td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>Yes</td>
+            <td>66</td>
+            <td>%MC1=86, %BA=84, %SimpleUS9=38, %CascadeUS9=17, </td>
+            <td>yyyyNy=158, </td>
+        </tr>
+        <tr>
+            <td>16</td>
+            <td>Yes</td>
+            <td>74</td>
+            <td>%MC1=83, %BA=88, %SimpleUS9=79, %CascadeUS9=27, </td>
+            <td>yyyyyN=177, </td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td>No</td>
+            <td>0</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+
 
 # Which steps+MLP layers impact which use cases?
 If we ablate an MLP layer in a step, and the loss does not increase, then that MLP layer is **not** used by the algorithm, and can be excluded from further analysis. With 2 layers, CoLab Part 10C shows:
