@@ -74,13 +74,7 @@ Sometimes the model does not use entire prediction steps. If we ablate alls head
 - With n_digits = 5, n_layers = 1, the addition algorithm does not use any data generated in steps 0 to 10 inclusive. The model also does not use the last (17th) step. Therefore, the addition is started and completed in 6 steps (11 to 16)
 - With n_digits = 5, n_layers = 2, the addition algorithm does not use any data generated in steps 0 to 7 inclusive. The model also does not use the last (17th) step. Therefore, the addition is started and completed in 9 steps (8 to 16). What are the extra 3 steps used for?
 
-<style scoped>
-table {
-  font-size: 8px;
-}
-</style>
-
-<table>
+<table style="font-size:8px">
     <thead>
         <tr>
             <th>Step</th>
