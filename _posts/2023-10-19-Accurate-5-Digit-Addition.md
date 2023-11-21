@@ -195,28 +195,26 @@ For the model to do integer addition perfectly accurately, it must calculate D4.
 Applying this calculation frameworkto the above "What model parts are doing useful calculations" diagram, we came up wth this (partial) hypothesis which allows D4.T5 to be calculated in step 11:
 
 - Step 8:
-  - L0.H1: D2 focus: Calculate D2.T1 = D2 + D2’
-  - L0.H2: D3 focus: Calculate D3.T1 = D3 + D3’
-  - L0.MLP: A4 focus: Use is not understood. Could calculate inaccurate D3.T2 = D3.T1 + D2.T1 // 10
+  - L0.H1: D2 attention: Calculate D2.T1 = D2 + D2’
+  - L0.MLP: A4 impact: Use is not understood.
 - Step 9
-  - L0.H1: D1 focus: Calculate D1:T1 = D1 + D1’
-  - L0.MLP: A3 focus: Use is not understood. Could calculate inaccurate D2.T2 = D2.T1 + D1.T1 // 10
+  - L0.H1: D1 attention: Calculate D1:T1 = D1 + D1’
+  - L0.MLP: A3 impact: Use is not understood.
 - Step 10
-  - L0.H0: D0 focus: Calculate D1.T2 = D1.T1 + (D0 + D0’) // 10. Perfectly accurate.
-  - L0.H1: D1 focus: Use is not understood. Duplicate of S9.L0.H1? 
-  - L0.H2: D1 focus: Use is not understood. Duplicate of S9.L0.H1? 
-  - L0.MLP: ~A2 focus: Calculate D2.T3 = D2.T1 + D1.T2 // 10. Perfectly accurate  
+  - L0.H0: D1 attention: Use is not understood. Duplicate of S9.L0.H1? 
+  - L0.H1: D0 attention: Calculate D1.T2 = D1.T1 + (D0 + D0’) // 10. Perfectly accurate.
+  - L0.MLP: A2 .. A5 impact: Calculate D2.T3 = D2.T1 + D1.T2 // 10. Perfectly accurate. 
 - Step 11:
-  - L0.H1: D3 focus: Calculate D3.T4 = D3.T1 + D2.T3. Perfectly accurate. 
-  - L0.H2: D4 focus: Calculate D4.T1 = D4 + D4’
-  - L0.MLP: A5 focus: Calculate D3.MC = D3.T4 // 10  
-  - L1.MLP: A5 focus: Calculate D4.T5 // 10 = (D4.T1 + D3.MC) // 10. Perfectly accurate A5.
+  - L0.H1: D3 attention: Calculate D3.T4 = D3 + D3’ + D2.T3. Perfectly accurate. 
+  - L0.H2: D4 attention: Calculate D4.T1 = D4 + D4’
+  - L0.MLP: A5 impact: Calculate D3.MC = D3.T4 // 10  
+  - L1.MLP: A5 impact: Calculate D4.T5 // 10 = (D4.T1 + D3.MC) // 10. Perfectly accurate A5.
 - Step 12:
-  - L0.H0: D4 focus: Calculate D4.T5 = D4.T1 + D3.T4 // 10. Perfectly accurate.
-  - L0.H1: D3 focus: Use is not understood. Could calculate accurate D3.BA = D3.T4 % 10 
-  - L0.H2: D4 focus: Use is not understood. Could calculate accurate D4.BA = D4.T5 % 10  
-  - L0.MLP: A4 focus: Calculate D4.T5 % 10. Perfectly accurate A4
-  - L1.MLP: A4 focus: Use is not understood.
+  - L0.H0: D4 attention: Calculate D4.T5 = D4.T1 + D3.T4 // 10. Perfectly accurate.
+  - L0.H1: D3 attention: Use is not understood. 
+  - L0.H2: D4 attention: Use is not understood. 
+  - L0.MLP: A4 impact: Calculate D4.T5 % 10. Perfectly accurate A4
+  - L1.MLP: A4 impact: Use is not understood.
 
 Even without using the "not understood" cells, A5 and A4 are calculated with perfect accuracy in time. Modifying the first diagram, we can show this hypothesis diagramatically:
 
