@@ -343,6 +343,8 @@ If we ablate an MLP layer in a step, and the loss does not increase, then that M
 
 # Which steps+heads/MLPs impact which answer digits summarised?
 
+This is overall summary of heads and MLP layers by step. A non-zero number means that when the cell is ablated, the model produces thie percentange of bad answers. This implies the cell is necessary for accurate answers. 
+
 <table>
     <thead>
         <tr>
@@ -539,7 +541,7 @@ If we ablate an MLP layer in a step, and the loss does not increase, then that M
     </tbody>
 </table>
 
-The most common failure pattern (with associated failure %) when each head or MLP in each step is ablated
+This is summary of the impact when a head or MLP layer is ablated in a by step. The cell shows the pattern of correct/incorrect answer digits the number of incorrect answers. If the cell has a trailing "..." then this cell has multiple incorrect digit patterns, with the most common incorrect pattern being shown. 
 
 <table>
     <thead>
@@ -737,22 +739,8 @@ The most common failure pattern (with associated failure %) when each head or ML
     </tbody>
 </table>
 
-
-
-# Which steps+heads impact which use cases?
-If we repeat this experiment but only test each class of question one at a time, we gain insights. With 2 layers:
-- For BA questions, CoLab Part 11A shows:
-  - S0 to S11 and S17 are not relevant
-  - L1 is not relevant
-  - L0H1 is not relevant.
-- For UC questions, CoLab Part 11B shows:
-  - S0 to S11 and S17 are not relevant
-  - L1 is not relevant.
-- For Simple US9 questions, CoLab Part 11C shows:
-  - S0 to S7 and S17 are not relevant
-  - L1 is not relevant.
-- For Cascade US9 questions, CoLab Part 11D shows:
--   S0 to S7 and S17 are not relevant.
+# Which steps+heads impact BA questions?
+If we ablate each head in each step but only test BA questions, we gain insights. With 2 layers:
 
 <table>
     <thead>
@@ -841,6 +829,8 @@ If we repeat this experiment but only test each class of question one at a time,
     </tbody>
 </table>
 
+# Which steps+heads impact MC1 questions?
+If we ablate each head in each step but only test MC1 questions, we gain insights. With 2 layers:
 
 <table>
     <thead>
@@ -977,6 +967,9 @@ If we repeat this experiment but only test each class of question one at a time,
     </tbody>
 </table>
 
+# Which steps+heads impact SimpleUS9 questions?
+If we ablate each head in each step but only test SimpleUS9 questions, we gain insights. With 2 layers:
+
 <table>
     <thead>
         <tr>
@@ -1112,6 +1105,9 @@ If we repeat this experiment but only test each class of question one at a time,
     </tbody>
 </table>
 
+# Which steps+heads impact CascadingUS9 questions?
+If we ablate each head in each step but only test CascadingUS9 questions, we gain insights. With 2 layers:
+
 <table>
     <thead>
         <tr>
@@ -1230,7 +1226,6 @@ If we repeat this experiment but only test each class of question one at a time,
         </tr>
     </tbody>
 </table>
-
 
 ## Inituition
 The above is our base evidence to help us work out how the 2-layer algorithm works. Our intuition is:
