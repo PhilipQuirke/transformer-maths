@@ -201,7 +201,7 @@ Applying this calculation frameworkto the above "What model parts are doing usef
   - L0.H1: D1 attention: Calculate D1:T1 = D1 + D1’
   - L0.MLP: A3 impact: Use is not understood.
 - Step 10
-  - L0.H0: D1 attention: Use is not understood. Duplicate of S9.L0.H1? 
+  - L0.H0: D1 attention: Use is not understood. Duplicate of S9.L0.H1? Ablating gives 1% loss.
   - L0.H1: D0 attention: Calculate D1.T2 = D1.T1 + (D0 + D0’) // 10. Perfectly accurate.
   - L0.MLP: A2 .. A5 impact: Calculate D2.T3 = D2.T1 + D1.T2 // 10. Perfectly accurate. 
 - Step 11:
