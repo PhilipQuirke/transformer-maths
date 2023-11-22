@@ -1277,10 +1277,10 @@ Our intuition is that there are not enough useful heads+steps and heads+MLPs in 
 Our second hypothesis was that the 2 layer algorithm:
 
 - Has a **more compact** data representation. That is, it does not store BA, MC and US data as separate datums.
-- Can therefore pack more calculations into each head+layer and head+MLP in steps 8 to 11, allowing it to calculate A5 by step 11.
+- Can pack more calculations into each head+layer and head+MLP in steps 8 to 11, allowing it to calculate A5 by step 11.
 - Has a data representation that allows re-use of some A5 sub-calculations in the A4-calculation, allowing it to calculate A4 by step 12. 
 
-We now assume the model stores the sum of each digit pair as a single token in the range “0” to “18” (covering 0+0 to 9+9). We name this operator Dn.T1 - where T stands for “token addition” (and the 1 will be explained later):
+Our novel claim is that the model stores the sum of each digit pair as a single token in the range “0” to “18” (covering 0+0 to 9+9). We name this operator Dn.T1, where T stands for “token addition”, and the 1 will be explained later:
 
 - Dn.T1 = Dn + Dn’
 
@@ -1310,7 +1310,7 @@ We define operators Dn.T3, Dn.T4 & Dn.T5 each with higher accuracy:
 - Dn.T4 = Dn.T1 + ( Dn-1.T3 // 10 )	Four-digit accuracy
 - Dn.T5 = Dn.T1 + ( Dn-1.T4 // 10 )	Five-digit accuracy
 
-The value D4.T5 is perfectly accurate as it integrates MC1 and cascading MS9 data all the way back to and including D0.T1. The values D1.T2, D2.T3, D3.T4 are also all perfectly accurate. If we know these values we can calculate answer digits with perfect accuracy:
+The value D4.T5 is perfectly accurate as it integrates MC1 and cascading MS9 data all the way back to and including D0.T1. The values D1.T2, D2.T3, D3.T4 are also all perfectly accurate. If the model knows these values it can calculate answer digits with perfect accuracy:
 
 - A1 = D1.T2 % 10 with zero loss
 - A2 = D2.T3 % 10 with zero loss
@@ -1318,8 +1318,10 @@ The value D4.T5 is perfectly accurate as it integrates MC1 and cascading MS9 dat
 - A4 = D4.T5 % 10 with zero loss
 - A5 = D4.T5 // 10 with zero loss
 
-For the model to do integer addition perfectly accurately, it must calculate D4.T5 by step 11 so an accurate A5 can be revealed. 
-Applying this calculation frameworkto the above "What model parts are doing useful calculations" diagram, we came up wth this (partial) hypothesis which allows D4.T5 to be calculated in step 11:
+For the model to do integer addition perfectly accurately, it must calculate D4.T5 by step 11 so an accurate A5 can be revealed.
+Understanding how the model calculates A5 will help us how understand the model's algorithm works. 
+
+Applying this mathematical framework within the constraints of the above "What model parts are doing useful calculations" diagram, we claim this is how the model calculates D4.T5 by step 11:
 
 - Step 8:
   - L0.H1: D2 attention: Calculate D2.T1 = D2 + D2’
@@ -1343,7 +1345,7 @@ Applying this calculation frameworkto the above "What model parts are doing usef
   - L0.MLP: A4 impact: Calculate D4.T5 % 10. Perfectly accurate A4
   - L1.MLP: A4 impact: Use is not understood.
 
-Even without using the "not understood" cells, A5 and A4 are calculated with perfect accuracy in time. Modifying the first diagram, we can show this hypothesis diagramatically:
+Even ignoring "not understood" cells, A5 and A4 are calculated with perfect accuracy in time. Modifying the first diagram, we can show this hypothesis diagramatically:
 
 <img src="{{site.url}}/assets/StaircaseA3L2H3_Part2.svg" style="display: block; margin: auto;" />
 
