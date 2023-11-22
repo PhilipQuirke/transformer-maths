@@ -38,7 +38,7 @@ For this model these approaches all failed to improve the model accuracy:
 What worked was increasing the number of model “layers” (n_layers) from 1 to 2, while retaining n_heads = 3. This doubles the number of attention heads in the model from 3 to 6. 
 Also, the literature says a multiple-layer model gains the ability to “compose” the attention heads together in new ways to implement more complex algorithms.
 
-With 2 layers the model definitely gains accuracy (using CoLab with training batches = 20K or 30K, batch_si
+With more layers and more training batches the model definitely gains accuracy (using CoLab with batch_size = 64, n_heads = 3, lr = 0.00008, weight_decay = 0.1):
 
 <table>
     <thead>
@@ -54,7 +54,7 @@ With 2 layers the model definitely gains accuracy (using CoLab with training bat
             <td>5 digits</td>
             <td>0.008314</td>
             <td>0.000003</td>
-            <td>TBA</td>
+            <td>0.000000002</td>
         </tr>
         <tr>
             <td>10 digits</td>
@@ -76,7 +76,7 @@ With 2 layers the model definitely gains accuracy (using CoLab with training bat
 To be accurate, the 2 layer algorithm must learn the functionality of the 1 layer algorithm **and** 
 learn additional functionality to handle the 06665+03335=10000 case by cascading the Carry 1 through multiple columns. How does it do this? 
 
-Why isn't the 2 layer algorithm 100% accurate? 
+The 2 layer algorithm with 30K training batches has a loss of TBA. Is it 100% accurate? 
 
 
 ## What model parts are doing useful calculations?
@@ -113,7 +113,6 @@ CoLab Part 10B does this analysis and produces this output:
     <thead>
         <tr>
             <th>Step</th>
-            <th>Important?</th>
             <th>% Fails</th>
             <th>% Fails by Case</th>
             <th># Fails by Patterns</th>
@@ -122,126 +121,108 @@ CoLab Part 10B does this analysis and produces this output:
     <tbody>
         <tr>
             <td>0</td>
-            <td>No</td>
             <td>0</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>1</td>
-            <td>No</td>
             <td>0</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>2</td>
-            <td>No</td>
             <td>0</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>3</td>
-            <td>No</td>
             <td>0</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>4</td>
-            <td>No</td>
             <td>0</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>5</td>
-            <td>No</td>
             <td>0</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>6</td>
-            <td>No</td>
             <td>0</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>7</td>
-            <td>No</td>
             <td>0</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>8</td>
-            <td>Yes</td>
             <td>7</td>
             <td>%SimpleUS9=31, %CascadeUS9=10, </td>
             <td>yNyyyy=12, NNyyyy=4, </td>
         </tr>
         <tr>
             <td>9</td>
-            <td>Yes</td>
             <td>10</td>
             <td>%CascadeUS9=29, %SimpleUS9=28, </td>
             <td>yyNyyy=11, yNNyyy=9, NNNyyy=3, </td>
         </tr>
         <tr>
             <td>10</td>
-            <td>Yes</td>
             <td>15</td>
             <td>%CascadeUS9=61, %SimpleUS9=28, </td>
             <td>yyyNyy=11, NNNNyy=11, yyNNyy=8, yNNNyy=4, yNyNyy=1, NyNNyy=1, </td>
         </tr>
         <tr>
             <td>11</td>
-            <td>Yes</td>
             <td>37</td>
             <td>%MC1=52, %CascadeUS9=56, %SimpleUS9=31, </td>
             <td>Nyyyyy=89, </td>
         </tr>
         <tr>
             <td>12</td>
-            <td>Yes</td>
             <td>72</td>
             <td>%MC1=87, %BA=68, %SimpleUS9=62, %CascadeUS9=46, </td>
             <td>yNyyyy=171, </td>
         </tr>
         <tr>
             <td>13</td>
-            <td>Yes</td>
             <td>68</td>
             <td>%MC1=88, %BA=84, %SimpleUS9=44, %CascadeUS9=20, </td>
             <td>yyNyyy=163, </td>
         </tr>
         <tr>
             <td>14</td>
-            <td>Yes</td>
             <td>74</td>
             <td>%MC1=85, %BA=80, %CascadeUS9=56, %SimpleUS9=56, </td>
             <td>yyyNyy=178, </td>
         </tr>
         <tr>
             <td>15</td>
-            <td>Yes</td>
             <td>66</td>
             <td>%MC1=86, %BA=84, %SimpleUS9=38, %CascadeUS9=17, </td>
             <td>yyyyNy=158, </td>
         </tr>
         <tr>
             <td>16</td>
-            <td>Yes</td>
             <td>74</td>
             <td>%MC1=83, %BA=88, %SimpleUS9=79, %CascadeUS9=27, </td>
             <td>yyyyyN=177, </td>
         </tr>
         <tr>
             <td>17</td>
-            <td>No</td>
             <td>0</td>
             <td></td>
             <td></td>
@@ -780,7 +761,6 @@ CoLab 10E also shows, for each useful head and MLP layer by step, "digit pattern
 
 
 # Which steps+heads impact BA questions?
-Our 
 
 If we ablate each head in each step but only test BA questions, we gain insights. With 2 layers:
 
@@ -1279,11 +1259,12 @@ The above is our base evidence to help us work out how the 2-layer algorithm wor
 The answer digit A5 seems like a good place to focus our efforts:
 - It is the earliest-revealed answer
 - Despite always being 0 or 1, it is the hardest digit to calculation accurately as it may depend on a cascade all the way from D0+D0' e.g. 55555+44445=100000
-- It is revealed in step 11. The diagram says it must be calculated in steps 8 to 11, by the 8 useful steps+heads and 5 useful step+MLPs.
+- It is revealed in step 11. The diagram says it must be calculated in steps 8 to 11, using just 5 useful steps+heads and 3 useful step+MLPs!
+- The 5 useful steps+heads pay attention to D2+D2', D1+D1', D0+D0', D3+D3', D4+D4'. Each pair of question digits is attended to once. This is obviously not random.
 
 
 ## Hypothesis
-Now we try to detail how the 2-layer algorithm works.
+using the above information, we now seek to understand the detail of how the 2-layer algorithm is implemented.
 
 # What didn’t work
 Given the 2 layer attention pattern’s similarity to 1 layer pattern, and the above evidence, our first hypothesis was that the 2 layer algorithm:
@@ -1300,7 +1281,7 @@ If this is correct then the 2 layer algorithm successfully completes these calcu
 - A4 = D4.BA + (D3.MC or D3.MS & D2.MC or D3.MS & D2.MS & D1.MC or D3.MS & D2.MS & D1.MS & D0.MC)
 - A5 = D4.MC or D4.MS & D3.MC or D4.MS & D3.MS & D2.MC or D4.MS & D3.MS & D2.MS & D1.MC or D4.MS & D3.MS & D2.MS & D1.MS & D0.MC
 
-Our intuition is that there are not enough useful heads+steps and heads+MLPs in steps 8 to 11 to complete the A5 calculation. So we abandoned this hypothesis.
+Our intuition is that there are not enough useful heads+steps and heads+MLPs in steps 8 to 11 to complete the A5 calculation this way. So we abandoned this hypothesis.
 
 
 # What did work
@@ -1340,6 +1321,7 @@ We define operators Dn.T3, Dn.T4 & Dn.T5 each with higher accuracy:
 - Dn.T4 = Dn.T1 + ( Dn-1.T3 // 10 )	Four-digit accuracy
 - Dn.T5 = Dn.T1 + ( Dn-1.T4 // 10 )	Five-digit accuracy
 
+A DnTm value is perfectly accurate if it 
 The value D4.T5 is perfectly accurate as it integrates MC1 and cascading MS9 data all the way back to and including D0.T1. The values D1.T2, D2.T3, D3.T4 are also all perfectly accurate. If the model knows these values it can calculate answer digits with perfect accuracy:
 
 - A1 = D1.T2 % 10 with zero loss
