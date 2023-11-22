@@ -764,7 +764,7 @@ CoLab 10E also shows, for each useful head and MLP layer by step, "digit pattern
 
 # Which steps+heads impact BA questions?
 
-If we ablate each head in each step but only test BA questions, we gain insights. With 2 layers:
+If we ablate each head in each step but only test BA questions, we gain insights. With 2 layers, these failures occur:
 
 <table>
     <thead>
@@ -854,7 +854,7 @@ If we ablate each head in each step but only test BA questions, we gain insights
 </table>
 
 # Which steps+heads impact MC1 questions?
-If we ablate each head in each step but only test MC1 questions, we gain insights. With 2 layers:
+If we ablate each head in each step but only test MC1 questions, we gain insights. With 2 layers, these failures occur:
 
 <table>
     <thead>
@@ -992,7 +992,7 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
 </table>
 
 # Which steps+heads impact SimpleUS9 questions?
-If we ablate each head in each step but only test SimpleUS9 questions, we gain insights. With 2 layers:
+If we ablate each head in each step but only test SimpleUS9 questions, we gain insights. With 2 layers, these failures occur:
 
 <table>
     <thead>
@@ -1130,7 +1130,7 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
 </table>
 
 # Which steps+heads impact CascadingUS9 questions?
-If we ablate each head in each step but only test CascadingUS9 questions, we gain insights. With 2 layers:
+If we ablate each head in each step but only test CascadingUS9 questions, we gain insights. With 2 layers, these failures occur:
 
 <table>
     <thead>
