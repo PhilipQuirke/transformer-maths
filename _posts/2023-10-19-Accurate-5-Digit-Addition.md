@@ -122,50 +122,50 @@ CoLab Part 10B does this analysis and produces the below output. Note that an en
     </thead>
     <tbody>
         <tr>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>1</td>
-            <td>0</td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>2</td>
-            <td>0</td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>3</td>
-            <td>0</td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>4</td>
-            <td>0</td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>5</td>
-            <td>0</td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>6</td>
-            <td>0</td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>7</td>
-            <td>0</td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>
@@ -225,7 +225,7 @@ CoLab Part 10B does this analysis and produces the below output. Note that an en
         </tr>
         <tr>
             <td>17</td>
-            <td>0</td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>
@@ -254,28 +254,28 @@ CoLab Part 10C does this analysis and produces this output:
     <tbody>
         <tr>
             <td>8</td>
-            <td>0</td>
+            <td></td>
             <td>3</td>
             <td>%SimpleUS9=8, %MC1=3, %CascadeUS9=2, </td>
             <td>yNyyyy=6, NNyyyy=1, </td>
         </tr>
         <tr>
             <td>9</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>%CascadeUS9=2, </td>
             <td>yNyyyy=1, </td>
         </tr>
         <tr>
             <td>10</td>
-            <td>0</td>
+            <td></td>
             <td>18</td>
             <td>%CascadeUS9=51, %SimpleUS9=28, %BA=12, %MC1=5, </td>
             <td>yyyNyy=20, yyNNyy=12, NyNNyy=4, yNNNyy=2, yNNyyy=1, Nyyyyy=1, NyNyyy=1, yyNyyy=1, yNyNyy=1, yNyyyy=1, </td>
         </tr>
         <tr>
             <td>11</td>
-            <td>0</td>
+            <td></td>
             <td>18</td>
             <td>%MC1=25, %CascadeUS9=27, %SimpleUS9=15, </td>
             <td>Nyyyyy=43, </td>
@@ -289,7 +289,7 @@ CoLab Part 10C does this analysis and produces this output:
         </tr>
         <tr>
             <td>12</td>
-            <td>0</td>
+            <td></td>
             <td>69</td>
             <td>%MC1=81, %BA=68, %SimpleUS9=64, %CascadeUS9=44, </td>
             <td>yNyyyy=164, </td>
@@ -303,7 +303,7 @@ CoLab Part 10C does this analysis and produces this output:
         </tr>
         <tr>
             <td>13</td>
-            <td>0</td>
+            <td></td>
             <td>64</td>
             <td>%MC1=80, %BA=80, %SimpleUS9=46, %CascadeUS9=20, </td>
             <td>yyNyyy=153, </td>
@@ -317,7 +317,7 @@ CoLab Part 10C does this analysis and produces this output:
         </tr>
         <tr>
             <td>14</td>
-            <td>0</td>
+            <td></td>
             <td>61</td>
             <td>%MC1=72, %BA=77, %SimpleUS9=51, %CascadeUS9=22, </td>
             <td>yyyNyy=146, </td>
@@ -331,7 +331,7 @@ CoLab Part 10C does this analysis and produces this output:
         </tr>
         <tr>
             <td>15</td>
-            <td>0</td>
+            <td></td>
             <td>63</td>
             <td>%MC1=83, %BA=71, %SimpleUS9=36, %CascadeUS9=24, </td>
             <td>yyyyNy=150, </td>
@@ -345,7 +345,7 @@ CoLab Part 10C does this analysis and produces this output:
         </tr>
         <tr>
             <td>16</td>
-            <td>0</td>
+            <td></td>
             <td>72</td>
             <td>%MC1=81, %BA=84, %SimpleUS9=74, %CascadeUS9=34, </td>
             <td>yyyyyN=173, </td>
@@ -393,35 +393,35 @@ CoLab 10E brings the above information together into a summary of useful heads a
     <tbody>
         <tr>
             <td>L0H0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>45</td>
             <td>41</td>
             <td>33</td>
             <td>31</td>
             <td>38</td>
-            <td>0</td>
+            <td></td>
         </tr>
         <tr>
             <td>L0H1</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>6</td>
             <td>3</td>
             <td>15</td>
@@ -430,42 +430,42 @@ CoLab 10E brings the above information together into a summary of useful heads a
             <td>11</td>
             <td>4</td>
             <td>31</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <td>L0H2</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>29</td>
             <td>22</td>
             <td>26</td>
             <td>31</td>
             <td>24</td>
             <td>14</td>
-            <td>0</td>
+            <td></td>
         </tr>
         <tr>
             <td>MLP </td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>3</td>
-            <td>0</td>
+            <td></td>
             <td>18</td>
             <td>18</td>
             <td>69</td>
@@ -473,91 +473,91 @@ CoLab 10E brings the above information together into a summary of useful heads a
             <td>61</td>
             <td>63</td>
             <td>72</td>
-            <td>0</td>
+            <td></td>
         </tr>
         <tr>
             <td>L1H0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <td>L1H1</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <td>L1H2</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <td>MLP </td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>6</td>
             <td>51</td>
             <td>59</td>
             <td>56</td>
             <td>42</td>
             <td>40</td>
-            <td>0</td>
+            <td></td>
         </tr>
     </tbody>
 </table>
@@ -780,7 +780,7 @@ If we ablate each head in each step but only test BA questions, we gain insights
     <tbody>
         <tr>
             <td>9</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>5</td>
             <td>%BA=5, </td>
@@ -788,23 +788,23 @@ If we ablate each head in each step but only test BA questions, we gain insights
         </tr>
         <tr>
             <td>12</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>37</td>
             <td>%BA=37, </td>
             <td>yNyyyy=7, </td>
         </tr>
         <tr>
             <td>13</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>21</td>
             <td>%BA=21, </td>
             <td>yyNyyy=4, </td>
         </tr>
         <tr>
             <td>13</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>5</td>
             <td>%BA=5, </td>
@@ -812,15 +812,15 @@ If we ablate each head in each step but only test BA questions, we gain insights
         </tr>
         <tr>
             <td>14</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>26</td>
             <td>%BA=26, </td>
             <td>yyyNyy=5, </td>
         </tr>
         <tr>
             <td>14</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>11</td>
             <td>%BA=11, </td>
@@ -828,15 +828,15 @@ If we ablate each head in each step but only test BA questions, we gain insights
         </tr>
         <tr>
             <td>15</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>47</td>
             <td>%BA=47, </td>
             <td>yyyyNy=9, </td>
         </tr>
         <tr>
             <td>15</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>11</td>
             <td>%BA=11, </td>
@@ -844,8 +844,8 @@ If we ablate each head in each step but only test BA questions, we gain insights
         </tr>
         <tr>
             <td>16</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>42</td>
             <td>%BA=42, </td>
             <td>yyyyyN=8, </td>
@@ -870,7 +870,7 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
     <tbody>
         <tr>
             <td>11</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>42</td>
             <td>%MC1=42, </td>
@@ -878,15 +878,15 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>12</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>84</td>
             <td>%MC1=84, </td>
             <td>yNyyyy=16, </td>
         </tr>
         <tr>
             <td>12</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>26</td>
             <td>%MC1=26, </td>
@@ -894,7 +894,7 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>12</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>32</td>
             <td>%MC1=32, </td>
@@ -902,15 +902,15 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>13</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>74</td>
             <td>%MC1=74, </td>
             <td>yyNyyy=14, </td>
         </tr>
         <tr>
             <td>13</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>5</td>
             <td>%MC1=5, </td>
@@ -918,7 +918,7 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>13</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>58</td>
             <td>%MC1=58, </td>
@@ -926,15 +926,15 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>14</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>37</td>
             <td>%MC1=37, </td>
             <td>yyyNyy=7, </td>
         </tr>
         <tr>
             <td>14</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>5</td>
             <td>%MC1=5, </td>
@@ -942,7 +942,7 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>14</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>16</td>
             <td>%MC1=16, </td>
@@ -950,15 +950,15 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>15</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>63</td>
             <td>%MC1=63, </td>
             <td>yyyyNy=12, </td>
         </tr>
         <tr>
             <td>15</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>42</td>
             <td>%MC1=42, </td>
@@ -966,7 +966,7 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>15</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>5</td>
             <td>%MC1=5, </td>
@@ -974,15 +974,15 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>16</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>68</td>
             <td>%MC1=68, </td>
             <td>yyyyyN=13, </td>
         </tr>
         <tr>
             <td>16</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>11</td>
             <td>%MC1=11, </td>
@@ -1008,7 +1008,7 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
     <tbody>
         <tr>
             <td>8</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>33</td>
             <td>%SimpleUS9=33, </td>
@@ -1016,7 +1016,7 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>10</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>39</td>
             <td>%SimpleUS9=39, </td>
@@ -1024,7 +1024,7 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>11</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>6</td>
             <td>%SimpleUS9=6, </td>
@@ -1032,7 +1032,7 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>11</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>33</td>
             <td>%SimpleUS9=33, </td>
@@ -1040,15 +1040,15 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>12</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>78</td>
             <td>%SimpleUS9=78, </td>
             <td>yNyyyy=14, </td>
         </tr>
         <tr>
             <td>12</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>67</td>
             <td>%SimpleUS9=67, </td>
@@ -1056,15 +1056,15 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>13</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>61</td>
             <td>%SimpleUS9=61, </td>
             <td>yyNyyy=11, </td>
         </tr>
         <tr>
             <td>13</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>39</td>
             <td>%SimpleUS9=39, </td>
@@ -1072,15 +1072,15 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>14</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>33</td>
             <td>%SimpleUS9=33, </td>
             <td>yyyNyy=6, </td>
         </tr>
         <tr>
             <td>14</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>11</td>
             <td>%SimpleUS9=11, </td>
@@ -1088,7 +1088,7 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>14</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>44</td>
             <td>%SimpleUS9=44, </td>
@@ -1096,15 +1096,15 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>15</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>72</td>
             <td>%SimpleUS9=72, </td>
             <td>yyyyNy=13, </td>
         </tr>
         <tr>
             <td>15</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>39</td>
             <td>%SimpleUS9=39, </td>
@@ -1112,7 +1112,7 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>15</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>17</td>
             <td>%SimpleUS9=17, </td>
@@ -1120,8 +1120,8 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>16</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>56</td>
             <td>%SimpleUS9=56, </td>
             <td>yyyyyN=10, </td>
@@ -1146,7 +1146,7 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
     <tbody>
         <tr>
             <td>8</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>7</td>
             <td>%CascadeUS9=7, </td>
@@ -1154,7 +1154,7 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
         </tr>
         <tr>
             <td>10</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>69</td>
             <td>%CascadeUS9=69, </td>
@@ -1162,7 +1162,7 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
         </tr>
         <tr>
             <td>11</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>31</td>
             <td>%CascadeUS9=31, </td>
@@ -1170,15 +1170,15 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
         </tr>
         <tr>
             <td>12</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>69</td>
             <td>%CascadeUS9=69, </td>
             <td>yNyyyy=20, </td>
         </tr>
         <tr>
             <td>12</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>24</td>
             <td>%CascadeUS9=24, </td>
@@ -1186,23 +1186,23 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
         </tr>
         <tr>
             <td>13</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>62</td>
             <td>%CascadeUS9=62, </td>
             <td>yyNyyy=18, </td>
         </tr>
         <tr>
             <td>14</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>31</td>
             <td>%CascadeUS9=31, </td>
             <td>yyyNyy=9, </td>
         </tr>
         <tr>
             <td>14</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>31</td>
             <td>%CascadeUS9=31, </td>
@@ -1210,15 +1210,15 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
         </tr>
         <tr>
             <td>15</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>31</td>
             <td>%CascadeUS9=31, </td>
             <td>yyyyNy=9, </td>
         </tr>
         <tr>
             <td>15</td>
-            <td>0</td>
+            <td></td>
             <td>1</td>
             <td>69</td>
             <td>%CascadeUS9=69, </td>
@@ -1226,7 +1226,7 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
         </tr>
         <tr>
             <td>15</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>21</td>
             <td>%CascadeUS9=21, </td>
@@ -1234,15 +1234,15 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
         </tr>
         <tr>
             <td>16</td>
-            <td>0</td>
-            <td>0</td>
+            <td></td>
+            <td></td>
             <td>66</td>
             <td>%CascadeUS9=66, </td>
             <td>yyyyyN=19, </td>
         </tr>
         <tr>
             <td>16</td>
-            <td>0</td>
+            <td></td>
             <td>2</td>
             <td>34</td>
             <td>%CascadeUS9=34, </td>
@@ -1342,9 +1342,7 @@ Applying this mathematical framework within the constraints of the above "What m
   - L0.MLP: A4 impact: Use is not understood.
 - Step 9
   - L0.H1: D1 attention: Calculate D1:T1 = D1 + D1’
-  - L0.MLP: A3 impact: Use is not understood.
 - Step 10
-  - L0.H0: D1 attention: Use is not understood. Duplicate of S9.L0.H1? Ablating gives 1% loss.
   - L0.H1: D0 attention: Calculate D1.T2 = D1.T1 + (D0 + D0’) // 10. Perfectly accurate.
   - L0.MLP: A2 .. A5 impact: Calculate D2.T3 = D2.T1 + D1.T2 // 10. Perfectly accurate. 
 - Step 11:
@@ -1364,18 +1362,19 @@ Even ignoring "not understood" cells, A5 and A4 are calculated with perfect accu
 <img src="{{site.url}}/assets/StaircaseA3L2H3_Part2.svg" style="display: block; margin: auto;" />
 
 Some notes :
-- Possible issue: Ablation says two step 10 heads are useful, but they have are not used in this hypothesis. 
-  - Possible solution: These heads may be “duplicates” of S9.L0.H1, splitting the workload
-- Possible issue: To get a perfect A5, all the digits have been completed by step 11. Why does the model retain the redundant long staircase BA calculations?
-  - Possible solution: The model is not optimising for compactness. The long staircase is discovered early and it works for simple questions. Once the overall algorithm gives the right numeric answer consistently it stops optimising. 
 - Possible issue: The calculation by S11.MLP of D4.T5 // 10 = (D4.T1 + D3.MC) // 10 seems complex. Can this calc be done by the MLP?
-  - Solution: The D4.T1 and D3.MC values are in the residual stream. This is a bigram
-- Possible issue: Are there other ways to formulate the framework or different ways to use the calculation cells?
+  - Solution: The D4.T1 and D3.MC values are in the residual stream. This is a bigram. Resolved
+- Possible issue: There is a MLP layers in S8 that are not understood - they are theoretically unnecessary, but the model does depend on it
+  - Possible solution: Unresolved
+- Possible issue: There are 2 heads and 1 MLP layer in S12 that are not understood - They are theoretically unnecessary, but the model does depend on them
+  - Possible solution: The model is duplicating functionality?
+- Possible issue: Are there other ways to formulate the mathematical framework or different ways to map the framework to the calculation cells?
   - Possible solution: Do experiments to test the hypothesis    
-
+- Possible issue: To get a perfect A5, all the digits have been completed by step 11. Why does the model retain the redundant long staircase BA calculations in step 11 to 16?
+  - Possible solution: The model is not optimising for compactness. The long staircase is discovered early and it works for simple questions. Once the overall algorithm gives low loss consistently it stops optimising. 
 
 ## Testing the hypothesis 
-CoLab part 15A tests the hypothesis that D4.T1 is calculated at S11.L0.H2 and shows ...
+CoLab part 15A onwards tests the hypothesis and shows...
 
 
 # Pulling it all together (TBD)
