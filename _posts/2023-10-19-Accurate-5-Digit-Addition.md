@@ -60,7 +60,7 @@ With more layers and more training batches the model definitely gains accuracy (
             <td>10 digits</td>
             <td>0.040984</td>
             <td>0.000094</td>
-            <td>TBA</td>
+            <td>0.000116186</td>
         </tr>
         <tr>
             <td>15 digits</td>
@@ -1370,7 +1370,7 @@ Some notes :
   - Possible solution: The model is not optimising for compactness. The long staircase is discovered early and it works for simple questions. Once the overall algorithm gives the right numeric answer consistently it stops optimising. 
 - Possible issue: The calculation by S11.MLP of D4.T5 // 10 = (D4.T1 + D3.MC) // 10 seems complex. Can this calc be done by the MLP?
   - Solution: The D4.T1 and D3.MC values are in the residual stream. This is a bigram
-- Possible issue: Are there other ways to forumlate the framework or different ways to use the calculation cells?
+- Possible issue: Are there other ways to formulate the framework or different ways to use the calculation cells?
   - Possible solution: Do experiments to test the hypothesis    
 
 
