@@ -83,7 +83,7 @@ A key internal part of the model is its “attention heads”. For technical rea
 
 Our model has 3 attention heads. This sample “attention pattern” graph (from CoLab Part 13) shows which tokens each of the 3 attention heads are focused on in each of the 18 steps:
 
-<img src="{{site.url}}/assets/AttentionPattern5D3H.svg" style="display: block; margin: auto;" />
+<img src="{{site.url}}/assets/AttentionPattern5Digits3Heads.svg" style="display: block; margin: auto;" />
 
 The pattern is 18 by 18 squares. Time proceeds vertically downwards, with one additional token being revealed horizontally at each step, giving the overall triangle shape. After the question is fully revealed (at step 11), each head starts attending to pairs of question digits from left to right (i.e. high-value digits before lower-value digits) giving the “double staircase" shape. The three heads attend to a given digit pair in three different steps, giving a time ordering of heads. The fact that the three staircases do not overlap is part of the model’s algorithm.
 
