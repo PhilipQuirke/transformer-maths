@@ -119,7 +119,7 @@ In more detail, the “programming” of the algorithm for A3 is:
 
 <img src="{{site.url}}/assets/StaircaseA3_Detailed.svg" style="display: block; margin: auto;" />
 
-The neural network's algorithm, calculated in 22 co-ordinated heads and MLP layers, is equivalent to the following python code: 
+The neural network's algorithm, implemented using calculations done in 22 attention heads and MLP layers, is equivalent to the following python code: 
 
 ```
 def calculate_answer_digits( n_digits, q1, q2 ):
