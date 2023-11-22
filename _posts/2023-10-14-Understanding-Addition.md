@@ -119,7 +119,43 @@ In more detail, the “programming” of the algorithm for A3 is:
 
 <img src="{{site.url}}/assets/StaircaseA3_Detailed.svg" style="display: block; margin: auto;" />
 
-With n_layers = 1, the above findings stay the same for n_digits = 10 or 15.(CoLab Part 2).
+The neural network's algorithm, calculated in 22 co-ordinated heads and MLP layers, is equivalent to the following python code: 
+
+```
+def calculate_answer_digits( n_digits, q1, q2 ):
+  answer = ""
+
+  for i in range(n_digits):
+      pos = n_digits - i - 1
+
+      mc1_prev_prev = 0
+      if pos >= 2 and (q1[pos-2] + q2[pos-2] >= 10):
+         mc1_prev_prev = 1
+
+      mc1_prev = 0
+      if pos >= 1 and (q1[pos-1] + q2[pos-1] >= 10):
+         mc1_prev = 1
+
+      ms9_prev = 0
+      if pos >= 1 and (q1[pos-1] + q2[pos-1] == 9):
+         ms9_prev = 1
+
+      prev_prev = 0
+      if mc1_prev == 0 and (ms9_prev == 1 and mc1_prev_prev == 1):
+        prev_prev = 1
+
+      digit_answer = (q1[pos] + q2[pos] + mc1_prev + prev_prev) % 10
+
+      answer = str(digit_answer) + answer
+
+  return answer
+
+q1 = [2,3,4,5,6]
+q2 = [1,3,1,5,6]
+print(calculate_answer_digits(5,q1,q2))
+```
+
+With n_layers = 1, the above findings stay the same for n_digits = 10 or 15. (CoLab Part 2).
 
 # The MLP
 The above diagram references the MLP and uses the term “trigrams”. For clarity of presentation, we didn’t discuss these beforehand. We discuss them here.
