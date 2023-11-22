@@ -1335,11 +1335,11 @@ The value D4.T5 is perfectly accurate as it integrates MC1 and cascading MS9 dat
 For the model to do integer addition perfectly accurately, it must calculate D4.T5 by step 11 so an accurate A5 can be revealed.
 Understanding how the model calculates A5 will help us how understand the model's algorithm works. 
 
-Applying this mathematical framework within the constraints of the above "What model parts are doing useful calculations" diagram, we claim this is how the model calculates D4.T5 by step 11:
+Applying this mathematical framework within the constraints of the above "What model parts are doing useful calculations" diagram, we hypothesise this is how the model calculates A5 by step 11:
 
 - Step 8:
   - L0.H1: D2 attention: Calculate D2.T1 = D2 + D2’
-  - L0.MLP: A4 impact: Use is not understood.
+  - L0.MLP: A4 impact: Not used
 - Step 9
   - L0.H1: D1 attention: Calculate D1:T1 = D1 + D1’
 - Step 10
@@ -1350,22 +1350,41 @@ Applying this mathematical framework within the constraints of the above "What m
   - L0.H2: D4 attention: Calculate D4.T1 = D4 + D4’
   - L0.MLP: A5 impact: Calculate D3.MC = D3.T4 // 10  
   - L1.MLP: A5 impact: Calculate D4.T5 // 10 = (D4.T1 + D3.MC) // 10. Perfectly accurate A5.
+ 
+The calculation by S11.MLP of D4.T5 // 10 = (D4.T1 + D3.MC) // 10 seems complex. Can this calc be done by the MLP? 
+The D4.T1 and D3.MC values are in the residual stream. This is a bigram which the MLP can do.
+
+There is a MLP layer in S8 that is not understood. It is theoretically unnecessary, but the model does depend on it. 
+Ignoring this gap in our undersstadning for now, we further hypothesise this is how the model calculates A4 by step 12:
+
 - Step 12:
   - L0.H0: D4 attention: Calculate D4.T5 = D4.T1 + D3.T4 // 10. Perfectly accurate.
-  - L0.H1: D3 attention: Use is not understood. 
-  - L0.H2: D4 attention: Use is not understood. 
+  - L0.H1: D3 attention: Not used
+  - L0.H2: D4 attention: Not used
   - L0.MLP: A4 impact: Calculate D4.T5 % 10. Perfectly accurate A4
-  - L1.MLP: A4 impact: Use is not understood.
+  - L1.MLP: A4 impact: Not used
+
+In step 12, there are another 2 heads and 1 MLP layer that are not understood. 
+They are theoretically unnecessary, but the model does depend on them. 
+
+
+
+PQR 
+
+Obviously our hypothesis is not 100% right, but we have shown a hypothetical way to calculate A5 and A4 in time.
+Perhaps the model is duplicating the same functionality in multiple headsor MLP layers? 
+
+
+
+
+  - Possible solution: The model is duplicating functionality?
+
 
 Even ignoring "not understood" cells, A5 and A4 are calculated with perfect accuracy in time. Modifying the first diagram, we can show this hypothesis diagramatically:
 
 <img src="{{site.url}}/assets/StaircaseA3L2H3_Part2.svg" style="display: block; margin: auto;" />
 
 Some notes :
-- Possible issue: The calculation by S11.MLP of D4.T5 // 10 = (D4.T1 + D3.MC) // 10 seems complex. Can this calc be done by the MLP?
-  - Solution: The D4.T1 and D3.MC values are in the residual stream. This is a bigram. Resolved
-- Possible issue: There is a MLP layers in S8 that are not understood - they are theoretically unnecessary, but the model does depend on it
-  - Possible solution: Unresolved
 - Possible issue: There are 2 heads and 1 MLP layer in S12 that are not understood - They are theoretically unnecessary, but the model does depend on them
   - Possible solution: The model is duplicating functionality?
 - Possible issue: Are there other ways to formulate the mathematical framework or different ways to map the framework to the calculation cells?
