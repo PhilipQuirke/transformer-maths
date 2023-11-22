@@ -74,9 +74,10 @@ With more layers and more training batches the model definitely gains accuracy (
 
 # Open Questions
 To be accurate, the 2 layer algorithm must learn the functionality of the 1 layer algorithm **and** 
-learn additional functionality to handle the 06665+03335=10000 case by cascading the Carry 1 through multiple columns. How does it do this? 
+learn additional functionality to handle the 06665+03335=10000 case by cascading the Carry 1 through multiple columns. 
+How does it implement this? 
 
-The 2 layer algorithm with 30K training batches has a loss of TBA. Is it 100% accurate? 
+The 2 layer algorithm with 30K training batches has a final training loss of 0.000000002. Is the algorithm 100% accurate? 
 
 
 ## What model parts are doing useful calculations?
@@ -106,8 +107,9 @@ Sometimes the model does not use entire prediction steps. If we ablate alls head
 
 - With n_digits = 5, n_layers = 1, the addition algorithm does not use any data generated in steps 0 to 10 inclusive. The model also does not use the last (17th) step. Therefore, the addition is started and completed in 6 steps (11 to 16)
 - With n_digits = 5, n_layers = 2, the addition algorithm does not use any data generated in steps 0 to 7 inclusive. The model also does not use the last (17th) step. Therefore, the addition is started and completed in 9 steps (8 to 16). What are the extra 3 steps used for?
+- In **both** the above cases, the pattern failures in steps 11 to 16 each fail in exactly one digit, and the failing digit progresses steadily from A5 to A0 step by step.
 
-CoLab Part 10B does this analysis and produces this output:
+CoLab Part 10B does this analysis and produces the below output. Note that an entry like "%SimpleUS9=31" means that 31% of SimpleUS9 questions failed - not 31% of all questions failed.
 
 <table>
     <thead>
