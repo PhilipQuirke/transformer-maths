@@ -43,36 +43,41 @@ With 2 layers the model definitely does better (using CoLab with 20K training ep
 <img src="{{site.url}}/assets/Addition_AccuracyByLayersDigits.png" style="display: block; margin: auto;" />
 
 # Open Questions
-To be accurate, the 2 layer algorithm must have the functionality of the 1 layer algorithm **and** 
-additional functionality to handle the 06665+03335=10000 case by cascading the Carry 1 through multiple columns. How does it do this? 
+To be accurate, the 2 layer algorithm must learn the functionality of the 1 layer algorithm **and** 
+learn additional functionality to handle the 06665+03335=10000 case by cascading the Carry 1 through multiple columns. How does it do this? 
 
 Why isn't the 2 layer algorithm 100% accurate? 
 
 
 ## What model parts are doing useful calculations?
-A good first step in understanding a model is to work out what parts of the model are needed to do low-loss predictions.
+A good first step in understanding a model is to look at **what** parts of the model are actually doing something useful when the model generates an answer to a question. 
+We can do this analysis, before we understand the **how** the model is generating the answer.  
 
-After training, most models don't need to use all their available step, attention heads, etc when doing predictions. 
-Even without understand the algorithm, we can use attention patterns and ablation experiments (described below), to create this diagram of what calculates the model does where (for n_layers = 2, n_heads = 3, n_digits = 5): 
+Most models don't use all their steps, attention heads and MLP layers to generate an answers. 
+This diagram shows what parts the model is using in integer addition (for n_layers = 2, n_heads = 3, n_digits = 5): 
 
 <img src="{{site.url}}/assets/StaircaseA3L2H3_Part1.svg" style="display: block; margin: auto;" />
 
-A cell containing an X is not used during predictions (even if the attention pattern shows a clear focus for that cell.) 
-A attention head cell containing say D3,D3' is paying attention to those question digits.
-An MLP cell containing say A4 has a significant impact on the accuracy of that answer digit.
+The diagram is constructed for information gathering in a few steps. We'll describe the steps shortly,but for now note:
+- A cell containing an X is not used to generate an answer 
+- A attention head cell containing say D3,D3' is paying attention to those question digits.
+- An MLP cell containing say A4 has a significant impact on the accuracy of that answer digit.
+- The diagram was manually drawn in draw.io using the automatically generated information from the sections below.
 
 # Attention patterns
-Attention patterns are a good way to view what the model's attention heads are doing. With 1 layer, the attention pattern showed one row of 3 attention heads. With 2 layers, there are now 6 attention heads over two rows. For example, the question “16044+14973=” gives this attention pattern:
+Attention patterns show us what the model's attention heads are paying attention to. With 2 layers, there are now 6 attention heads over two rows. For example, the question “382954+92495=130790” gives this attention pattern:
 
 <img src="{{site.url}}/assets/AttentionPattern5Digit3Heads2Layer.png" style="display: block; margin: auto;" />
 
-Viewing a number of examples is sometimes useful to get a feel for patterns in the model's attention heads over successive steps.
+Viewing a number of examples can give you a feel for patterns in the model's attention heads over successive steps.
 
 # Which steps+heads do any useful calculations?
-Sometimes the model does not use entire prediction steps. If we ablate alls head in a step, and the loss does not increase, then that step is **not** used by the algorithm, and can be excluded from further analysis. CoLab Part 10B does this analysis and shows:
+Sometimes the model does not use entire prediction steps. If we ablate alls head in a step, and the loss does not increase, then that step is **not** used by the algorithm, and can be excluded from further analysis. We find:
 
 - With n_digits = 5, n_layers = 1, the addition algorithm does not use any data generated in steps 0 to 10 inclusive. The model also does not use the last (17th) step. Therefore, the addition is started and completed in 6 steps (11 to 16)
 - With n_digits = 5, n_layers = 2, the addition algorithm does not use any data generated in steps 0 to 7 inclusive. The model also does not use the last (17th) step. Therefore, the addition is started and completed in 9 steps (8 to 16). What are the extra 3 steps used for?
+
+CoLab Part 10B does this analysis and produces this output:
 
 <table>
     <thead>
@@ -215,11 +220,13 @@ Sometimes the model does not use entire prediction steps. If we ablate alls head
 </table>
 
 # Which steps+MLP layers impact which use cases?
-If we ablate an MLP layer in a step, and the loss does not increase, then that MLP layer is **not** used by the algorithm, and can be excluded from further analysis. With 2 layers, CoLab Part 10C shows:
+If we ablate an MLP layer in a step, and the loss does not increase, then that MLP layer is **not** used by the algorithm, and can be excluded from further analysis. With 2 layers, we find:
 
 - In steps 0 .. 7, neither MLP layer is used
 - In steps 8 .. 10, only the layer 0 MLP is used
 - In steps 11 .. 16, both MLP layers are used and they strongly align to A5 .. A0 in successive steps.
+
+CoLab Part 10C does this analysis and produces this output:
 
 <table>
     <thead>
@@ -340,10 +347,11 @@ If we ablate an MLP layer in a step, and the loss does not increase, then that M
     </tbody>
 </table>
 
-
 # Which steps+heads/MLPs impact which answer digits summarised?
+Previously we look at which entire steps (e.g. step 14) were useful by ablating **all** heads in a step. 
+For a step we know is useful, we can ablate one head at a time and find out whether each head is useful. CoLab Part10D does this analysis 
 
-This is overall summary of heads and MLP layers by step. A non-zero number means that when the cell is ablated, the model produces thie percentange of bad answers. This implies the cell is necessary for accurate answers. 
+CoLab 10E brings the above information together into a summary of useful heads and MLP layers by step. A non-zero number means that when the cell is ablated, the model produces this percentange of bad answers (and so the cell is necessary for accurate answers.) 
 
 <table>
     <thead>
@@ -541,7 +549,7 @@ This is overall summary of heads and MLP layers by step. A non-zero number means
     </tbody>
 </table>
 
-This is summary of the impact when a head or MLP layer is ablated in a by step. The cell shows the pattern of correct/incorrect answer digits the number of incorrect answers. If the cell has a trailing "..." then this cell has multiple incorrect digit patterns, with the most common incorrect pattern being shown. 
+CoLab 10E also shows, for each useful head and MLP layer by step, "digit pattern(s)" of the incorrect answers. If the cell has a trailing "+" then this cell has another (less frequent) incorrect digit pattern. If a cell has one digit pattern then this gives us an insight into which digit the cell most impacts: 
 
 <table>
     <thead>
@@ -739,7 +747,11 @@ This is summary of the impact when a head or MLP layer is ablated in a by step. 
     </tbody>
 </table>
 
+
+
 # Which steps+heads impact BA questions?
+Our 
+
 If we ablate each head in each step but only test BA questions, we gain insights. With 2 layers:
 
 <table>
