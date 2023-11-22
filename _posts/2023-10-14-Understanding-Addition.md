@@ -57,7 +57,7 @@ We defined 2 “compound” tasks that chain operations across digits:
 - UseCarry1 (aka UC1), which takes the previous column's carry output and adds it to the sum of the current digit pair. That is it combines BA and MC1.
 - UseSum9 (aka US9), which propagates (aka cascades) a carry over of 1 to the next column if the current column sums to 9 and the previous column generated a carry over. US9 is a complex task as it spans three digits. For some rare questions (e.g. 05555+04445=10000) US9 applies to up to four sequential digits, causing a chain effect, with the MC1 cascading through multiple digits. This cascade requires a time ordering of the US9 calculations from lower to higher digits.
 
-While the model was training, we categorised each question based on which tasks the model must perform to get the correct answer. We categorised each training question as one of:
+We used these tasks to analyse the model during training. While the model was training, we categorised each question based on which tasks the model must perform to get the correct answer. We categorised each training question as one of:
 - Only the BA task is needed (e.g. 11111+22222= ), or 
 - The BA, MC1 and UC1 tasks are needed (e.g. 00045+00055= ), or
 - All the tasks including US9 are needed (e.g. 05555+04445= )
@@ -74,7 +74,7 @@ This transformer model processes the question and predicts the answer one token 
 
 <img src="{{site.url}}/assets/QuestionAnswerSteps.svg" style="display: block; margin: auto;" />
 
-Before answering the question, the trained model focuses on (aka attends to) the first token, then the first two tokens, then the first three tokens, etc. At each of the 18 steps the model does some calculations. After the question is fully revealed (at step 11), the model starts predicting the answer tokens, revealing the highest-value (100,000s) A5 digit first, then the other answer digits, finishing with the lowest-value (units) A0 digit. So it must reveal answer digits in the reverse order from what a human doing addition would!  
+Before answering the question, the trained model focuses on (aka attends to) the first token, then the first two tokens, then the first three tokens, etc. At each of the 18 steps the model does some calculations. After the question is fully revealed (at step 11), the model starts predicting the answer tokens, revealing the highest-value (100,000s) A5 digit first, then the other answer digits, finishing with the lowest-value (units) A0 digit. So it must reveal answer digits in the reverse order from what a human doing addition would!
 
 To get the A5 digit we need to know whether the question generated a Carry 1 in digit A4, which may depend on A3’s Carry 1, which may depend on A2’s Carry 1, etc. Which leads to the question, has the model calculated all the digits before it reveals A5? How do we find out?
 
@@ -83,7 +83,7 @@ A key internal part of the model is its “attention heads”. For technical rea
 
 Our model has 3 attention heads. This sample “attention pattern” graph (from CoLab Part 13) shows which tokens each of the 3 attention heads are focused on in each of the 18 steps:
 
-<img src="{{site.url}}/assets/AttentionPattern5Digit3Head.png" style="display: block; margin: auto;" />
+<img src="{{site.url}}/assets/AttentionPattern5D3H.svg" style="display: block; margin: auto;" />
 
 The pattern is 18 by 18 squares. Time proceeds vertically downwards, with one additional token being revealed horizontally at each step, giving the overall triangle shape. After the question is fully revealed (at step 11), each head starts attending to pairs of question digits from left to right (i.e. high-value digits before lower-value digits) giving the “double staircase" shape. The three heads attend to a given digit pair in three different steps, giving a time ordering of heads. The fact that the three staircases do not overlap is part of the model’s algorithm.
 
