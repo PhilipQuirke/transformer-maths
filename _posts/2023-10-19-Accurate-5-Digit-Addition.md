@@ -38,9 +38,41 @@ For this model these approaches all failed to improve the model accuracy:
 What worked was increasing the number of model “layers” (n_layers) from 1 to 2, while retaining n_heads = 3. This doubles the number of attention heads in the model from 3 to 6. 
 Also, the literature says a multiple-layer model gains the ability to “compose” the attention heads together in new ways to implement more complex algorithms.
 
-With 2 layers the model definitely does better (using CoLab with 20K training epochs, batch_size = 64, n_layers = 2 n_heads = 3, lr = 0.00008, weight_decay = 0.1):
+With 2 layers the model definitely gains accuracy (using CoLab with training batches = 20K or 30K, batch_size = 64, n_layers = 2 n_heads = 3, lr = 0.00008, weight_decay = 0.1):
 
 <img src="{{site.url}}/assets/Addition_AccuracyByLayersDigits.png" style="display: block; margin: auto;" />
+
+<table>
+    <thead>
+        <tr>
+            <th>Size of question</th>
+            <th>1 layer, 20K batches </th>
+            <th>2 layers, 20K batches</th>
+            <th>2 layers, 30K batches</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>5 digits</td>
+            <td>0.008314</td>
+            <td>0.000003</td>
+            <td>TBA</td>
+        </tr>
+        <tr>
+            <td>10 digits</td>
+            <td>0.040984</td>
+            <td>0.000094</td>
+            <td>TBA</td>
+        </tr>
+        <tr>
+            <td>15 digits</td>
+            <td>0.031746</td>
+            <td>0.002501</td>
+            <td>TBA</td>
+        </tr>
+    </tbody>
+</table>
+
 
 # Open Questions
 To be accurate, the 2 layer algorithm must learn the functionality of the 1 layer algorithm **and** 
