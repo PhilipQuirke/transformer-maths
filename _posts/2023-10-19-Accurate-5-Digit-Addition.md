@@ -38,9 +38,7 @@ For this model these approaches all failed to improve the model accuracy:
 What worked was increasing the number of model “layers” (n_layers) from 1 to 2, while retaining n_heads = 3. This doubles the number of attention heads in the model from 3 to 6. 
 Also, the literature says a multiple-layer model gains the ability to “compose” the attention heads together in new ways to implement more complex algorithms.
 
-With 2 layers the model definitely gains accuracy (using CoLab with training batches = 20K or 30K, batch_size = 64, n_layers = 2 n_heads = 3, lr = 0.00008, weight_decay = 0.1):
-
-<img src="{{site.url}}/assets/Addition_AccuracyByLayersDigits.png" style="display: block; margin: auto;" />
+With 2 layers the model definitely gains accuracy (using CoLab with training batches = 20K or 30K, batch_si
 
 <table>
     <thead>
@@ -90,7 +88,7 @@ This diagram shows what parts the model is using in integer addition (for n_laye
 
 <img src="{{site.url}}/assets/StaircaseA3L2H3_Part1.svg" style="display: block; margin: auto;" />
 
-The diagram is constructed for information gathering in a few steps. We'll describe the steps shortly,but for now note:
+The diagram is constructed for information gathering in a few steps. We'll describe the steps shortly, but some initial notes:
 - A cell containing an X is not used to generate an answer 
 - A attention head cell containing say D3,D3' is paying attention to those question digits.
 - An MLP cell containing say A4 has a significant impact on the accuracy of that answer digit.
