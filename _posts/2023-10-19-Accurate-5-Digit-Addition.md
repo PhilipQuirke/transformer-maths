@@ -1196,7 +1196,7 @@ Applying this mathematical framework within the constraints of the above "What m
 The calculation by S11.MLP of D4.T5 // 10 = (D4.T1 + D3.MC) // 10 seems complex. Can this calc be done by the MLP? 
 The D4.T1 and D3.MC values are in the residual stream. This is a bigram which the MLP can do.
 
-There is a MLP layer in S8 that is not understood. It is theoretically unnecessary, but the model does depend on it. 
+There are MLP layers in S8 & s9 that are not used. It is theoretically unnecessary, but the model does depend on it. 
 Ignoring this gap in our understanding for now, we further hypothesise this is how the model calculates A4 by step 12:
 
 - Step 12:
@@ -1206,7 +1206,7 @@ Ignoring this gap in our understanding for now, we further hypothesise this is h
   - L0.MLP: A4 impact: Calculate D4.T5 % 10. Perfectly accurate A4
   - L1.MLP: A4 impact: Not used
 
-In step 12, there are another 2 heads and 1 MLP layer that are not understood. 
+In step 12, there are another 2 heads and 1 MLP layer that are not used. 
 They are theoretically unnecessary, but the model does depend on them. 
 
 Obviously our hypothesis is not 100% right, but we have shown a hypothetical way to calculate A5 and A4 in time.
@@ -1314,13 +1314,17 @@ Applying this mathematical framework within the constraints of the above "What m
   - L0.H1: D3 attention: Calculate D3.C1 = TriState(D3, D3’)
   - L0.H2: D4 attention: Calculate D4.C1 = TriState(D4, D4’)
   - L0.MLP: A5 impact: Calculate D4.C5 = TriSum(D4.C1, TriSum(D3.C1, D2.C3)).
-  - L1.MLP: A5 impact: Calculate A5 = ( D4.C5 == 10 ). Perfectly accurate A5.
- 
+  - L1.MLP: A5 impact: Calculate A5 = ( D4.C5 == 10 ). Perfectly accurate.
 
+There are MLP layers in S8 and S9 that are not understood. It is theoretically unnecessary, but the model does depend on it. 
+Ignoring this gap in our understanding for now, we further hypothesise this is how the model calculates A4 by step 12:
 
-
-
-
+- Step 12:
+  - L0.H0: D4 attention: Calculate D4.BA = (D4 + D4') % 10. 
+  - L0.H1: D3 attention: Not used
+  - L0.H2: D4 attention: Not used
+  - L0.MLP: A4 impact: Calculate D3.C4 = TriSum(D3.C1, D2.C3). Perfectly accurate
+  - L1.MLP: A4 impact: Calculate A4 = (D4.BA + D3.C4) % 10. Perfectly accurate.
 
 Time to start experimenting to get more information!
 
