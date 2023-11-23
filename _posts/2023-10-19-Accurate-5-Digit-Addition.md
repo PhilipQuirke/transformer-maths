@@ -364,20 +364,13 @@ CoLab Part 10C does this analysis and produces this output:
 CoLan Part 10B works out which steps are used in the models calculations 
 For each useful step, CoLab Part 10D ablates one attention head at a time and find out whether each head is useful.
 Part 10C does the same for each MLPlayer in each useful step.
-Part 10E combines this information together into the below summary. A non-zero number means that when the cell is ablated, the model produces this percentange of bad answers (and so the cell is necessary for accurate answers.) 
+Part 10E combines this information together into the below summary. A non-zero number means that when the cell is ablated, 
+the model produces this percentage of bad answers (and so the cell is necessary for accurate answers.) 
 
 <table>
     <thead>
         <tr>
             <th>Step</th>
-            <th>0</th>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-            <th>4</th>
-            <th>5</th>
-            <th>6</th>
-            <th>7</th>
             <th>8</th>
             <th>9</th>
             <th>10</th>
@@ -387,7 +380,6 @@ Part 10E combines this information together into the below summary. A non-zero n
             <th>14</th>
             <th>15</th>
             <th>16</th>
-            <th>17</th>
         </tr>
     </thead>
     <tbody>
@@ -402,15 +394,6 @@ Part 10E combines this information together into the below summary. A non-zero n
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>45</td>
-            <td>41</td>
-            <td>33</td>
-            <td>31</td>
-            <td>38</td>
-            <td></td>
         </tr>
         <tr>
             <td>L0H1</td>
@@ -422,15 +405,6 @@ Part 10E combines this information together into the below summary. A non-zero n
             <td></td>
             <td></td>
             <td></td>
-            <td>6</td>
-            <td>3</td>
-            <td>15</td>
-            <td>3</td>
-            <td>21</td>
-            <td>11</td>
-            <td>4</td>
-            <td>31</td>
-            <td></td>
             <td></td>
         </tr>
         <tr>
@@ -438,218 +412,11 @@ Part 10E combines this information together into the below summary. A non-zero n
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>29</td>
-            <td>22</td>
-            <td>26</td>
-            <td>31</td>
-            <td>24</td>
-            <td>14</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>MLP </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>3</td>
-            <td></td>
-            <td>18</td>
-            <td>18</td>
-            <td>69</td>
-            <td>64</td>
-            <td>61</td>
-            <td>63</td>
-            <td>72</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>L1H0</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>L1H1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>L1H2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>MLP </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>6</td>
-            <td>51</td>
-            <td>59</td>
-            <td>56</td>
-            <td>42</td>
             <td>40</td>
             <td></td>
-        </tr>
-    </tbody>
-</table>
-
-CoLab 10E also shows, for each useful head and MLP layer by step, "digit pattern(s)" of the incorrect answers. If the cell has a trailing "+" then this cell has another (less frequent) incorrect digit pattern. If a cell has one digit pattern then this gives us an insight into which digit the cell most impacts: 
-
-<table>
-    <thead>
-        <tr>
-            <th>Step</th>
-            <th>0</th>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-            <th>4</th>
-            <th>5</th>
-            <th>6</th>
-            <th>7</th>
-            <th>8</th>
-            <th>9</th>
-            <th>10</th>
-            <th>11</th>
-            <th>12</th>
-            <th>13</th>
-            <th>14</th>
-            <th>15</th>
-            <th>16</th>
-            <th>17</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>L0H0</td>
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>yNyyyy=107</td>
-            <td>yyNyyy=99</td>
-            <td>yyyNyy=80</td>
-            <td>yyyyNy=75</td>
-            <td>yyyyyN=90</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>L0H1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>yNyyyy=12</td>
-            <td>yNyyyy=2</td>
-            <td>NNNNyy=12</td>
-            <td>Nyyyyy=7</td>
-            <td>yNyyyy=51</td>
-            <td>yyNyyy=26</td>
-            <td>yyyNyy=9</td>
-            <td>yyyyNy=73</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>L0H2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Nyyyyy=70</td>
-            <td>yNyyyy=53</td>
-            <td>yyNyyy=61</td>
-            <td>yyyNyy=73</td>
-            <td>yyyyNy=57</td>
-            <td>yyyyyN=34</td>
             <td></td>
         </tr>
         <tr>
@@ -662,28 +429,10 @@ CoLab 10E also shows, for each useful head and MLP layer by step, "digit pattern
             <td></td>
             <td></td>
             <td></td>
-            <td>yNyyyy=6</td>
-            <td>yNyyyy=1</td>
-            <td>yyyNyy=20</td>
-            <td>Nyyyyy=43</td>
-            <td>yNyyyy=164</td>
-            <td>yyNyyy=153</td>
-            <td>yyyNyy=146</td>
-            <td>yyyyNy=150</td>
-            <td>yyyyyN=173</td>
             <td></td>
         </tr>
         <tr>
             <td>L1H0</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -705,27 +454,9 @@ CoLab 10E also shows, for each useful head and MLP layer by step, "digit pattern
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
         </tr>
         <tr>
             <td>L1H2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -747,20 +478,131 @@ CoLab 10E also shows, for each useful head and MLP layer by step, "digit pattern
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td>Nyyyyy=15</td>
-            <td>yNyyyy=121</td>
-            <td>yyNyyy=142</td>
-            <td>yyyNyy=133</td>
-            <td>yyyyNy=100</td>
-            <td>yyyyyN=95</td>
-            <td></td>
         </tr>
     </tbody>
 </table>
 
+The 1-layer algorithm uses 24 cells (17 attention heads and 7 MLPs) to do 5-digit addition with 99.5% accuracy.
+The 2-layer algorithm uses 33 cells (19 attention heads and 14 MLPs) to do 5-digit addition with ~100% accuracy.
 
+CoLab 10E also shows, for each useful head and MLP layer by useful step, "digit pattern(s)" of the incorrect answers. 
+If the cell has a trailing "+" then this cell has another (less frequent) incorrect digit pattern. 
+If a cell has one digit pattern then this gives us an insight into which digit the cell most impacts: 
+
+<table>
+    <thead>
+        <tr>
+            <th>Step</th>
+            <th>8</th>
+            <th>9</th>
+            <th>10</th>
+            <th>11</th>
+            <th>12</th>
+            <th>13</th>
+            <th>14</th>
+            <th>15</th>
+            <th>16</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>L0H0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>L0H1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>L0H2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Nyyyyy=4</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>MLP </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>L1H0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>L1H1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>L1H2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>MLP </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
 
 # Which steps+heads impact BA questions?
 
