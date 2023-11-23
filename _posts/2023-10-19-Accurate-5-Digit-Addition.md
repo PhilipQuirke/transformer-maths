@@ -1219,26 +1219,13 @@ Time to start experimenting to get more information!
 
 # Experimentation
 
-## Part 13A: Claim: D3.T1 is calculated at S11.L0.H1 for A5 calculations
-When n_digits = 5, n_layers = 2 and n_heads = 3, we claim D3.T1 is calculated at S11.L0.H1.
+## Part 13A: Claim: D3.T1 is calculated at S11.L0.H1 and S12.L0.H1
+With n_digits = 5, n_layers = 2 and n_heads = 3:
 
-If this claim is correct then when we ablate S11.L0.H1, we expect the A4 and A5 loss to increase if and only if D3+D3' >= 10 
+We claim D3.T1 is calculated at S11.L0.H1 to help calculate A5 and A4. If correct then when ablating S11.L0.H1 should increase the A4 and A5 loss when D3+D3' >= 10. Part 13A finds that A5 loss increases as expected, but A4 loss does not change! So S11.L0.H1 is used to calculate A5 but not used to calculate A4.
 
-By experimentation, we find that A5 loss increases as expected, but A4 loss does not change! So S11.L0.H1 is used to calculate A5 but not used to calculate A4.
+So we claim D3.T1 is also calculated at S12.L0.H1 to help calculate A4. (This would eliminate one of the hypothesis's "not used" heads.) If correct then ablating S12.L0.H1, should increase the A4 loss when D3+D3' >= 10. We find that A4 loss increases but only in 25% of questions. Why 25%? This head is useful for A4 but it is not D3.T1
 
-This might explain S12.L0.H1 which attends to D3+D3' but does not seem necessary. Maybe it also calculates D3.T1 but this time for use in A4 calculations. 
-
-## Part 13B: Claim: D3.T1 is calculated at S12.L0.H1 for A4 calculations
-When n_digits = 5, n_layers = 2 and n_heads = 3, we claim D3.T1 is calculated at S12.L0.H1.
-
-If this claim is correct then when we ablate S12.L0.H1, we expect the A4 loss to increase if and only if D3+D3' >= 10 
-
-By experimentation, we find that ... TBC
-
-This eliminate one of the "not used" heads. TBC
-
-
-  - Possible solution: The model is duplicating functionality?
 
 
 Some notes :
@@ -1248,8 +1235,6 @@ Some notes :
   - Possible solution: Do experiments to test the hypothesis    
 - Possible issue: To get a perfect A5, all the digits have been completed by step 11. Why does the model retain the redundant long staircase BA calculations in step 11 to 16?
   - Possible solution: The model is not optimising for compactness. The long staircase is discovered early and it works for simple questions. Once the overall algorithm gives low loss consistently it stops optimising. 
-
-
 
 # Pulling it all together (TBD)
 TBA
