@@ -254,28 +254,28 @@ CoLab Part 10C does this analysis and produces this output:
     <tbody>
         <tr>
             <td>8</td>
-            <td></td>
+            <td>0</td>
             <td>3</td>
             <td>%SimpleUS9=8, %MC1=3, %CascadeUS9=2, </td>
             <td>yNyyyy=6, NNyyyy=1, </td>
         </tr>
         <tr>
             <td>9</td>
-            <td></td>
+            <td>0</td>
             <td></td>
             <td>%CascadeUS9=2, </td>
             <td>yNyyyy=1, </td>
         </tr>
         <tr>
             <td>10</td>
-            <td></td>
+            <td>0</td>
             <td>18</td>
             <td>%CascadeUS9=51, %SimpleUS9=28, %BA=12, %MC1=5, </td>
             <td>yyyNyy=20, yyNNyy=12, NyNNyy=4, yNNNyy=2, yNNyyy=1, Nyyyyy=1, NyNyyy=1, yyNyyy=1, yNyNyy=1, yNyyyy=1, </td>
         </tr>
         <tr>
             <td>11</td>
-            <td></td>
+            <td>0</td>
             <td>18</td>
             <td>%MC1=25, %CascadeUS9=27, %SimpleUS9=15, </td>
             <td>Nyyyyy=43, </td>
@@ -289,7 +289,7 @@ CoLab Part 10C does this analysis and produces this output:
         </tr>
         <tr>
             <td>12</td>
-            <td></td>
+            <td>0</td>
             <td>69</td>
             <td>%MC1=81, %BA=68, %SimpleUS9=64, %CascadeUS9=44, </td>
             <td>yNyyyy=164, </td>
@@ -303,7 +303,7 @@ CoLab Part 10C does this analysis and produces this output:
         </tr>
         <tr>
             <td>13</td>
-            <td></td>
+            <td>0</td>
             <td>64</td>
             <td>%MC1=80, %BA=80, %SimpleUS9=46, %CascadeUS9=20, </td>
             <td>yyNyyy=153, </td>
@@ -317,7 +317,7 @@ CoLab Part 10C does this analysis and produces this output:
         </tr>
         <tr>
             <td>14</td>
-            <td></td>
+            <td>0</td>
             <td>61</td>
             <td>%MC1=72, %BA=77, %SimpleUS9=51, %CascadeUS9=22, </td>
             <td>yyyNyy=146, </td>
@@ -331,7 +331,7 @@ CoLab Part 10C does this analysis and produces this output:
         </tr>
         <tr>
             <td>15</td>
-            <td></td>
+            <td>0</td>
             <td>63</td>
             <td>%MC1=83, %BA=71, %SimpleUS9=36, %CascadeUS9=24, </td>
             <td>yyyyNy=150, </td>
@@ -345,7 +345,7 @@ CoLab Part 10C does this analysis and produces this output:
         </tr>
         <tr>
             <td>16</td>
-            <td></td>
+            <td>0</td>
             <td>72</td>
             <td>%MC1=81, %BA=84, %SimpleUS9=74, %CascadeUS9=34, </td>
             <td>yyyyyN=173, </td>
