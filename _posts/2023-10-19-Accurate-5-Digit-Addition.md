@@ -87,7 +87,7 @@ We can do this analysis, before we understand the **how** the model is generatin
 Most models don't use all their steps, attention heads and MLP layers to generate an answers. 
 This diagram shows what parts the model is using in integer addition (for n_layers = 2, n_heads = 3, n_digits = 5): 
 
-<img src="{{site.url}}/assets/StaircaseA3L2H3_Part1.svg" style="display: block; margin: auto;" />
+<img src="{{site.url}}/assets/StaircaseA5L2H3_Part1.svg" style="display: block; margin: auto;" />
 
 The diagram is constructed for information gathering in a few steps. We'll describe the steps shortly, but some initial notes:
 - A cell containing an X is not used to generate an answer 
@@ -1212,7 +1212,7 @@ They are theoretically unnecessary, but the model does depend on them.
 Obviously our hypothesis is not 100% right, but we have shown a hypothetical way to calculate A5 and A4 in time.
 Ignoring "not used" cells for now, modifying the first diagram, we can show our hypothesis diagramatically:
 
-<img src="{{site.url}}/assets/StaircaseA3L2H3_Part2.svg" style="display: block; margin: auto;" />
+<img src="{{site.url}}/assets/StaircaseA5L2H3_Part2.svg" style="display: block; margin: auto;" />
 
 Time to start experimenting to get more information!
 
@@ -1224,7 +1224,7 @@ When n_digits = 5, n_layers = 2 and n_heads = 3, we claim D3.T1 is calculated at
 
 If this claim is correct then when we ablate S11.L0.H1, we expect the A4 and A5 loss to increase if and only if D3+D3' >= 10 
 
-By experimentation, we find that A5 loss increases as expected, but A4 loss does not change. So S11.L0.H1 is used to calculate A5 but not used to calculate A4.
+By experimentation, we find that A5 loss increases as expected, but A4 loss does not change! So S11.L0.H1 is used to calculate A5 but not used to calculate A4.
 
 This might explain S12.L0.H1 which attends to D3+D3' but does not seem necessary. Maybe it also calculates D3.T1 but this time for use in A4 calculations. 
 
