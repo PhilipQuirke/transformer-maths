@@ -1367,22 +1367,37 @@ Ignoring this gap in our undersstadning for now, we further hypothesise this is 
 In step 12, there are another 2 heads and 1 MLP layer that are not understood. 
 They are theoretically unnecessary, but the model does depend on them. 
 
-
-
-PQR 
-
 Obviously our hypothesis is not 100% right, but we have shown a hypothetical way to calculate A5 and A4 in time.
-Perhaps the model is duplicating the same functionality in multiple headsor MLP layers? 
+Ignoring "not used" cells for now, modifying the first diagram, we can show our hypothesis diagramatically:
+
+<img src="{{site.url}}/assets/StaircaseA3L2H3_Part2.svg" style="display: block; margin: auto;" />
+
+Time to start experimenting to get more information!
 
 
+# Experimentation
+
+## Part 13A: Claim: D3.T1 is calculated at S11.L0.H1 for A5 calculations
+When n_digits = 5, n_layers = 2 and n_heads = 3, we claim D3.T1 is calculated at S11.L0.H1.
+
+If this claim is correct then when we ablate S11.L0.H1, we expect the A4 and A5 loss to increase if and only if D3+D3' >= 10 
+
+By experimentation, we find that A5 loss increases as expected, but A4 loss does not change. So S11.L0.H1 is used to calculate A5 but not used to calculate A4.
+
+This might explain S12.L0.H1 which attends to D3+D3' but does not seem necessary. Maybe it also calculates D3.T1 but this time for use in A4 calculations. 
+
+## Part 13B: Claim: D3.T1 is calculated at S12.L0.H1 for A4 calculations
+When n_digits = 5, n_layers = 2 and n_heads = 3, we claim D3.T1 is calculated at S12.L0.H1.
+
+If this claim is correct then when we ablate S12.L0.H1, we expect the A4 loss to increase if and only if D3+D3' >= 10 
+
+By experimentation, we find that ... TBC
+
+This eliminate one of the "not used" heads. TBC
 
 
   - Possible solution: The model is duplicating functionality?
 
-
-Even ignoring "not understood" cells, A5 and A4 are calculated with perfect accuracy in time. Modifying the first diagram, we can show this hypothesis diagramatically:
-
-<img src="{{site.url}}/assets/StaircaseA3L2H3_Part2.svg" style="display: block; margin: auto;" />
 
 Some notes :
 - Possible issue: There are 2 heads and 1 MLP layer in S12 that are not understood - They are theoretically unnecessary, but the model does depend on them
@@ -1392,8 +1407,6 @@ Some notes :
 - Possible issue: To get a perfect A5, all the digits have been completed by step 11. Why does the model retain the redundant long staircase BA calculations in step 11 to 16?
   - Possible solution: The model is not optimising for compactness. The long staircase is discovered early and it works for simple questions. Once the overall algorithm gives low loss consistently it stops optimising. 
 
-## Testing the hypothesis 
-CoLab part 15A onwards tests the hypothesis and shows...
 
 
 # Pulling it all together (TBD)
