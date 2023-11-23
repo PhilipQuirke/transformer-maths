@@ -389,22 +389,22 @@ the model produces this percentage of bad answers (and so the cell is necessary 
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>45</td>
+            <td>41</td>
+            <td>33</td>
+            <td>31</td>
+            <td>38</td>
         </tr>
         <tr>
             <td>L0H1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>6</td>
+            <td>3</td>
+            <td>15</td>
+            <td>3</td>
+            <td>21</td>
+            <td>11</td>
+            <td>4</td>
+            <td>31</td>
             <td></td>
         </tr>
         <tr>
@@ -412,24 +412,24 @@ the model produces this percentage of bad answers (and so the cell is necessary 
             <td></td>
             <td></td>
             <td></td>
-            <td>40</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>29</td>
+            <td>22</td>
+            <td>26</td>
+            <td>31</td>
+            <td>24</td>
+            <td>14</td>
         </tr>
         <tr>
             <td>MLP </td>
+            <td>3</td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>18</td>
+            <td>18</td>
+            <td>69</td>
+            <td>64</td>
+            <td>61</td>
+            <td>63</td>
+            <td>72</td>
         </tr>
         <tr>
             <td>L1H0</td>
@@ -472,12 +472,12 @@ the model produces this percentage of bad answers (and so the cell is necessary 
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>6</td>
+            <td>51</td>
+            <td>59</td>
+            <td>56</td>
+            <td>42</td>
+            <td>40</td>
         </tr>
     </tbody>
 </table>
@@ -511,22 +511,22 @@ If a cell has one digit pattern then this gives us an insight into which digit t
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>yNyyyy=107</td>
+            <td>yyNyyy=99</td>
+            <td>yyyNyy=80</td>
+            <td>yyyyNy=75</td>
+            <td>yyyyyN=90</td>
         </tr>
         <tr>
             <td>L0H1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>yNyyyy=12, +, +</td>
+            <td>yNyyyy=2, +, +, +</td>
+            <td>NNNNyy=12, +, +, +</td>
+            <td>Nyyyyy=7</td>
+            <td>yNyyyy=51</td>
+            <td>yyNyyy=26</td>
+            <td>yyyNyy=9</td>
+            <td>yyyyNy=73</td>
             <td></td>
         </tr>
         <tr>
@@ -534,24 +534,24 @@ If a cell has one digit pattern then this gives us an insight into which digit t
             <td></td>
             <td></td>
             <td></td>
-            <td>Nyyyyy=4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Nyyyyy=70</td>
+            <td>yNyyyy=53</td>
+            <td>yyNyyy=61</td>
+            <td>yyyNyy=73</td>
+            <td>yyyyNy=57</td>
+            <td>yyyyyN=34</td>
         </tr>
         <tr>
             <td>MLP </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>yNyyyy=6, +</td>
+            <td>yNyyyy=1</td>
+            <td>yyyNyy=20, +, +, +, +, +, +, +, +, +</td>
+            <td>Nyyyyy=43</td>
+            <td>yNyyyy=164</td>
+            <td>yyNyyy=153</td>
+            <td>yyyNyy=146</td>
+            <td>yyyyNy=150</td>
+            <td>yyyyyN=173</td>
         </tr>
         <tr>
             <td>L1H0</td>
@@ -594,12 +594,12 @@ If a cell has one digit pattern then this gives us an insight into which digit t
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Nyyyyy=15</td>
+            <td>yNyyyy=121</td>
+            <td>yyNyyy=142</td>
+            <td>yyyNyy=133</td>
+            <td>yyyyNy=100</td>
+            <td>yyyyyN=95</td>
         </tr>
     </tbody>
 </table>
