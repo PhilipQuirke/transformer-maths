@@ -1110,7 +1110,7 @@ The answer digit A5 seems like a good place to focus our efforts:
 ## Hypothesis
 using the above information, we now seek to understand the detail of how the 2-layer algorithm is implemented.
 
-# What didn’t work
+# Hypothesis 1
 Given the 2 layer attention pattern’s similarity to 1 layer pattern, and the above evidence, our first hypothesis was that the 2 layer algorithm:
 - Is based on the same BaseAdd (BA), MakeCarry1 (MC) and UseSum9 (US) operations as the 1 layer.
 - Uses the new early steps to (somehow) do the US9 calculations with higher accuracy than the 1 layer model.
@@ -1128,14 +1128,14 @@ If this is correct then the 2 layer algorithm successfully completes these calcu
 Our intuition is that there are not enough useful heads+steps and heads+MLPs in steps 8 to 11 to complete the A5 calculation this way. So we abandoned this hypothesis.
 
 
-# What did work
+# Hypothesis 2
 Our second hypothesis was that the 2 layer algorithm:
 
 - Has a **more compact** data representation. That is, it does not store BA, MC and US data as separate datums.
 - Can pack more calculations into each head+layer and head+MLP in steps 8 to 11, allowing it to calculate A5 by step 11.
 - Has a data representation that allows re-use of some A5 sub-calculations in the A4-calculation, allowing it to calculate A4 by step 12. 
 
-Our novel claim is that the model stores the sum of each digit pair as a single token in the range “0” to “18” (covering 0+0 to 9+9). We name this operator Dn.T1, where T stands for “token addition”, and the 1 will be explained later:
+Our claim is that the model stores the sum of each digit pair as a single token in the range “0” to “18” (covering 0+0 to 9+9). We name this operator Dn.T1, where T stands for “token addition”, and the 1 will be explained later:
 
 - Dn.T1 = Dn + Dn’
 
@@ -1155,7 +1155,7 @@ The D0.T1 value is perfectly accurate. But the other Dn.T1 values are **not** pe
 
 - Dn.T2 = Dn.T1 + ( Dn-1.T1 // 10 )
 
-Dn.T2 is more accurate than DnT1. The Dn.T2 value is always in the range “0” to “19” (covering 0+0+0 to 9+9+MakeCarry1). The model can implement the T2 operator as a bigram mapping from 2 input tokens to 1 result token e.g. “12” + “1” = “13”. There are 38 distinct mappings: 
+Dn.T2 is more accurate than Dn.T1. The Dn.T2 value is always in the range “0” to “19” (covering 0+0+0 to 9+9+MakeCarry1). The model can implement the T2 operator as a bigram mapping from 2 input tokens to 1 result token e.g. “12” + “1” = “13”. There are 38 distinct mappings: 
 
 <img src="{{site.url}}/assets/Addition_T2Mappings.png" style="display: block; margin: auto;" />
 
@@ -1165,7 +1165,6 @@ We define operators Dn.T3, Dn.T4 & Dn.T5 each with higher accuracy:
 - Dn.T4 = Dn.T1 + ( Dn-1.T3 // 10 )	Four-digit accuracy
 - Dn.T5 = Dn.T1 + ( Dn-1.T4 // 10 )	Five-digit accuracy
 
-A DnTm value is perfectly accurate if it 
 The value D4.T5 is perfectly accurate as it integrates MC1 and cascading MS9 data all the way back to and including D0.T1. The values D1.T2, D2.T3, D3.T4 are also all perfectly accurate. If the model knows these values it can calculate answer digits with perfect accuracy:
 
 - A1 = D1.T2 % 10 with zero loss
@@ -1184,6 +1183,7 @@ Applying this mathematical framework within the constraints of the above "What m
   - L0.MLP: A4 impact: Not used
 - Step 9
   - L0.H1: D1 attention: Calculate D1:T1 = D1 + D1’
+  - L0.MLP: A4 impact: Not used
 - Step 10
   - L0.H1: D0 attention: Calculate D1.T2 = D1.T1 + (D0 + D0’) // 10. Perfectly accurate.
   - L0.MLP: A2 .. A5 impact: Calculate D2.T3 = D2.T1 + D1.T2 // 10. Perfectly accurate. 
@@ -1197,7 +1197,7 @@ The calculation by S11.MLP of D4.T5 // 10 = (D4.T1 + D3.MC) // 10 seems complex.
 The D4.T1 and D3.MC values are in the residual stream. This is a bigram which the MLP can do.
 
 There is a MLP layer in S8 that is not understood. It is theoretically unnecessary, but the model does depend on it. 
-Ignoring this gap in our undersstadning for now, we further hypothesise this is how the model calculates A4 by step 12:
+Ignoring this gap in our understanding for now, we further hypothesise this is how the model calculates A4 by step 12:
 
 - Step 12:
   - L0.H0: D4 attention: Calculate D4.T5 = D4.T1 + D3.T4 // 10. Perfectly accurate.
@@ -1213,6 +1213,94 @@ Obviously our hypothesis is not 100% right, but we have shown a hypothetical way
 Ignoring "not used" cells for now, modifying the first diagram, we can show our hypothesis diagramatically:
 
 <img src="{{site.url}}/assets/StaircaseA5L2H3_Part2.svg" style="display: block; margin: auto;" />
+
+In this hypothesis, all the answer digits have been perfectly calculated by step 11. 
+So why does the model retain the redundant long staircase BA calculations in step 11 to 16? It could just read the results from the work done in steps 8 to 11. Two options:
+- The model is not optimising for compactness. The long staircase is discovered early and it works for simple questions. Once the overall algorithm gives low loss consistently it stops optimising.
+- The model is not doing all the calcuations for all digits by step 11. Why should it? Maybe Hypothesis 2 is too ambitious and the model does less by step 11.
+
+
+# Hypothesis 3
+If Hypothesis 1 was too cold, and Hypothesis 2 was too hot, then maybe Hypothesis 3 will be just right:
+
+The model's data model is more compact than Hypothesis 1 but less than Hypothesis 2. In early steps the model does just enough to correctly produce A4 and A5.
+
+Our claim is that in steps 8 to 11 the model stores the sum of each digit pair as a tri-state variable. We name this operator Dn.C1, where C stands for “case”, and the 1 stands for 1 digit acurracy:
+
+- Dn.C1 takes value: 
+    - 8 when sum of Dn and Dn' is 0 to 8
+    - 9 when sum of Dn and Dn' is exactly 9
+    - 10 when sum of Dn and Dn' is 10 to 18
+
+The model implements the C1 operator as a bigram mapping from 2 input tokens to 1 result token e.g. “8” + “7” = “10”. There are 100 distinct mappings
+
+If it needs to, the model can implement a bigram mapping to convert a C1 value into a MC or MS (but not a BA) value. Our notation shorthand for these "conversion" bigram mappings is:
+
+- Dn.MC = (Dn.C1 == 10)
+- Dn.MS = (Dn.C1 == 9)
+
+We define another more accurate operator Dn.C2 that has “two-digit accuracy”. Dn.C2 is calculated from Dn.C1 and Dn-1.C1 as follows:
+
+<table>
+    <thead>
+        <tr>
+            <th>Dn.C2</th>
+            <th>Dn.C1</th>
+            <th>Dn-1.C1</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>8</td>
+            <td>8</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>8</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>8</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>8</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>9</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>10</td>
+            <td>10</td>
+        </tr>
+    </tbody>
+</table>
+
+Dn.C2 is more accurate than Dn.C1. The model can implement the C2 operator as a bigram mapping from 2 input tokens to 1 result token. There are 7 distinct mappings 
+
+We define operators Dn.C3, Dn.C4 & Dn.C5 each with higher accuracy:
+
+- Dn.C3 = fn( Dn.C1, Dn-1.C2 )	Three-digit accuracy
+- Dn.C4 = fn( Dn.C1, Dn-1.C3 )	Four-digit accuracy
+- Dn.C5 = fn( Dn.C1, Dn-1.C4 )	Five-digit accuracy
+
+where "fn" is the same tri-state mapping function used to calculate Dn.C2.
+
+The values D4.C5 and D3.C4 are perfectly accurate as they integrate MC and cascading MS data all the way back to and including D0.C1. If the model knows these values it can calculate the following answer digits with perfect accuracy:
+
+- A4 = ( D4.BA + D3.C4 ) with zero loss
+- A5 = ( D4.C5 == 10 ) with zero loss
+
+
+
+
 
 Time to start experimenting to get more information!
 
