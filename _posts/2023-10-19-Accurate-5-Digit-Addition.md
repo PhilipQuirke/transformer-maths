@@ -1182,7 +1182,7 @@ Applying this mathematical framework within the constraints of the above "What m
   - L0.H1: D2 attention: Calculate D2.T1 = D2 + D2’
   - L0.MLP: A4 impact: Not used
 - Step 9
-  - L0.H1: D1 attention: Calculate D1:T1 = D1 + D1’
+  - L0.H1: D1 attention: Calculate D1.T1 = D1 + D1’
   - L0.MLP: A4 impact: Not used
 - Step 10
   - L0.H1: D0 attention: Calculate D1.T2 = D1.T1 + (D0 + D0’) // 10. Perfectly accurate.
@@ -1225,12 +1225,13 @@ If Hypothesis 1 was too cold, and Hypothesis 2 was too hot, then maybe Hypothesi
 
 The model's data model is more compact than Hypothesis 1 but less than Hypothesis 2. In early steps the model does just enough to correctly produce A4 and A5.
 
-Our claim is that in steps 8 to 11 the model stores the sum of each digit pair as a tri-state variable. We name this operator Dn.C1, where C stands for “case”, and the 1 stands for 1 digit acurracy:
+Our claim is that in steps 8 to 11 the model stores the sum of each digit pair as a tri-state variable. 
+We name this operator Dn.C1, where C stands for “case”, and the 1 stands for 1 digit acurracy
 
-- Dn.C1 takes value: 
-    - 8 when sum of Dn and Dn' is 0 to 8
-    - 9 when sum of Dn and Dn' is exactly 9
-    - 10 when sum of Dn and Dn' is 10 to 18
+- Dn.C1 is calculated using a function TriState( Dn, Dn' ) defined as:
+    - when Dn + Dn' is 0 to 8 => 8
+    - when Dn + Dn' is exactly 9 => 9
+    - when Dn + Dn' is 10 to 18 => 10
 
 The model implements the C1 operator as a bigram mapping from 2 input tokens to 1 result token e.g. “8” + “7” = “10”. There are 100 distinct mappings
 
@@ -1239,7 +1240,8 @@ If it needs to, the model can implement a bigram mapping to convert a C1 value i
 - Dn.MC = (Dn.C1 == 10)
 - Dn.MS = (Dn.C1 == 9)
 
-We define another more accurate operator Dn.C2 that has “two-digit accuracy”. Dn.C2 is calculated from Dn.C1 and Dn-1.C1 as follows:
+We define another more accurate operator Dn.C2 that has “two-digit accuracy”. 
+Dn.C2 is calculated using a function TriSum( Dn.C1, Dn-1.C1 ) defined as:
 
 <table>
     <thead>
@@ -1287,16 +1289,34 @@ Dn.C2 is more accurate than Dn.C1. The model can implement the C2 operator as a 
 
 We define operators Dn.C3, Dn.C4 & Dn.C5 each with higher accuracy:
 
-- Dn.C3 = fn( Dn.C1, Dn-1.C2 )	Three-digit accuracy
-- Dn.C4 = fn( Dn.C1, Dn-1.C3 )	Four-digit accuracy
-- Dn.C5 = fn( Dn.C1, Dn-1.C4 )	Five-digit accuracy
+- Dn.C3 = TriSum( Dn.C1, Dn-1.C2 )	Three-digit accuracy
+- Dn.C4 = TriSum( Dn.C1, Dn-1.C3 )	Four-digit accuracy
+- Dn.C5 = TriSum( Dn.C1, Dn-1.C4 )	Five-digit accuracy
 
-where "fn" is the same tri-state mapping function used to calculate Dn.C2.
+The values D4.C5, D3.C4, D2.C3 and D1.C2 are perfectly accurate as they integrate MC and cascading MS data all the way back to and including D0.C1. 
+The model can uses these value to calculate perfectly accurate answer digits:
 
-The values D4.C5 and D3.C4 are perfectly accurate as they integrate MC and cascading MS data all the way back to and including D0.C1. If the model knows these values it can calculate the following answer digits with perfect accuracy:
+- A4 = ( D4.BA + D3.C4 ) % 10 
+- A5 = ( D4.C5 == 10 )
 
-- A4 = ( D4.BA + D3.C4 ) with zero loss
-- A5 = ( D4.C5 == 10 ) with zero loss
+Applying this mathematical framework within the constraints of the above "What model parts are doing useful calculations" diagram, we hypothesise this is how the model calculates A5 by step 11:
+
+- Step 8:
+  - L0.H1: D2 attention: Calculate D2.C1 = TriState(D2, D2’)
+  - L0.MLP: A4 impact: Not used
+- Step 9
+  - L0.H1: D1 attention: Calculate D1.C1 = TriState(D1, D1')
+  - L0.MLP: A4 impact: Not used
+- Step 10
+  - L0.H1: D0 attention: Calculate D1.C1 = TriState(D0, D0’) 
+  - L0.MLP: A2 .. A5 impact: Calculate D2.C3 = TriSum(D2.C1, TriSum(D1.C1, D0.C1)). Trigram mapping. Perfectly accurate. 
+- Step 11:
+  - L0.H1: D3 attention: Calculate D3.C1 = TriState(D3, D3’)
+  - L0.H2: D4 attention: Calculate D4.C1 = TriState(D4, D4’)
+  - L0.MLP: A5 impact: Calculate D4.C5 = TriSum(D4.C1, TriSum(D3.C1, D2.C3)).
+  - L1.MLP: A5 impact: Calculate A5 = ( D4.C5 == 10 ). Perfectly accurate A5.
+ 
+
 
 
 
