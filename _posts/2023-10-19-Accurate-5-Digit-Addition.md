@@ -9,7 +9,7 @@ The <a href="{{site.url}}/2023/10/14/Understanding-Addition.html">previous post<
 
 <img src="{{site.url}}/assets/AdditionQuestionAnswer.svg" style="display: block; margin: auto;" />
 
-It summarised the model's addition algorithm like this and stated it could solve > 99.5% of integer addition questions:
+It summarised the model's addition algorithm like this, showing it could solve > 99.5% of integer addition questions:
 
 <img src="{{site.url}}/assets/StaircaseA3_Summary.svg" style="display: block; margin: auto;" />
 
@@ -122,7 +122,7 @@ CoLab Part 10B does this analysis and produces the below output. Note that an en
     </thead>
     <tbody>
         <tr>
-            <td></td>
+            <td>0</td>
             <td></td>
             <td></td>
             <td></td>
@@ -361,10 +361,10 @@ CoLab Part 10C does this analysis and produces this output:
 </table>
 
 # Which steps+heads/MLPs impact which answer digits summarised?
-Previously we look at which entire steps (e.g. step 14) were useful by ablating **all** heads in a step. 
-For a step we know is useful, we can ablate one head at a time and find out whether each head is useful. CoLab Part10D does this analysis 
-
-CoLab 10E brings the above information together into a summary of useful heads and MLP layers by step. A non-zero number means that when the cell is ablated, the model produces this percentange of bad answers (and so the cell is necessary for accurate answers.) 
+CoLan Part 10B works out which steps are used in the models calculations 
+For each useful step, CoLab Part 10D ablates one attention head at a time and find out whether each head is useful.
+Part 10C does the same for each MLPlayer in each useful step.
+Part 10E combines this information together into the below summary. A non-zero number means that when the cell is ablated, the model produces this percentange of bad answers (and so the cell is necessary for accurate answers.) 
 
 <table>
     <thead>
