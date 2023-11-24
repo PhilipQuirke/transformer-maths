@@ -1217,12 +1217,12 @@ Ignoring "not used" cells for now, modifying the first diagram, we can show our 
 In this hypothesis, all the answer digits have been perfectly calculated by step 11. 
 So why does the model retain the redundant long staircase BA calculations in step 11 to 16? It could just read the results from the work done in steps 8 to 11. Two options:
 - The model is not optimising for compactness. The long staircase is discovered early and it works for simple questions. Once the overall algorithm gives low loss consistently it stops optimising.
-- The model is not doing all the calcuations for all digits by step 11. Why should it? Maybe Hypothesis 2 is too ambitious and the model does less by step 11.
+- The model is not doing all the calcuations for all digits by step 11. Why should it? Maybe Hypothesis 2 requires too much co-ordination between cells and the model actually achieves less by step 11.
 
 Time to start experimenting to get more information!
 
 
-# Experimentation 1
+# Experimentation 2
 
 ## Part 13A: Claim: D3.T1 is calculated at S11.L0.H1 and S12.L0.H1
 With n_digits = 5, n_layers = 2 and n_heads = 3:
@@ -1242,7 +1242,7 @@ The model's data model is more compact than Hypothesis 1 but less than Hypothesi
 Our claim is that in steps 8 to 11 the model stores the sum of each digit pair as a tri-state variable. 
 We name this operator Dn.C1, where C stands for “case”, and the 1 stands for 1 digit acurracy
 
-- Dn.C1 is calculated using a function TriState( Dn, Dn' ) defined as:
+- Dn.C1 is calculated using a function TriCase( Dn, Dn' ) defined as:
     - when Dn + Dn' is 0 to 8 => 8
     - when Dn + Dn' is exactly 9 => 9
     - when Dn + Dn' is 10 to 18 => 10
@@ -1255,7 +1255,7 @@ If it needs to, the model can implement a bigram mapping to convert a C1 value i
 - Dn.MS = (Dn.C1 == 9)
 
 We define another more accurate operator Dn.C2 that has “two-digit accuracy”. 
-Dn.C2 is calculated using a function TriSum( Dn.C1, Dn-1.C1 ) defined as:
+Dn.C2 is calculated using a function TriAdd( Dn.C1, Dn-1.C1 ) defined as:
 
 <table>
     <thead>
@@ -1303,9 +1303,9 @@ Dn.C2 is more accurate than Dn.C1. The model can implement the C2 operator as a 
 
 We define operators Dn.C3, Dn.C4 & Dn.C5 each with higher accuracy:
 
-- Dn.C3 = TriSum( Dn.C1, Dn-1.C2 )	Three-digit accuracy
-- Dn.C4 = TriSum( Dn.C1, Dn-1.C3 )	Four-digit accuracy
-- Dn.C5 = TriSum( Dn.C1, Dn-1.C4 )	Five-digit accuracy
+- Dn.C3 = TriAdd( Dn.C1, Dn-1.C2 )	Three-digit accuracy
+- Dn.C4 = TriAdd( Dn.C1, Dn-1.C3 )	Four-digit accuracy
+- Dn.C5 = TriAdd( Dn.C1, Dn-1.C4 )	Five-digit accuracy
 
 The values D4.C5, D3.C4, D2.C3 and D1.C2 are perfectly accurate as they integrate MC and cascading MS data all the way back to and including D0.C1. 
 The model can uses these value to calculate perfectly accurate answer digits:
@@ -1316,18 +1316,18 @@ The model can uses these value to calculate perfectly accurate answer digits:
 Applying this mathematical framework within the constraints of the above "What model parts are doing useful calculations" diagram, we hypothesise this is how the model calculates A5 by step 11:
 
 - Step 8:
-  - L0.H1: D2 attention: Calculate D2.C1 = TriState(D2, D2’)
-  - L0.MLP: A4 impact: Not used
+  - L0.H1: D2 attention: Calculate D2.C1 = TriCase(D2, D2’)
+  - L0.MLP: A4 & A5 impact: Not used
 - Step 9
-  - L0.H1: D1 attention: Calculate D1.C1 = TriState(D1, D1')
+  - L0.H1: D1 attention: Calculate D1.C1 = TriCase(D1, D1')
   - L0.MLP: A4 impact: Not used
 - Step 10
-  - L0.H1: D0 attention: Calculate D1.C1 = TriState(D0, D0’) 
-  - L0.MLP: A2 .. A5 impact: Calculate D2.C3 = TriSum(D2.C1, TriSum(D1.C1, D0.C1)). Trigram mapping. Perfectly accurate. 
+  - L0.H1: D0 attention: Calculate D0.C1 = TriCase(D0, D0’) 
+  - L0.MLP: A2 .. A5 impact: Calculate D2.C3 = TriAdd(D2.C1, TriAdd(D1.C1, D0.C1)). Trigram mapping. Perfectly accurate. 
 - Step 11:
-  - L0.H1: D3 attention: Calculate D3.C1 = TriState(D3, D3’)
-  - L0.H2: D4 attention: Calculate D4.C1 = TriState(D4, D4’)
-  - L0.MLP: A5 impact: Calculate D4.C5 = TriSum(D4.C1, TriSum(D3.C1, D2.C3)).
+  - L0.H1: D3 attention: Calculate D3.C1 = TriCase(D3, D3’)
+  - L0.H2: D4 attention: Calculate D4.C1 = TriCase(D4, D4’)
+  - L0.MLP: A5 impact: Calculate D4.C5 = TriAdd(D4.C1, TriAdd(D3.C1, D2.C3)).
   - L1.MLP: A5 impact: Calculate A5 = ( D4.C5 == 10 ). Perfectly accurate.
 
 There are MLP layers in S8 and S9 that are not understood. It is theoretically unnecessary, but the model does depend on it. 
@@ -1335,28 +1335,38 @@ Ignoring this gap in our understanding for now, we further hypothesise this is h
 
 - Step 12:
   - L0.H0: D4 attention: Calculate D4.BA = (D4 + D4') % 10. 
-  - L0.H1: D3 attention: Not used
-  - L0.H2: D4 attention: Not used
-  - L0.MLP: A4 impact: Calculate D3.C4 = TriSum(D3.C1, D2.C3). Perfectly accurate
+  - L0.H1: D3 attention: Calculate D3.C1 = TriCase(D3, D3’). Duplicate of S11.L0.H1 
+  - L0.H2: D4 attention: Not used. Could be duplicate of L0.H0
+  - L0.MLP: A4 impact: Calculate D3.C4 = TriAdd(D3.C1, D2.C3). Relies on D2.C3 from S10.L0.MLP. Perfectly accurate
   - L1.MLP: A4 impact: Calculate A4 = (D4.BA + D3.C4) % 10. Perfectly accurate.
 
+Hypothesis 3 has 2 unexplained MLP cells and maybe 1 unused Head.
 
 <img src="{{site.url}}/assets/StaircaseA5L2H3_PartC.svg" style="display: block; margin: auto;" />
 
 Time to start experimenting to get more information!
 
+# Experimentation 3
 
-# Experimentation 2
+Hypothesis has these testable claims:
 
+- S12.L0.H1 is a duplicate of S11.L0.H1. So A4 accuracy does not depends on S11.L0.H1. This is proved true by experiment.
+
+- S12.L0.MLP relies on S10.L0.MLP. So A4 accuracy depends on S10.L0.MLP and so also on S8.L0.H1, S9.L0.H1, S10.L0.H1. This is proved true by experiment.
+
+- Is S12.L0.H2 a duplicate of S12.L0.H0? Is impact of ablating S12.L0.H0 and S12.L0.H2 the same? Part 10D shows:
++------+-------+------+---------+--------------------------------------------------+--------------------------------------------+
+| Step | Layer | Head | % Fails |                 % Fails by Case                  |            # Fails by Patterns             |
++------+-------+------+---------+--------------------------------------------------+--------------------------------------------+
+|  12  |   0   |  0   |    45   | %MC1=40, %BA=46, %CascadeUS9=56, %SimpleUS9=44,  |                yNyyyy=107,                 |
+|  12  |   0   |  2   |    22   |     %MC1=46, %SimpleUS9=13, %CascadeUS9=2,       |                yNyyyy=53,                  |
+So they are not the same as H0 has an impact on BA 
 
 
 Some notes :
-- Possible issue: There are 2 heads and 1 MLP layer in S12 that are not understood - They are theoretically unnecessary, but the model does depend on them
-  - Possible solution: The model is duplicating functionality?
 - Possible issue: Are there other ways to formulate the mathematical framework or different ways to map the framework to the calculation cells?
   - Possible solution: Do experiments to test the hypothesis    
-- Possible issue: To get a perfect A5, all the digits have been completed by step 11. Why does the model retain the redundant long staircase BA calculations in step 11 to 16?
-  - Possible solution: The model is not optimising for compactness. The long staircase is discovered early and it works for simple questions. Once the overall algorithm gives low loss consistently it stops optimising. 
+
 
 # Pulling it all together (TBD)
 TBA
