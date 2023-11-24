@@ -622,7 +622,7 @@ If we ablate each head in each step but only test BA questions, we gain insights
     <tbody>
         <tr>
             <td>9</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>5</td>
             <td>%BA=5, </td>
@@ -630,23 +630,23 @@ If we ablate each head in each step but only test BA questions, we gain insights
         </tr>
         <tr>
             <td>12</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>37</td>
             <td>%BA=37, </td>
             <td>yNyyyy=7, </td>
         </tr>
         <tr>
             <td>13</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>21</td>
             <td>%BA=21, </td>
             <td>yyNyyy=4, </td>
         </tr>
         <tr>
             <td>13</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>5</td>
             <td>%BA=5, </td>
@@ -654,15 +654,15 @@ If we ablate each head in each step but only test BA questions, we gain insights
         </tr>
         <tr>
             <td>14</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>26</td>
             <td>%BA=26, </td>
             <td>yyyNyy=5, </td>
         </tr>
         <tr>
             <td>14</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>11</td>
             <td>%BA=11, </td>
@@ -670,15 +670,15 @@ If we ablate each head in each step but only test BA questions, we gain insights
         </tr>
         <tr>
             <td>15</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>47</td>
             <td>%BA=47, </td>
             <td>yyyyNy=9, </td>
         </tr>
         <tr>
             <td>15</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>11</td>
             <td>%BA=11, </td>
@@ -686,8 +686,8 @@ If we ablate each head in each step but only test BA questions, we gain insights
         </tr>
         <tr>
             <td>16</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>42</td>
             <td>%BA=42, </td>
             <td>yyyyyN=8, </td>
@@ -712,7 +712,7 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
     <tbody>
         <tr>
             <td>11</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>42</td>
             <td>%MC1=42, </td>
@@ -720,15 +720,15 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>12</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>84</td>
             <td>%MC1=84, </td>
             <td>yNyyyy=16, </td>
         </tr>
         <tr>
             <td>12</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>26</td>
             <td>%MC1=26, </td>
@@ -736,7 +736,7 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>12</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>32</td>
             <td>%MC1=32, </td>
@@ -744,15 +744,15 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>13</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>74</td>
             <td>%MC1=74, </td>
             <td>yyNyyy=14, </td>
         </tr>
         <tr>
             <td>13</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>5</td>
             <td>%MC1=5, </td>
@@ -760,7 +760,7 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>13</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>58</td>
             <td>%MC1=58, </td>
@@ -768,15 +768,15 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>14</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>37</td>
             <td>%MC1=37, </td>
             <td>yyyNyy=7, </td>
         </tr>
         <tr>
             <td>14</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>5</td>
             <td>%MC1=5, </td>
@@ -784,7 +784,7 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>14</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>16</td>
             <td>%MC1=16, </td>
@@ -792,15 +792,15 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>15</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>63</td>
             <td>%MC1=63, </td>
             <td>yyyyNy=12, </td>
         </tr>
         <tr>
             <td>15</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>42</td>
             <td>%MC1=42, </td>
@@ -808,7 +808,7 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>15</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>5</td>
             <td>%MC1=5, </td>
@@ -816,15 +816,15 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
         </tr>
         <tr>
             <td>16</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>68</td>
             <td>%MC1=68, </td>
             <td>yyyyyN=13, </td>
         </tr>
         <tr>
             <td>16</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>11</td>
             <td>%MC1=11, </td>
@@ -850,7 +850,7 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
     <tbody>
         <tr>
             <td>8</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>33</td>
             <td>%SimpleUS9=33, </td>
@@ -858,7 +858,7 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>10</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>39</td>
             <td>%SimpleUS9=39, </td>
@@ -866,7 +866,7 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>11</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>6</td>
             <td>%SimpleUS9=6, </td>
@@ -874,7 +874,7 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>11</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>33</td>
             <td>%SimpleUS9=33, </td>
@@ -882,15 +882,15 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>12</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>78</td>
             <td>%SimpleUS9=78, </td>
             <td>yNyyyy=14, </td>
         </tr>
         <tr>
             <td>12</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>67</td>
             <td>%SimpleUS9=67, </td>
@@ -898,15 +898,15 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>13</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>61</td>
             <td>%SimpleUS9=61, </td>
             <td>yyNyyy=11, </td>
         </tr>
         <tr>
             <td>13</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>39</td>
             <td>%SimpleUS9=39, </td>
@@ -914,15 +914,15 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>14</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>33</td>
             <td>%SimpleUS9=33, </td>
             <td>yyyNyy=6, </td>
         </tr>
         <tr>
             <td>14</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>11</td>
             <td>%SimpleUS9=11, </td>
@@ -930,7 +930,7 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>14</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>44</td>
             <td>%SimpleUS9=44, </td>
@@ -938,15 +938,15 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>15</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>72</td>
             <td>%SimpleUS9=72, </td>
             <td>yyyyNy=13, </td>
         </tr>
         <tr>
             <td>15</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>39</td>
             <td>%SimpleUS9=39, </td>
@@ -954,7 +954,7 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>15</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>17</td>
             <td>%SimpleUS9=17, </td>
@@ -962,8 +962,8 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
         </tr>
         <tr>
             <td>16</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>56</td>
             <td>%SimpleUS9=56, </td>
             <td>yyyyyN=10, </td>
@@ -988,7 +988,7 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
     <tbody>
         <tr>
             <td>8</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>7</td>
             <td>%CascadeUS9=7, </td>
@@ -996,7 +996,7 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
         </tr>
         <tr>
             <td>10</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>69</td>
             <td>%CascadeUS9=69, </td>
@@ -1004,7 +1004,7 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
         </tr>
         <tr>
             <td>11</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>31</td>
             <td>%CascadeUS9=31, </td>
@@ -1012,15 +1012,15 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
         </tr>
         <tr>
             <td>12</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>69</td>
             <td>%CascadeUS9=69, </td>
             <td>yNyyyy=20, </td>
         </tr>
         <tr>
             <td>12</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>24</td>
             <td>%CascadeUS9=24, </td>
@@ -1028,23 +1028,23 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
         </tr>
         <tr>
             <td>13</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>62</td>
             <td>%CascadeUS9=62, </td>
             <td>yyNyyy=18, </td>
         </tr>
         <tr>
             <td>14</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>31</td>
             <td>%CascadeUS9=31, </td>
             <td>yyyNyy=9, </td>
         </tr>
         <tr>
             <td>14</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>31</td>
             <td>%CascadeUS9=31, </td>
@@ -1052,15 +1052,15 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
         </tr>
         <tr>
             <td>15</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>31</td>
             <td>%CascadeUS9=31, </td>
             <td>yyyyNy=9, </td>
         </tr>
         <tr>
             <td>15</td>
-            <td></td>
+            <td>0</td>
             <td>1</td>
             <td>69</td>
             <td>%CascadeUS9=69, </td>
@@ -1068,7 +1068,7 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
         </tr>
         <tr>
             <td>15</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>21</td>
             <td>%CascadeUS9=21, </td>
@@ -1076,15 +1076,15 @@ If we ablate each head in each step but only test CascadingUS9 questions, we gai
         </tr>
         <tr>
             <td>16</td>
-            <td></td>
-            <td></td>
+            <td>0</td>
+            <td>0</td>
             <td>66</td>
             <td>%CascadeUS9=66, </td>
             <td>yyyyyN=19, </td>
         </tr>
         <tr>
             <td>16</td>
-            <td></td>
+            <td>0</td>
             <td>2</td>
             <td>34</td>
             <td>%CascadeUS9=34, </td>
