@@ -1219,6 +1219,20 @@ So why does the model retain the redundant long staircase BA calculations in ste
 - The model is not optimising for compactness. The long staircase is discovered early and it works for simple questions. Once the overall algorithm gives low loss consistently it stops optimising.
 - The model is not doing all the calcuations for all digits by step 11. Why should it? Maybe Hypothesis 2 is too ambitious and the model does less by step 11.
 
+Time to start experimenting to get more information!
+
+
+# Experimentation 1
+
+## Part 13A: Claim: D3.T1 is calculated at S11.L0.H1 and S12.L0.H1
+With n_digits = 5, n_layers = 2 and n_heads = 3:
+
+We claim D3.T1 is calculated at S11.L0.H1 to help calculate A5 and A4. If correct then when ablating S11.L0.H1 should increase the A4 and A5 loss when D3+D3' >= 10. Part 13A finds that A5 loss increases as expected, but A4 loss does not change! So S11.L0.H1 is used to calculate A5 but not used to calculate A4.
+
+So we claim D3.T1 is also calculated at S12.L0.H1 to help calculate A4. (This would eliminate one of the hypothesis's "not used" heads.) If correct then ablating S12.L0.H1, should increase the A4 loss when D3+D3' >= 10. We find that A4 loss increases but only in 25% of questions. Why 25%? This head is useful for A4 but it is not D3.T1. What is it?
+
+This test shows the digit focus of the cell, that the cell is useful, that the cell has impact depending on whether D4+D4' >= 10 or not, but it does not show that the cell is implementing D4.T1. It could be implementing D4.MC or something else.
+
 
 # Hypothesis 3
 If Hypothesis 1 was too cold, and Hypothesis 2 was too hot, then maybe Hypothesis 3 will be just right:
@@ -1326,17 +1340,13 @@ Ignoring this gap in our understanding for now, we further hypothesise this is h
   - L0.MLP: A4 impact: Calculate D3.C4 = TriSum(D3.C1, D2.C3). Perfectly accurate
   - L1.MLP: A4 impact: Calculate A4 = (D4.BA + D3.C4) % 10. Perfectly accurate.
 
+
+<img src="{{site.url}}/assets/StaircaseA5L2H3_PartC.svg" style="display: block; margin: auto;" />
+
 Time to start experimenting to get more information!
 
 
-# Experimentation
-
-## Part 13A: Claim: D3.T1 is calculated at S11.L0.H1 and S12.L0.H1
-With n_digits = 5, n_layers = 2 and n_heads = 3:
-
-We claim D3.T1 is calculated at S11.L0.H1 to help calculate A5 and A4. If correct then when ablating S11.L0.H1 should increase the A4 and A5 loss when D3+D3' >= 10. Part 13A finds that A5 loss increases as expected, but A4 loss does not change! So S11.L0.H1 is used to calculate A5 but not used to calculate A4.
-
-So we claim D3.T1 is also calculated at S12.L0.H1 to help calculate A4. (This would eliminate one of the hypothesis's "not used" heads.) If correct then ablating S12.L0.H1, should increase the A4 loss when D3+D3' >= 10. We find that A4 loss increases but only in 25% of questions. Why 25%? This head is useful for A4 but it is not D3.T1
+# Experimentation 2
 
 
 
