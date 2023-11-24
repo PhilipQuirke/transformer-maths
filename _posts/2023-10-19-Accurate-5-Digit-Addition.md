@@ -1355,12 +1355,40 @@ Hypothesis has these testable claims:
 - S12.L0.MLP relies on S10.L0.MLP. So A4 accuracy depends on S10.L0.MLP and so also on S8.L0.H1, S9.L0.H1, S10.L0.H1. This is proved true by experiment.
 
 - Is S12.L0.H2 a duplicate of S12.L0.H0? Is impact of ablating S12.L0.H0 and S12.L0.H2 the same? Part 10D shows:
-+------+-------+------+---------+--------------------------------------------------+--------------------------------------------+
-| Step | Layer | Head | % Fails |                 % Fails by Case                  |            # Fails by Patterns             |
-+------+-------+------+---------+--------------------------------------------------+--------------------------------------------+
-|  12  |   0   |  0   |    45   | %MC1=40, %BA=46, %CascadeUS9=56, %SimpleUS9=44,  |                yNyyyy=107,                 |
-|  12  |   0   |  2   |    22   |     %MC1=46, %SimpleUS9=13, %CascadeUS9=2,       |                yNyyyy=53,                  |
-So they are not the same as H0 has an impact on BA 
+
+<table>
+    <thead>
+        <tr>
+            <th>Step</th>
+            <th>Layer</th>
+            <th>Head</th>
+            <th>% Fails</th>
+            <th>% Fails by Case</th>
+            <th># Fails by Patterns </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>12</td>
+            <td>0</td>
+            <td>0</td>
+            <td>45</td>
+            <td>%MC1=40, %BA=46, %CascadeUS9=56, %SimpleUS9=44,</td>
+            <td>yNyyyy=107,</td>            
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>0</td>
+            <td>2</td>
+            <td>22</td>
+            <td>%MC1=46, %SimpleUS9=13, %CascadeUS9=2, </td>
+            <td>yNyyyy=53, </td>            
+        </tr>
+    </tbody>
+</table>
+
+They are not the same. H2 has no role in BA calcs while H0 has. 
+
 
 
 Some notes :
