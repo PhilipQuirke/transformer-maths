@@ -140,9 +140,9 @@ With one extra layer the model gains accuracy (using CoLab with batch_size = 64,
         <tr>
             <td># Training Batches</td>
             <td>20K</td>
-            <td>30K</td>
+            <td>30K (+10K)</td>
             <td>20K</td>
-            <td>30K</td>
+            <td>30K (+10K)</td>
         </tr>
         <tr>
             <td>Loss</td>
@@ -156,24 +156,25 @@ With one extra layer the model gains accuracy (using CoLab with batch_size = 64,
             <td>21</td>
             <td>TBA</td>
             <td>57</td>
-            <td>51</td>
+            <td>51 (6 less)</td>
         </tr>
         <tr>
             <td># MLPs used </td>
             <td>15</td>
             <td>TBA</td>
             <td>27</td>
-            <td>28</td>
+            <td>28 (1 more)</td>
         </tr>
         <tr>
             <td>Sequential correct answers</td>
             <td> > 4000 </td>
-            <td> > 1,000,000 !! </td>
+            <td> > 1,000,000 (~1M more!) </td>
             <td> > 1600 </td>
-            <td> > 2750 </td>
+            <td> > 2750 (1150 more)</td>
         </tr>           
     </tbody>
 </table>
+
 
 # Open Questions
 To be accurate, the 2 layer algorithm must learn the functionality of the 1 layer algorithm **and** 
