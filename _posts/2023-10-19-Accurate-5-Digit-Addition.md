@@ -63,6 +63,12 @@ With more layers and more training batches the model definitely gains accuracy (
             <td>3</td>
         </tr>
         <tr>
+            <td># Layers</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>        
+        <tr>
             <td># Training Batches</td>
             <td>20K</td>
             <td>20K</td>
@@ -76,21 +82,21 @@ With more layers and more training batches the model definitely gains accuracy (
         </tr>     
         <tr>
             <td># heads used</td>
-            <td>TBA of TBA</td>
-            <td>TBA of TBA</td>
-            <td>TBA of TBA</td>
+            <td>TBA</td>
+            <td>TBA</td>
+            <td>TBA</td>
         </tr>
         <tr>
             <td># MLPs used </td>
-            <td>TBA of TBA</td>
-            <td>TBA of TBA</td>
-            <td>TBA of TBA</td>
+            <td>TBA</td>
+            <td>TBA</td>
+            <td>TBA</td>
         </tr>
         <tr>
-            <td># correct answers</td>
-            <td>TBA of TBA</td>
-            <td>TBA of TBA</td>
-            <td>TBA of TBA</td>
+            <td>Sequential correct answers</td>
+            <td>TBA</td>
+            <td>TBA</td>
+            <td>TBA</td>
         </tr>           
     </tbody>
 </table>
@@ -98,37 +104,68 @@ With more layers and more training batches the model definitely gains accuracy (
 <table>
     <thead>
         <tr>
-            <th>Size of question</th>
-            <th>1 layer, 20K batches </th>
-            <th>2 layers, 20K batches</th>
-            <th>2 layers, 30K batches</th>
+            <th>Attribute</th>
+            <th>5D, 3H, 2L, 20K </th>
+            <th>5D, 3H, 2L, 30K </th>
+            <th>10D, 3H, 2L, 20K </th>
+            <th>10D, 3H, 2L, 30K </th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>5 digits</td>
-            <td>0.008314</td>
-            <td>0.000003</td>
-            <td>0.000000002</td>
+            <td># Digits</td>
+            <td>5</td>
+            <td>5</td>
+            <td>10</td>
+            <td>10</td>
         </tr>
         <tr>
-            <td>10 digits</td>
-            <td>0.040984</td>
-            <td>0.000094</td>
-            <td>0.000116186</td>
+            <td># Attention Heads</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
         </tr>
         <tr>
-            <td>15 digits</td>
-            <td>0.031746</td>
-            <td>0.002501</td>
+            <td># Layers</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+        </tr>          
+        <tr>
+            <td># Training Batches</td>
+            <td>20K</td>
+            <td>30K</td>
+            <td>20K</td>
+            <td>30K</td>
+        </tr>
+        <tr>
+            <td>Loss</td>
+            <td>TBA</td>
+            <td>TBA</td>
+            <td>TBA</td>
+        </tr>     
+        <tr>
+            <td># heads used</td>
+            <td>TBA</td>
+            <td>TBA</td>
             <td>TBA</td>
         </tr>
+        <tr>
+            <td># MLPs used </td>
+            <td>TBA</td>
+            <td>TBA</td>
+            <td>TBA</td>
+        </tr>
+        <tr>
+            <td>Sequential correct answers</td>
+            <td>TBA</td>
+            <td>TBA</td>
+            <td>TBA</td>
+        </tr>           
     </tbody>
 </table>
-
-
-
-
 
 # Open Questions
 To be accurate, the 2 layer algorithm must learn the functionality of the 1 layer algorithm **and** 
