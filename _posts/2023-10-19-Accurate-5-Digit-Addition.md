@@ -337,138 +337,16 @@ CoLab Part 10B does this analysis and produces the below output. Note that an en
     </tbody>
 </table>
 
+
 # Which steps+MLP layers impact which use cases?
 If we ablate an MLP layer in a step, and the loss does not increase, then that MLP layer is **not** used by the algorithm, and can be excluded from further analysis. With 2 layers, we find:
 
-- In steps 0 .. 7, neither MLP layer is used
-- In steps 8 .. 10, only the layer 0 MLP is used
-- In steps 11 .. 16, both MLP layers are used and they strongly align to A5 .. A0 in successive steps.
+CoLab Part 10C does this analysis and for 2 layers finds that the addition algorithm does not use the MLPs in steps 0 to 7 inclusive, and also does not use the last (17th) step. 
 
-CoLab Part 10C does this analysis and produces this output:
-
-<table>
-    <thead>
-        <tr>
-            <th>Step</th>
-            <th>MLP Layer</th>
-            <th>% Fails</th>
-            <th>% Fails by Case</th>
-            <th># Fails by Patterns</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>8</td>
-            <td>0</td>
-            <td>3</td>
-            <td>%SimpleUS9=8, %MC1=3, %CascadeUS9=2, </td>
-            <td>yNyyyy=6, NNyyyy=1, </td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>0</td>
-            <td></td>
-            <td>%CascadeUS9=2, </td>
-            <td>yNyyyy=1, </td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>0</td>
-            <td>18</td>
-            <td>%CascadeUS9=51, %SimpleUS9=28, %BA=12, %MC1=5, </td>
-            <td>yyyNyy=20, yyNNyy=12, NyNNyy=4, yNNNyy=2, yNNyyy=1, Nyyyyy=1, NyNyyy=1, yyNyyy=1, yNyNyy=1, yNyyyy=1, </td>
-        </tr>
-        <tr>
-            <td>11</td>
-            <td>0</td>
-            <td>18</td>
-            <td>%MC1=25, %CascadeUS9=27, %SimpleUS9=15, </td>
-            <td>Nyyyyy=43, </td>
-        </tr>
-        <tr>
-            <td>11</td>
-            <td>1</td>
-            <td>6</td>
-            <td>%CascadeUS9=37, </td>
-            <td>Nyyyyy=15, </td>
-        </tr>
-        <tr>
-            <td>12</td>
-            <td>0</td>
-            <td>69</td>
-            <td>%MC1=81, %BA=68, %SimpleUS9=64, %CascadeUS9=44, </td>
-            <td>yNyyyy=164, </td>
-        </tr>
-        <tr>
-            <td>12</td>
-            <td>1</td>
-            <td>51</td>
-            <td>%MC1=60, %BA=45, %SimpleUS9=51, %CascadeUS9=34, </td>
-            <td>yNyyyy=121, </td>
-        </tr>
-        <tr>
-            <td>13</td>
-            <td>0</td>
-            <td>64</td>
-            <td>%MC1=80, %BA=80, %SimpleUS9=46, %CascadeUS9=20, </td>
-            <td>yyNyyy=153, </td>
-        </tr>
-        <tr>
-            <td>13</td>
-            <td>1</td>
-            <td>59</td>
-            <td>%MC1=51, %CascadeUS9=98, %BA=50, %SimpleUS9=54, </td>
-            <td>yyNyyy=142, </td>
-        </tr>
-        <tr>
-            <td>14</td>
-            <td>0</td>
-            <td>61</td>
-            <td>%MC1=72, %BA=77, %SimpleUS9=51, %CascadeUS9=22, </td>
-            <td>yyyNyy=146, </td>
-        </tr>
-        <tr>
-            <td>14</td>
-            <td>1</td>
-            <td>56</td>
-            <td>%MC1=48, %CascadeUS9=90, %SimpleUS9=67, %BA=38, </td>
-            <td>yyyNyy=133, </td>
-        </tr>
-        <tr>
-            <td>15</td>
-            <td>0</td>
-            <td>63</td>
-            <td>%MC1=83, %BA=71, %SimpleUS9=36, %CascadeUS9=24, </td>
-            <td>yyyyNy=150, </td>
-        </tr>
-        <tr>
-            <td>15</td>
-            <td>1</td>
-            <td>42</td>
-            <td>%MC1=36, %CascadeUS9=63, %SimpleUS9=51, %BA=30, </td>
-            <td>yyyyNy=100, </td>
-        </tr>
-        <tr>
-            <td>16</td>
-            <td>0</td>
-            <td>72</td>
-            <td>%MC1=81, %BA=84, %SimpleUS9=74, %CascadeUS9=34, </td>
-            <td>yyyyyN=173, </td>
-        </tr>
-        <tr>
-            <td>16</td>
-            <td>1</td>
-            <td>40</td>
-            <td>%MC1=42, %BA=46, %SimpleUS9=46, %CascadeUS9=20, </td>
-            <td>yyyyyN=95, </td>
-        </tr>
-    </tbody>
-</table>
 
 # Which steps+heads/MLPs impact which answer digits summarised?
 CoLan Part 10B works out which steps are used in the models calculations 
-For each useful step, CoLab Part 10D ablates one attention head at a time and find out whether each head is useful.
-Part 10C does the same for each MLPlayer in each useful step.
+For each useful step, Parts 10C and 10D ablate one attention head and one MLP at a time and record the impact on loss..
 Part 10E combines this information together into the below summary. A non-zero number means that when the cell is ablated, 
 the model produces this percentage of bad answers (and so the cell is necessary for accurate answers.) 
 
