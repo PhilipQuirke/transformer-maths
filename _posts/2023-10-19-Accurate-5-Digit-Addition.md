@@ -220,7 +220,7 @@ CoLab Part 10B does this analysis and produces the below output. Note that an en
     <thead>
         <tr>
             <th>Step</th>
-            <th>% Fails</th>
+            <th>Fails</th>
             <th>% Fails by Case</th>
             <th># Fails by Patterns</th>
         </tr>
@@ -276,55 +276,55 @@ CoLab Part 10B does this analysis and produces the below output. Note that an en
         </tr>
         <tr>
             <td>8</td>
-            <td>7</td>
+            <td>7%</td>
             <td>%SimpleUS9=31, %CascadeUS9=10, </td>
             <td>yNyyyy=12, NNyyyy=4, </td>
         </tr>
         <tr>
             <td>9</td>
-            <td>10</td>
+            <td>10%</td>
             <td>%CascadeUS9=29, %SimpleUS9=28, </td>
             <td>yyNyyy=11, yNNyyy=9, NNNyyy=3, </td>
         </tr>
         <tr>
             <td>10</td>
-            <td>15</td>
+            <td>15%</td>
             <td>%CascadeUS9=61, %SimpleUS9=28, </td>
             <td>yyyNyy=11, NNNNyy=11, yyNNyy=8, yNNNyy=4, yNyNyy=1, NyNNyy=1, </td>
         </tr>
         <tr>
             <td>11</td>
-            <td>37</td>
+            <td>37%</td>
             <td>%MC1=52, %CascadeUS9=56, %SimpleUS9=31, </td>
             <td>Nyyyyy=89, </td>
         </tr>
         <tr>
             <td>12</td>
-            <td>72</td>
+            <td>72%</td>
             <td>%MC1=87, %BA=68, %SimpleUS9=62, %CascadeUS9=46, </td>
             <td>yNyyyy=171, </td>
         </tr>
         <tr>
             <td>13</td>
-            <td>68</td>
+            <td>68%</td>
             <td>%MC1=88, %BA=84, %SimpleUS9=44, %CascadeUS9=20, </td>
             <td>yyNyyy=163, </td>
         </tr>
         <tr>
             <td>14</td>
-            <td>74</td>
+            <td>74%</td>
             <td>%MC1=85, %BA=80, %CascadeUS9=56, %SimpleUS9=56, </td>
             <td>yyyNyy=178, </td>
         </tr>
         <tr>
             <td>15</td>
-            <td>66</td>
+            <td>66%</td>
             <td>%MC1=86, %BA=84, %SimpleUS9=38, %CascadeUS9=17, </td>
             <td>yyyyNy=158, </td>
         </tr>
         <tr>
             <td>16</td>
-            <td>74</td>
+            <td>74%</td>
             <td>%MC1=83, %BA=88, %SimpleUS9=79, %CascadeUS9=27, </td>
             <td>yyyyyN=177, </td>
         </tr>
