@@ -350,7 +350,7 @@ For each useful step, Parts 10C and 10D ablate one attention head and one MLP at
 Part 10E combines this information together into the below summary. A non-zero number means that when the cell is ablated, 
 the model produces this percentage of bad answers (and so the cell is necessary for accurate answers.) 
 
-<img src="{{site.url}}/assets/Accurate10E.png" style="display: block; margin: auto;" />
+<img src="{{site.url}}/assets/AccuratePart10E.png" style="display: block; margin: auto;" />
 
 CoLab 10E also shows, for each useful head and MLP layer by useful step, "digit pattern(s)" of the incorrect answers. 
 If the cell has a trailing "+" then this cell has another (less frequent) incorrect digit pattern. 
@@ -475,7 +475,7 @@ If a cell has one digit pattern then this gives us an insight into which digit t
 
 If we ablate each head in each step but only test BA questions, we gain insights. With 2 layers, these failures occur:
 
-<img src="{{site.url}}/assets/Accurate11A.png" style="display: block; margin: auto;" />
+<img src="{{site.url}}/assets/AccuratePart11A.png" style="display: block; margin: auto;" />
 
 <table>
     <thead>
@@ -595,7 +595,7 @@ If we ablate each head in each step but only test BA questions, we gain insights
 # Which steps+heads impact MC1 questions?
 If we ablate each head in each step but only test MC1 questions, we gain insights. With 2 layers, these failures occur:
 
-<img src="{{site.url}}/assets/Accurate11B.png" style="display: block; margin: auto;" />
+<img src="{{site.url}}/assets/AccuratePart11B.png" style="display: block; margin: auto;" />
 
 <table>
     <thead>
@@ -715,122 +715,7 @@ If we ablate each head in each step but only test MC1 questions, we gain insight
 # Which steps+heads impact SimpleUS9 questions?
 If we ablate each head in each step but only test SimpleUS9 questions, we gain insights. With 2 layers, these failures occur:
 
-<img src="{{site.url}}/assets/Accurate11C.png" style="display: block; margin: auto;" />
-
-<table>
-    <thead>
-        <tr>
-            <th>Step</th>
-            <th>8</th>
-            <th>9</th>
-            <th>10</th>
-            <th>11</th>
-            <th>12</th>
-            <th>13</th>
-            <th>14</th>
-            <th>15</th>
-            <th>16</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>L0H0</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>yNyyyy=14</td>
-            <td>yyNyyy=11</td>
-            <td>yyyNyy=6</td>
-            <td>yyyyNy=13</td>
-            <td>yyyyyN=10</td>
-        </tr>
-        <tr>
-            <td>L0H1</td>
-            <td>yNyyyy=6</td>
-            <td></td>
-            <td>yyyNyy=7</td>
-            <td>Nyyyyy=1</td>
-            <td>yNyyyy=12</td>
-            <td>yyNyyy=7</td>
-            <td>yyyNyy=2</td>
-            <td>yyyyNy=7</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>L0H2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Nyyyyy=6</td>
-            <td></td>
-            <td></td>
-            <td>yyyNyy=8</td>
-            <td>yyyyNy=3</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>MLP </td>
-            <td>yNyyyy=2</td>
-            <td></td>
-            <td>yyyNyy=7</td>
-            <td></td>
-            <td>yNyyyy=9</td>
-            <td>yyNyyy=5</td>
-            <td>yyyNyy=5</td>
-            <td></td>
-            <td>yyyyyN=9</td>
-        </tr>
-        <tr>
-            <td>L1H0</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>L1H1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>L1H2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>MLP </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>yNyyyy=7</td>
-            <td>yyNyyy=9</td>
-            <td>yyyNyy=12</td>
-            <td>yyyyNy=9</td>
-            <td>yyyyyN=4</td>
-        </tr>
-    </tbody>
-</table>
+<img src="{{site.url}}/assets/AccuratePart11C.png" style="display: block; margin: auto;" />
 
 <table>
     <thead>
@@ -950,7 +835,7 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
 # Which steps+heads impact CascadingUS9 questions?
 If we ablate each head in each step but only test CascadingUS9 questions, we gain insights. With 2 layers, these failures occur:
 
-<img src="{{site.url}}/assets/Accurate11D.png" style="display: block; margin: auto;" />
+<img src="{{site.url}}/assets/AccuratePart11D.png" style="display: block; margin: auto;" />
 
 <table>
     <thead>
