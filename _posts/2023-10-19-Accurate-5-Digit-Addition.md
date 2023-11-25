@@ -82,26 +82,28 @@ These are the results for the 1 layer model used in <a href="{{site.url}}/2023/1
         </tr>     
         <tr>
             <td># Heads used</td>
-            <td>TBA</td>
-            <td>TBA</td>
-            <td>TBA</td>
+            <td>15</td>
+            <td>29</td>
+            <td>46</td>
         </tr>
         <tr>
-            <td># MLPs used </td>
-            <td>TBA</td>
-            <td>TBA</td>
-            <td>TBA</td>
+            <td># MLPs used</td>
+            <td>6</td>
+            <td>11</td>
+            <td>16</td>
         </tr>
         <tr>
             <td>Sequential correct answers</td>
-            <td>TBA</td>
-            <td>TBA</td>
-            <td>TBA</td>
+            <td>~20</td>
+            <td>~5</td>
+            <td>~8</td>
         </tr>           
     </tbody>
 </table>
 
-With an addition layer and more training batches the model definitely gains accuracy (using CoLab with batch_size = 64, n_heads = 3, lr = 0.00008, weight_decay = 0.1):
+"Sequential correct answers" is (based on CoLab Part14 experimental results) roughly the number of addition question that model will get correct before it gets one wrong.     
+
+With one extra layer the model gains accuracy (using CoLab with batch_size = 64, n_heads = 3, lr = 0.00008, weight_decay = 0.1):
 
 <table>
     <thead>
@@ -147,9 +149,11 @@ With an addition layer and more training batches the model definitely gains accu
             <td>TBA</td>
             <td>TBA</td>
             <td>TBA</td>
+            <td>TBA</td>
         </tr>     
         <tr>
             <td># Heads used</td>
+            <td>TBA</td>
             <td>TBA</td>
             <td>TBA</td>
             <td>TBA</td>
@@ -159,10 +163,12 @@ With an addition layer and more training batches the model definitely gains accu
             <td>TBA</td>
             <td>TBA</td>
             <td>TBA</td>
+            <td>TBA</td>
         </tr>
         <tr>
             <td>Sequential correct answers</td>
             <td>TBA</td>
+            <td>>1,000,000</td>
             <td>TBA</td>
             <td>TBA</td>
         </tr>           
