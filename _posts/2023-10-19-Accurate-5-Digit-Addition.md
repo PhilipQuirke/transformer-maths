@@ -38,15 +38,15 @@ For this model these approaches all failed to improve the model accuracy:
 What worked was increasing the number of model “layers” (n_layers) from 1 to 2, while retaining n_heads = 3. This doubles the number of attention heads in the model from 3 to 6. 
 Also, the literature says a multiple-layer model gains the ability to “compose” the attention heads together in new ways to implement more complex algorithms.
 
-With more layers and more training batches the model definitely gains accuracy (using CoLab with batch_size = 64, n_heads = 3, lr = 0.00008, weight_decay = 0.1):
+These are the results for the 1 layer model used in <a href="{{site.url}}/2023/10/14/Understanding-Addition.html">Understanding Addition</a>:
 
 <table>
     <thead>
         <tr>
             <th>Attribute</th>
-            <th>5D, 3H, 1L, 10K </th>
-            <th>10D, 3H, 1L, 10K </th>
-            <th>15D, 3H, 1L, 10K </th>
+            <th>5D, 3H, 1L, 20K </th>
+            <th>10D, 3H, 1L, 20K </th>
+            <th>15D, 3H, 1L, 20K </th>
         </tr>
     </thead>
     <tbody>
@@ -81,7 +81,7 @@ With more layers and more training batches the model definitely gains accuracy (
             <td>0.031746</td>
         </tr>     
         <tr>
-            <td># heads used</td>
+            <td># Heads used</td>
             <td>TBA</td>
             <td>TBA</td>
             <td>TBA</td>
@@ -100,6 +100,8 @@ With more layers and more training batches the model definitely gains accuracy (
         </tr>           
     </tbody>
 </table>
+
+With an addition layer and more training batches the model definitely gains accuracy (using CoLab with batch_size = 64, n_heads = 3, lr = 0.00008, weight_decay = 0.1):
 
 <table>
     <thead>
@@ -147,7 +149,7 @@ With more layers and more training batches the model definitely gains accuracy (
             <td>TBA</td>
         </tr>     
         <tr>
-            <td># heads used</td>
+            <td># Heads used</td>
             <td>TBA</td>
             <td>TBA</td>
             <td>TBA</td>
