@@ -93,7 +93,7 @@ These are the results for the 1 layer model used in <a href="{{site.url}}/2023/1
             <td>16</td>
         </tr>
         <tr>
-            <td>Sequential correct answers</td>
+            <td>Seq correct answers</td>
             <td>~20</td>
             <td>~5</td>
             <td>~8</td>
@@ -101,7 +101,7 @@ These are the results for the 1 layer model used in <a href="{{site.url}}/2023/1
     </tbody>
 </table>
 
-"Sequential correct answers" is (based on CoLab Part14 experimental results) roughly the number of addition question that model will get correct before it gets one wrong.     
+"Seq correct answers" is roughly the number of addition question that model will get correct before it gets one wrong. (Based on CoLab Part14 experimental results.)  
 
 With one extra layer the model gains accuracy (using CoLab with batch_size = 64, n_heads = 3, lr = 0.00008, weight_decay = 0.1):
 
@@ -140,9 +140,9 @@ With one extra layer the model gains accuracy (using CoLab with batch_size = 64,
         <tr>
             <td># Training Batches</td>
             <td>20K</td>
-            <td>30K (+10K)</td>
+            <td>30K (10K more)</td>
             <td>20K</td>
-            <td>30K (+10K)</td>
+            <td>30K (10K more)</td>
         </tr>
         <tr>
             <td>Loss</td>
@@ -163,14 +163,14 @@ With one extra layer the model gains accuracy (using CoLab with batch_size = 64,
             <td>15</td>
             <td>15</td>
             <td>27</td>
-            <td>28 (1 more)</td>
+            <td>28 (+1)</td>
         </tr>
         <tr>
-            <td>Sequential correct answers</td>
+            <td>Seq correct answers</td>
             <td> > 4000 </td>
-            <td> > 1,000,000 (~1M more!) </td>
+            <td> > 1M (~1M more!) </td>
             <td> > 1600 </td>
-            <td> > 2750 (1150 more)</td>
+            <td> > 2750 (+1150)</td>
         </tr>           
     </tbody>
 </table>
@@ -1183,117 +1183,113 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
     <thead>
         <tr>
             <th>Step</th>
-            <th>Layer</th>
-            <th>Head</th>
-            <th>% Fails</th>
-            <th>% Fails by Case</th>
-            <th># Fails by Patterns</th>
+            <th>8</th>
+            <th>9</th>
+            <th>10</th>
+            <th>11</th>
+            <th>12</th>
+            <th>13</th>
+            <th>14</th>
+            <th>15</th>
+            <th>16</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>8</td>
-            <td>0</td>
-            <td>1</td>
-            <td>7</td>
-            <td>%CascadeUS9=7, </td>
-            <td>Nyyyyy=2, </td>
+            <td>L0H0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>78%</td>
+            <td>61%</td>
+            <td>33%</td>
+            <td>72%</td>
+            <td>56%</td>
         </tr>
         <tr>
-            <td>10</td>
-            <td>0</td>
-            <td>1</td>
-            <td>69</td>
-            <td>%CascadeUS9=69, </td>
-            <td>NNNNyy=10, yyNNyy=7, yNNNyy=3, </td>
+            <td>L0H1</td>
+            <td>33%</td>
+            <td></td>
+            <td>39%</td>
+            <td>6%</td>
+            <td>67%</td>
+            <td>39%</td>
+            <td>11%</td>
+            <td>39%</td>
+            <td></td>
         </tr>
         <tr>
-            <td>11</td>
-            <td>0</td>
-            <td>2</td>
-            <td>31</td>
-            <td>%CascadeUS9=31, </td>
-            <td>Nyyyyy=9, </td>
+            <td>L0H2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>33%</td>
+            <td></td>
+            <td></td>
+            <td>44%</td>
+            <td>17%</td>
+            <td></td>
         </tr>
         <tr>
-            <td>12</td>
-            <td>0</td>
-            <td>0</td>
-            <td>69</td>
-            <td>%CascadeUS9=69, </td>
-            <td>yNyyyy=20, </td>
+            <td>MLP </td>
+            <td>11%</td>
+            <td></td>
+            <td>39%</td>
+            <td></td>
+            <td>50%</td>
+            <td>28%</td>
+            <td>28%</td>
+            <td></td>
+            <td>50%</td>
         </tr>
         <tr>
-            <td>12</td>
-            <td>0</td>
-            <td>1</td>
-            <td>24</td>
-            <td>%CascadeUS9=24, </td>
-            <td>yNyyyy=7, </td>
+            <td>L1H0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
-            <td>13</td>
-            <td>0</td>
-            <td>0</td>
-            <td>62</td>
-            <td>%CascadeUS9=62, </td>
-            <td>yyNyyy=18, </td>
+            <td>L1H1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
-            <td>14</td>
-            <td>0</td>
-            <td>0</td>
-            <td>31</td>
-            <td>%CascadeUS9=31, </td>
-            <td>yyyNyy=9, </td>
+            <td>L1H2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
-            <td>14</td>
-            <td>0</td>
-            <td>2</td>
-            <td>31</td>
-            <td>%CascadeUS9=31, </td>
-            <td>yyyNyy=9, </td>
-        </tr>
-        <tr>
-            <td>15</td>
-            <td>0</td>
-            <td>0</td>
-            <td>31</td>
-            <td>%CascadeUS9=31, </td>
-            <td>yyyyNy=9, </td>
-        </tr>
-        <tr>
-            <td>15</td>
-            <td>0</td>
-            <td>1</td>
-            <td>69</td>
-            <td>%CascadeUS9=69, </td>
-            <td>yyyyNy=20, </td>
-        </tr>
-        <tr>
-            <td>15</td>
-            <td>0</td>
-            <td>2</td>
-            <td>21</td>
-            <td>%CascadeUS9=21, </td>
-            <td>yyyyNy=6, </td>
-        </tr>
-        <tr>
-            <td>16</td>
-            <td>0</td>
-            <td>0</td>
-            <td>66</td>
-            <td>%CascadeUS9=66, </td>
-            <td>yyyyyN=19, </td>
-        </tr>
-        <tr>
-            <td>16</td>
-            <td>0</td>
-            <td>2</td>
-            <td>34</td>
-            <td>%CascadeUS9=34, </td>
-            <td>yyyyyN=10, </td>
+            <td>MLP </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>39%</td>
+            <td>50%</td>
+            <td>67%</td>
+            <td>50%</td>
+            <td>22%</td>
         </tr>
     </tbody>
 </table>
@@ -1413,6 +1409,120 @@ If we ablate each head in each step but only test SimpleUS9 questions, we gain i
     </tbody>
 </table>
 
+<table>
+    <thead>
+        <tr>
+            <th>Step</th>
+            <th>8</th>
+            <th>9</th>
+            <th>10</th>
+            <th>11</th>
+            <th>12</th>
+            <th>13</th>
+            <th>14</th>
+            <th>15</th>
+            <th>16</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>L0H0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>yNyyyy=14</td>
+            <td>yyNyyy=11</td>
+            <td>yyyNyy=6</td>
+            <td>yyyyNy=13</td>
+            <td>yyyyyN=10</td>
+        </tr>
+        <tr>
+            <td>L0H1</td>
+            <td>yNyyyy=6</td>
+            <td></td>
+            <td>yyyNyy=7</td>
+            <td>Nyyyyy=1</td>
+            <td>yNyyyy=12</td>
+            <td>yyNyyy=7</td>
+            <td>yyyNyy=2</td>
+            <td>yyyyNy=7</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>L0H2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Nyyyyy=6</td>
+            <td></td>
+            <td></td>
+            <td>yyyNyy=8</td>
+            <td>yyyyNy=3</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>MLP </td>
+            <td>yNyyyy=2</td>
+            <td></td>
+            <td>yyyNyy=7</td>
+            <td></td>
+            <td>yNyyyy=9</td>
+            <td>yyNyyy=5</td>
+            <td>yyyNyy=5</td>
+            <td></td>
+            <td>yyyyyN=9</td>
+        </tr>
+        <tr>
+            <td>L1H0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>L1H1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>L1H2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>MLP </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>yNyyyy=7</td>
+            <td>yyNyyy=9</td>
+            <td>yyyNyy=12</td>
+            <td>yyyyNy=9</td>
+            <td>yyyyyN=4</td>
+        </tr>
+    </tbody>
+</table>
 
 # Which steps+heads impact CascadingUS9 questions?
 If we ablate each head in each step but only test CascadingUS9 questions, we gain insights. With 2 layers, these failures occur:
