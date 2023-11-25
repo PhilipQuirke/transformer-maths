@@ -149,28 +149,28 @@ With one extra layer the model gains accuracy (using CoLab with batch_size = 64,
             <td>0.0000027</td>
             <td>TBA</td>
             <td>0.0000943</td>
-            <td>TBA</td>
+            <td>0.0001162</td>
         </tr>     
         <tr>
             <td># Heads used</td>
             <td>21</td>
             <td>TBA</td>
             <td>57</td>
-            <td>TBA</td>
+            <td>51</td>
         </tr>
         <tr>
             <td># MLPs used </td>
             <td>15</td>
             <td>TBA</td>
             <td>27</td>
-            <td>TBA</td>
+            <td>28</td>
         </tr>
         <tr>
             <td>Sequential correct answers</td>
             <td> > 4000 </td>
             <td> > 1,000,000 !! </td>
             <td> > 1600 </td>
-            <td>TBA</td>
+            <td> > 2750 </td>
         </tr>           
     </tbody>
 </table>
