@@ -465,9 +465,6 @@ the model produces this percentage of bad answers (and so the cell is necessary 
     </tbody>
 </table>
 
-The 1-layer algorithm uses 24 cells (17 attention heads and 7 MLPs) to do 5-digit addition with 99.5% accuracy.
-The 2-layer algorithm uses 33 cells (19 attention heads and 14 MLPs) to do 5-digit addition with ~100% accuracy.
-
 CoLab 10E also shows, for each useful head and MLP layer by useful step, "digit pattern(s)" of the incorrect answers. 
 If the cell has a trailing "+" then this cell has another (less frequent) incorrect digit pattern. 
 If a cell has one digit pattern then this gives us an insight into which digit the cell most impacts: 
