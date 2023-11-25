@@ -372,22 +372,22 @@ the model produces this percentage of bad answers (and so the cell is necessary 
             <td></td>
             <td></td>
             <td></td>
-            <td>45</td>
-            <td>41</td>
-            <td>33</td>
-            <td>31</td>
-            <td>38</td>
+            <td>45%</td>
+            <td>41%</td>
+            <td>33%</td>
+            <td>31%</td>
+            <td>38%</td>
         </tr>
         <tr>
             <td>L0H1</td>
-            <td>6</td>
-            <td>3</td>
-            <td>15</td>
-            <td>3</td>
-            <td>21</td>
-            <td>11</td>
-            <td>4</td>
-            <td>31</td>
+            <td>6%</td>
+            <td>3%</td>
+            <td>15%</td>
+            <td>3%</td>
+            <td>21%</td>
+            <td>11%</td>
+            <td>4%</td>
+            <td>31%</td>
             <td></td>
         </tr>
         <tr>
@@ -395,24 +395,24 @@ the model produces this percentage of bad answers (and so the cell is necessary 
             <td></td>
             <td></td>
             <td></td>
-            <td>29</td>
-            <td>22</td>
-            <td>26</td>
-            <td>31</td>
-            <td>24</td>
-            <td>14</td>
+            <td>29%</td>
+            <td>22%</td>
+            <td>26%</td>
+            <td>31%</td>
+            <td>24%</td>
+            <td>14%</td>
         </tr>
         <tr>
             <td>MLP </td>
-            <td>3</td>
+            <td>3%</td>
             <td></td>
-            <td>18</td>
-            <td>18</td>
-            <td>69</td>
-            <td>64</td>
-            <td>61</td>
-            <td>63</td>
-            <td>72</td>
+            <td>18%</td>
+            <td>18%</td>
+            <td>69%</td>
+            <td>64%</td>
+            <td>61%</td>
+            <td>63%</td>
+            <td>72%</td>
         </tr>
         <tr>
             <td>L1H0</td>
@@ -455,12 +455,12 @@ the model produces this percentage of bad answers (and so the cell is necessary 
             <td></td>
             <td></td>
             <td></td>
-            <td>6</td>
-            <td>51</td>
-            <td>59</td>
-            <td>56</td>
-            <td>42</td>
-            <td>40</td>
+            <td>6%</td>
+            <td>51%</td>
+            <td>59%</td>
+            <td>56%</td>
+            <td>42%</td>
+            <td>40%</td>
         </tr>
     </tbody>
 </table>
