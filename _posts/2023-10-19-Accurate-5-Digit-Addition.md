@@ -147,21 +147,21 @@ With one extra layer the model gains accuracy (using CoLab with batch_size = 64,
         <tr>
             <td>Loss</td>
             <td>0.0000027</td>
-            <td>TBA</td>
+            <td>0.000000002</td>
             <td>0.0000943</td>
             <td>0.0001162</td>
         </tr>     
         <tr>
             <td># Heads used</td>
             <td>21</td>
-            <td>TBA</td>
+            <td>19 (2 less)</td>
             <td>57</td>
             <td>51 (6 less)</td>
         </tr>
         <tr>
             <td># MLPs used </td>
             <td>15</td>
-            <td>TBA</td>
+            <td>15</td>
             <td>27</td>
             <td>28 (1 more)</td>
         </tr>
@@ -717,85 +717,228 @@ If we ablate each head in each step but only test BA questions, we gain insights
     <thead>
         <tr>
             <th>Step</th>
-            <th>Layer</th>
-            <th>Head</th>
-            <th>% Fails</th>
-            <th>% Fails by Case</th>
-            <th># Fails by Patterns</th>
+            <th>8</th>
+            <th>9</th>
+            <th>10</th>
+            <th>11</th>
+            <th>12</th>
+            <th>13</th>
+            <th>14</th>
+            <th>15</th>
+            <th>16</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>9</td>
-            <td>0</td>
-            <td>1</td>
-            <td>5</td>
-            <td>%BA=5, </td>
-            <td>Nyyyyy=1, </td>
-        </tr>
-        <tr>
-            <td>12</td>
-            <td>0</td>
-            <td>0</td>
+            <td>L0H0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>37</td>
-            <td>%BA=37, </td>
-            <td>yNyyyy=7, </td>
-        </tr>
-        <tr>
-            <td>13</td>
-            <td>0</td>
-            <td>0</td>
             <td>21</td>
-            <td>%BA=21, </td>
-            <td>yyNyyy=4, </td>
-        </tr>
-        <tr>
-            <td>13</td>
-            <td>0</td>
-            <td>2</td>
-            <td>5</td>
-            <td>%BA=5, </td>
-            <td>yyNyyy=1, </td>
-        </tr>
-        <tr>
-            <td>14</td>
-            <td>0</td>
-            <td>0</td>
             <td>26</td>
-            <td>%BA=26, </td>
-            <td>yyyNyy=5, </td>
-        </tr>
-        <tr>
-            <td>14</td>
-            <td>0</td>
-            <td>2</td>
-            <td>11</td>
-            <td>%BA=11, </td>
-            <td>yyyNyy=2, </td>
-        </tr>
-        <tr>
-            <td>15</td>
-            <td>0</td>
-            <td>0</td>
             <td>47</td>
-            <td>%BA=47, </td>
-            <td>yyyyNy=9, </td>
-        </tr>
-        <tr>
-            <td>15</td>
-            <td>0</td>
-            <td>2</td>
-            <td>11</td>
-            <td>%BA=11, </td>
-            <td>yyyyNy=2, </td>
-        </tr>
-        <tr>
-            <td>16</td>
-            <td>0</td>
-            <td>0</td>
             <td>42</td>
-            <td>%BA=42, </td>
-            <td>yyyyyN=8, </td>
+        </tr>
+        <tr>
+            <td>L0H1</td>
+            <td></td>
+            <td>5</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>L0H2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>5</td>
+            <td>11</td>
+            <td>11</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>MLP </td>
+            <td></td>
+            <td></td>
+            <td>11</td>
+            <td></td>
+            <td>79</td>
+            <td>84</td>
+            <td>74</td>
+            <td>63</td>
+            <td>63</td>
+        </tr>
+        <tr>
+            <td>L1H0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>L1H1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>L1H2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>MLP </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>47</td>
+            <td>63</td>
+            <td>53</td>
+            <td>26</td>
+            <td>32</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>Step</th>
+            <th>8</th>
+            <th>9</th>
+            <th>10</th>
+            <th>11</th>
+            <th>12</th>
+            <th>13</th>
+            <th>14</th>
+            <th>15</th>
+            <th>16</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>L0H0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>yNyyyy=7</td>
+            <td>yyNyyy=4</td>
+            <td>yyyNyy=5</td>
+            <td>yyyyNy=9</td>
+            <td>yyyyyN=8</td>
+        </tr>
+        <tr>
+            <td>L0H1</td>
+            <td></td>
+            <td>Nyyyyy=1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>L0H2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>yyNyyy=1</td>
+            <td>yyyNyy=2</td>
+            <td>yyyyNy=2</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>MLP </td>
+            <td></td>
+            <td></td>
+            <td>yyyNyy=1, +</td>
+            <td></td>
+            <td>yNyyyy=15</td>
+            <td>yyNyyy=16</td>
+            <td>yyyNyy=14</td>
+            <td>yyyyNy=12</td>
+            <td>yyyyyN=12</td>
+        </tr>
+        <tr>
+            <td>L1H0</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>L1H1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>L1H2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>MLP </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>yNyyyy=9</td>
+            <td>yyNyyy=12</td>
+            <td>yyyNyy=10</td>
+            <td>yyyyNy=5</td>
+            <td>yyyyyN=6</td>
         </tr>
     </tbody>
 </table>
