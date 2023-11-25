@@ -43,6 +43,61 @@ With more layers and more training batches the model definitely gains accuracy (
 <table>
     <thead>
         <tr>
+            <th>Attribute</th>
+            <th>5D, 3H, 1L, 10K </th>
+            <th>10D, 3H, 1L, 10K </th>
+            <th>15D, 3H, 1L, 10K </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td># Digits</td>
+            <td>5</td>
+            <td>10</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td># Attention Heads</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td># Training Batches</td>
+            <td>20K</td>
+            <td>20K</td>
+            <td>20K</td>
+        </tr>
+        <tr>
+            <td>Loss</td>
+            <td>0.008314</td>
+            <td>0.040984</td>
+            <td>0.031746</td>
+        </tr>     
+        <tr>
+            <td># heads used</td>
+            <td>TBA of TBA</td>
+            <td>TBA of TBA</td>
+            <td>TBA of TBA</td>
+        </tr>
+        <tr>
+            <td># MLPs used </td>
+            <td>TBA of TBA</td>
+            <td>TBA of TBA</td>
+            <td>TBA of TBA</td>
+        </tr>
+        <tr>
+            <td># correct answers</td>
+            <td>TBA of TBA</td>
+            <td>TBA of TBA</td>
+            <td>TBA of TBA</td>
+        </tr>           
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
             <th>Size of question</th>
             <th>1 layer, 20K batches </th>
             <th>2 layers, 20K batches</th>
@@ -72,12 +127,16 @@ With more layers and more training batches the model definitely gains accuracy (
 </table>
 
 
+
+
+
 # Open Questions
 To be accurate, the 2 layer algorithm must learn the functionality of the 1 layer algorithm **and** 
 learn additional functionality to handle the 06665+03335=10000 case by cascading the Carry 1 through multiple columns. 
 How does it implement this? 
 
 The 2 layer algorithm with 30K training batches has a final training loss of 0.000000002. Is the algorithm 100% accurate? 
+This is hard to prove either way. CoLab Part14 successfully performs 1,000,000 additions with zero errors. 
 
 
 ## What model parts are doing useful calculations?
