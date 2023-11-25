@@ -43,7 +43,7 @@ These are the results for the 1 layer model used in <a href="{{site.url}}/2023/1
 <table>
     <thead>
         <tr>
-            <th>Attribute</th>
+            <th>Attribute vs model</th>
             <th>5D, 3H, 1L, 20K </th>
             <th>10D, 3H, 1L, 20K </th>
             <th>15D, 3H, 1L, 20K </th>
@@ -108,7 +108,7 @@ With one extra layer the model gains accuracy (using CoLab with batch_size = 64,
 <table>
     <thead>
         <tr>
-            <th>Attribute</th>
+            <th>Attribute vs model</th>
             <th>5D, 3H, 2L, 20K </th>
             <th>5D, 3H, 2L, 30K </th>
             <th>10D, 3H, 2L, 20K </th>
