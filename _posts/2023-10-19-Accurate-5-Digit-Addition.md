@@ -167,14 +167,14 @@ With one extra layer the model gains accuracy (using CoLab with batch_size = 64,
             <td>15</td>
             <td>15</td>
             <td>27</td>
-            <td>28 (+1)</td>
+            <td>28</td>
         </tr>
         <tr>
             <td>Seq correct answers</td>
             <td> > 4000 </td>
-            <td> > 1M (~1M more!) </td>
+            <td> > 1M !</td>
             <td> > 1600 </td>
-            <td> > 2750 (+1150)</td>
+            <td> > 2750 </td>
         </tr>           
     </tbody>
 </table>
