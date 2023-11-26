@@ -2,19 +2,30 @@
 title: "Accurate 5-Digit Addition in Transformers (incomplete)"
 date: 2023-10-19
 ---
+
 ## Introduction
-This post is an incomplete work-in-progress. 
+When a builder starts to constuct a home, they don't start my making nails. Instead they use standard nails that are a standard shape and have a very low failure rate.
+When they say build a wall, they understand how the strength of the nails contribute to the strength of the resulting wall. In some sense the nails are a "known good" component. 
+
+In Machine Learning can we create small "known good" models that:
+- Have a very low loss (preferrably zero)
+- Have a well understood algorithm
+- Are compact
+- Can be re-used in larger models to help create larger "known good" models.
+
+In this blog, we show an integer addition model with a loss of 0.000000002 that can do 1 million addition questions without error. We explain its algorithm in detail. We claim it is a "known good" component model.
+
+In the future, we aim to create a "known good" integer multiplication model. Doing multiplication (at least for humans) includes some addition sub-tasks. If, before training, we initialise parts of our larger multiplication model, with a copy of the known good integer addition model, will the multiplication model re-use the addition model? Will this make it easier to understand the multiplication model algorithm?   
+
+## Background
 
 The <a href="{{site.url}}/2023/10/14/Understanding-Addition.html">previous post</a> discussed how a toy (1-layer, 3-head) transformer model answers integer addition questions like "33357+82243=". 
 
 <img src="{{site.url}}/assets/AdditionQuestionAnswer.svg" style="display: block; margin: auto;" />
 
-It summarised the model's addition algorithm like this, showing it could solve > 99.5% of integer addition questions:
+The model's algorithm is well understood (refer diagram) but it has a loss of ~0.5% so it is not "known good".
 
 <img src="{{site.url}}/assets/StaircaseA3_Summary.svg" style="display: block; margin: auto;" />
-
-The model can't reliably answer 0.5% of questions. 
-All these questions are similar to the question 06665+03335=10000 where a "Carry 1" in one column "cascades" through the next few higher columns that each "sum to 9" (e.g. 6 = 3). We call this Cascading Use Sum 9 (aka US9). 
 
 This post investigates whether we can improve that model to do integer addition 100% accurately, and still understand its algorithm.
 
