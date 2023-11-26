@@ -107,7 +107,7 @@ These are the results for the 1 layer model used in <a href="{{site.url}}/2023/1
 
 "Seq correct answers" is roughly the number of addition question that model will get correct before it gets one wrong. (Based on CoLab Part14 experimental results.)  
 
-With one extra layer the model gains accuracy (using CoLab with batch_size = 64, n_heads = 3, lr = 0.00008, weight_decay = 0.1):
+With two layers the model gains accuracy (using CoLab with batch_size = 64, n_heads = 3, lr = 0.00008, weight_decay = 0.1):
 
 <table>
     <thead>
