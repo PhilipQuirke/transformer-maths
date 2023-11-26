@@ -27,26 +27,19 @@ The model's algorithm is well understood (refer diagram) but it has a loss of ~0
 
 <img src="{{site.url}}/assets/StaircaseA3_Summary.svg" style="display: block; margin: auto;" />
 
-This post investigates whether we can improve that model to do integer addition 100% accurately, and still understand its algorithm.
+## Very Low Loss 
+We need our integer addition model to have every low loss, but we also prefer it to be "compact" as we later want to inject it into larger models. 
+So we looked for the smallest change that would make our model more accurate. These approaches did **not** work:
 
-The CoLab notepad for this blog can be downloaded from <a href="{{site.url}}/assets/Accurate_Addition_in_Transformers.ipynb">here</a>, 
-and used to train and test the model. You can alter the code to try out other approaches.
-
-
-## Increasing accuracy
-How can we increase the accuracy (i.e. decrease the loss) of the model?
-
-# What didn’t work
-We shouldn’t try to "program" or “teach” a model, but there are some standard "general purpose" changes that sometimes help make models more accurate.
-
-For this model these approaches all failed to improve the model accuracy:
-- Increasing the frequency of MakeSum9 cases in the training data so the model has more examples of this "hard" case to learn from (CoLab Part 3 setting ‘more_ms9_cases’).
-- Increasing the number of attention heads from 3 to 4 or 5 to provide more computing power.
+- Increasing the frequency of hard (cascading US9) examples in the training data so the model has more examples to learn from (CoLab setting ‘more_ms9_cases’).
+- Increasing the number of attention heads from 3 to 4 or 5 (while still n_layers = 1) to provide more computing power.
 - Changing the question format from “12345+22222=” to “12345+22222equals” to give the model more calculation steps after the question is revealed before it needs to state the first answer digit.
-- Changing the n_layers to 2 and n_heads to 2, increasing the number of attention heads from 3 to 4. Even with 30K training steps it was still inaccurate on A5 for some questions.
+- Changing the n_layers to 2 and n_heads to 2, increasing the number of attention heads from 3 to 4. 
 
-# What did work
-What worked was increasing the number of model “layers” (n_layers) from 1 to 2, while retaining n_heads = 3. This doubles the number of attention heads in the model from 3 to 6. 
+(The CoLab notepad for this blog can be downloaded from <a href="{{site.url}}/assets/Accurate_Addition_in_Transformers.ipynb">here</a>, 
+and used to train and test the model. You can alter the code to try out other approaches.)
+
+What worked was increasing the number of model “layers” (n_layers) from 1 to 2, while retaining n_heads = 3. This doubles its compute power. 
 Also, the literature says a multiple-layer model gains the ability to “compose” the attention heads together in new ways to implement more complex algorithms.
 
 These are the results for the 1 layer model used in <a href="{{site.url}}/2023/10/14/Understanding-Addition.html">Understanding Addition</a>:
@@ -186,16 +179,17 @@ With one extra layer the model gains accuracy (using CoLab with batch_size = 64,
     </tbody>
 </table>
 
+The 2 layer, 5 digit algorithm with 30K training batches has a final training loss of 0.000000002. Is the algorithm 100% accurate? 
+This is hard to prove either way. CoLab Part14 provides evidence of accuracy via a brute force approach - it does 1,000,000 additions with no errors. 
+If we understood the model algorithm, this might offer evidence for/against 100% accuracy. 
+
+
+## Well Understood Algorithm
 To be accurate, the 2 layer algorithm must learn the functionality of the 1 layer algorithm **and** 
 learn additional functionality to handle the 06665+03335=10000 case by cascading the Carry 1 through multiple columns. 
 How does it implement this? 
 
-The 2 layer algorithm with 30K training batches has a final training loss of 0.000000002. Is the algorithm 100% accurate? 
-This is hard to prove either way. CoLab Part14 provides evidence of accuracy via abrute force approach - doing 1,000,000 additions with no errors. 
-If we understood the model algorithm, this might offer evidence for/against 100% accuracy. 
-
-
-## What model parts are doing useful calculations?
+# What model parts are doing useful calculations?
 A good first step in understanding a model is to look at **what** parts of the model are actually doing something useful when the model generates an answer to a question. 
 We can do this analysis, before we understand the **how** the model is generating the answer.  
 
