@@ -193,16 +193,17 @@ How does it implement this?
 A good first step in understanding a model is to look at **what** parts of the model are actually doing something useful when the model generates an answer to a question. 
 We can do this analysis, before we understand the **how** the model is generating the answer.  
 
-Most models don't use all their steps, attention heads and MLP layers to generate an answers. 
-This diagram shows what parts the model is using in integer addition (for n_layers = 2, n_heads = 3, n_digits = 5): 
+This diagram shows what parts the model is using in 5-digit integer addition (for n_layers = 2, n_heads = 3, training epochs = 30K): 
 
 <img src="{{site.url}}/assets/StaircaseA5L2H3_Part1.svg" style="display: block; margin: auto;" />
 
-The diagram is constructed for information gathering in a few steps. We'll describe the steps shortly, but some initial notes:
-- A cell containing an X is not used to generate an answer 
+The diagram is manually draw (in draw.io) using information gathered in a few steps. Some notes:
+- Of the 18 steps, the model is only doing calculations in 10 steps  
+- A cell containing an X is not used in calculations 
 - A attention head cell containing say D3,D3' is paying attention to those question digits.
 - An MLP cell containing say A4 has a significant impact on the accuracy of that answer digit.
-- The diagram was manually drawn in draw.io using the automatically generated information from the sections below.
+
+The following sections describe the CoLab parts that provided the information in the diagram:
 
 # Attention patterns
 Attention patterns show us what the model's attention heads are paying attention to. With 2 layers, there are now 6 attention heads over two rows. For example, the question “382954+92495=130790” gives this attention pattern:
@@ -212,7 +213,7 @@ Attention patterns show us what the model's attention heads are paying attention
 Viewing a number of examples can give you a feel for patterns in the model's attention heads over successive steps.
 
 # Which steps+heads do any useful calculations?
-Sometimes the model does not use entire prediction steps. If we ablate alls head in a step, and the loss does not increase, then that step is **not** used by the algorithm, and can be excluded from further analysis. We find:
+Sometimes the model does not use entire prediction steps. If we ablate all heads in a step, and the loss does not increase, then that step is **not** used by the algorithm, and can be excluded from further analysis. We find:
 
 - With n_digits = 5, n_layers = 1, the addition algorithm does not use any data generated in steps 0 to 10 inclusive. The model also does not use the last (17th) step. Therefore, the addition is started and completed in 6 steps (11 to 16)
 - With n_digits = 5, n_layers = 2, the addition algorithm does not use any data generated in steps 0 to 7 inclusive. The model also does not use the last (17th) step. Therefore, the addition is started and completed in 9 steps (8 to 16). What are the extra 3 steps used for?
