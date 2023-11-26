@@ -175,14 +175,13 @@ With one extra layer the model gains accuracy (using CoLab with batch_size = 64,
     </tbody>
 </table>
 
-
-# Open Questions
 To be accurate, the 2 layer algorithm must learn the functionality of the 1 layer algorithm **and** 
 learn additional functionality to handle the 06665+03335=10000 case by cascading the Carry 1 through multiple columns. 
 How does it implement this? 
 
 The 2 layer algorithm with 30K training batches has a final training loss of 0.000000002. Is the algorithm 100% accurate? 
-This is hard to prove either way. CoLab Part14 successfully performs 1,000,000 additions with zero errors. 
+This is hard to prove either way. CoLab Part14 provides evidence of accuracy via abrute force approach - doing 1,000,000 additions with no errors. 
+If we understood the model algorithm, this might offer evidence for/against 100% accuracy. 
 
 
 ## What model parts are doing useful calculations?
@@ -979,10 +978,10 @@ Given the 2 layer attention pattern’s similarity to 1 layer pattern, and the a
 If this is correct then the 2 layer algorithm successfully completes these calculations:
 - A0 = D0.BA
 - A1 = D1.BA + D0.MC
-- A2 = D2.BA + (D1.MC or D1.MS & D0.MC)
-- A3 = D3.BA + (D2.MC or D2.MS & D1.MC or D2.MS & D1.MS & D0.MC)
-- A4 = D4.BA + (D3.MC or D3.MS & D2.MC or D3.MS & D2.MS & D1.MC or D3.MS & D2.MS & D1.MS & D0.MC)
-- A5 = D4.MC or D4.MS & D3.MC or D4.MS & D3.MS & D2.MC or D4.MS & D3.MS & D2.MS & D1.MC or D4.MS & D3.MS & D2.MS & D1.MS & D0.MC
+- A2 = D2.BA + (D1.MC or (D1.MS & D0.MC))
+- A3 = D3.BA + (D2.MC or (D2.MS & D1.MC) or (D2.MS & D1.MS & D0.MC))
+- A4 = D4.BA + (D3.MC or (D3.MS & D2.MC) or (D3.MS & D2.MS & D1.MC) or (D3.MS & D2.MS & D1.MS & D0.MC))
+- A5 = D4.MC or (D4.MS & D3.MC) or (D4.MS & D3.MS & D2.MC) or (D4.MS & D3.MS & D2.MS & D1.MC) or (D4.MS & D3.MS & D2.MS & D1.MS & D0.MC)
 
 Our intuition is that there are not enough useful heads+steps and heads+MLPs in steps 8 to 11 to complete the A5 calculation this way. So we abandoned this hypothesis.
 
