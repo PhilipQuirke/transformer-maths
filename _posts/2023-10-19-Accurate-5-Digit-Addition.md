@@ -1101,21 +1101,23 @@ The model's data model is more compact than Hypothesis 1 but less than Hypothesi
 Our claim is that in steps 8 to 11 the model stores the sum of each digit pair as a tri-state variable. 
 We name this operator Dn.C1, where C stands for “case”, and the 1 stands for 1 digit acurracy
 
-- Dn.C1 is calculated using a function TriCase( Dn, Dn' ) defined as:
-    - when Dn + Dn' is 0 to 8 => 8
-    - when Dn + Dn' is exactly 9 => 9
-    - when Dn + Dn' is 10 to 18 => 10
+- Dn.C1 = TriCase( Dn, Dn' ) where TriCase is a function implementing 3 distinct mappings:
+    - Dn.C1 is 8 when Dn + Dn' sums to 0 to 8  
+    - Dn.C1 is 9 when Dn + Dn' sums to exactly 9 
+    - Dn.C1 is 10 when Dn + Dn' sums to 10 to 18 
 
-The model implements the C1 operator as a bigram mapping from 2 input tokens to 1 result token e.g. “8” + “7” = “10”. There are 100 distinct mappings
+The model implements the C1 operator as a bigram mapping from 2 input tokens to 1 result token e.g. “4” + “7” = “10”. There are 100 distinct mappings. 
+For ease of reading we use "8", "9" and "10" to represent the 3 states, but the model will use some different but equivalent representation of the 3 states. 
 
 If it needs to, the model can implement a bigram mapping to convert a C1 value into a MC or MS (but not a BA) value. Our notation shorthand for these "conversion" bigram mappings is:
 
 - Dn.MC = (Dn.C1 == 10)
 - Dn.MS = (Dn.C1 == 9)
 
-We define another more accurate operator Dn.C2 that has “two-digit accuracy”. 
-Dn.C2 is calculated using a function TriAdd( Dn.C1, Dn-1.C1 ) defined as:
+We define another more accurate operator Dn.C2 that has “two-digit accuracy”. We defined Dn.C2 as follows: 
+- Dn.C2 = TriAdd( Dn.C1, Dn-1.C1 )
 
+Where TriAdd is a function implementing 6 distinct mappings:
 <table>
     <thead>
         <tr>
@@ -1158,7 +1160,7 @@ Dn.C2 is calculated using a function TriAdd( Dn.C1, Dn-1.C1 ) defined as:
     </tbody>
 </table>
 
-Dn.C2 is more accurate than Dn.C1. The model can implement the C2 operator as a bigram mapping from 2 input tokens to 1 result token. There are 7 distinct mappings 
+Dn.C2 is more accurate than Dn.C1. The model can implement the C2 operator as a bigram mapping from 2 input tokens to 1 result token.
 
 We define operators Dn.C3, Dn.C4 & Dn.C5 each with higher accuracy:
 
