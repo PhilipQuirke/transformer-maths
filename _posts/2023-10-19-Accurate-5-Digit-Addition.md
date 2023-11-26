@@ -13,7 +13,7 @@ In Machine Learning can we create small "known good" models that:
 - Are compact
 - Can be re-used in larger models to help create larger "known good" models.
 
-In this blog, we show an integer addition model with a loss of 0.000000002 that can do 1 million addition questions without error. We explain its algorithm in detail. We claim it is a "known good" component model.
+In this paper, we show a 5-digit integer addition model with a loss of 0.000000002 that can do 1 million random addition questions without error. We explain its algorithm in detail. We claim it is a "known good" component model.
 
 In the future, we aim to create a "known good" integer multiplication model. Doing multiplication (at least for humans) includes some addition sub-tasks. If, before training, we initialise parts of our larger multiplication model, with a copy of the known good integer addition model, will the multiplication model re-use the addition model? Will this make it easier to understand the multiplication model algorithm?   
 
@@ -344,14 +344,14 @@ CoLab Part 10B does this analysis and produces the below output. Note that an en
 
 
 # Which steps+MLP layers impact which use cases?
-If we ablate an MLP layer in a step, and the loss does not increase, then that MLP layer is **not** used by the algorithm, and can be excluded from further analysis. With 2 layers, we find:
+If we ablate an MLP layer in a step, and the loss does not increase, then that MLP layer is **not** used by the algorithm, and can be excluded from further analysis. 
 
 CoLab Part 10C does this analysis and for 2 layers finds that the addition algorithm does not use the MLPs in steps 0 to 7 inclusive, and also does not use the last (17th) step. 
 
 
 # Which steps+heads/MLPs impact which answer digits summarised?
-CoLan Part 10B works out which steps are used in the models calculations 
-For each useful step, Parts 10C and 10D ablate one attention head and one MLP at a time and record the impact on loss..
+CoLab Part 10B works out which steps are used in the models calculations 
+For each useful step, Parts 10C and 10D ablate one attention head and one MLP at a time and record the impact on loss.
 Part 10E combines this information together into the below summary. A non-zero number means that when the cell is ablated, 
 the model produces this percentage of bad answers (and so the cell is necessary for accurate answers.) 
 
